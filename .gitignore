@@ -1,3 +1,8 @@
 # Don't track content of these folders
 node_modules/
+<<<<<<< HEAD
+src/constants/firebase.js
+src/constants/firebase.js
+=======
 secrets.js
+>>>>>>> c9c8df8e6fe990de096074656d6fd24c13ae9497

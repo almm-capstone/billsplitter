@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { getRecipes, getMeals } from '../actions/recipes';
+import { getRecipes, getMeals, updateRecipes } from '../actions/recipes';
 
 class RecipeListing extends Component {
   static propTypes = {
@@ -25,7 +25,7 @@ class RecipeListing extends Component {
   componentDidMount = () => this.fetchData();
 
   fetchData = (data) => {
-    const { fetchRecipes, fetchMeals } = this.props;
+    const { fetchRecipes, fetchMeals, updateRecipes } = this.props;
 
     this.setState({ loading: true });
 
@@ -64,6 +64,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchMeals: getMeals,
   fetchRecipes: getRecipes,
+  updateRecipes: updateRecipes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeListing);

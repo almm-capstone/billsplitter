@@ -5,10 +5,7 @@
     "slug": "react-native-starter-kit",
     "privacy": "public",
     "sdkVersion": "32.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/images/app-icon.png",
@@ -20,11 +17,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.almm.expo.googlesignin"
+    },
+    "android": {
+      "package": "com.almm.expo.googlesigin"
     }
   }
 }

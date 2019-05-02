@@ -25,3 +25,11 @@ export function getRecipes() {
       return resolve(dispatch({ type: 'RECIPES_REPLACE', data }));
     })).catch((err) => { throw err.message; });
 }
+
+//Update Recipes
+export function updateRecipes() {
+  if (Firebase === null) return () => new Promise(resolve => resolve());
+
+  return dispatch => new Promise(resolve => FirebaseRef.child('recipes')
+    .off());
+}

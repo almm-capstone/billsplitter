@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Firebase, FirebaseRef } from '../lib/firebase';
 
-import { getRecipes, getMeals } from '../actions/recipes';
+import { getRecipes, getMeals, updateRecipes } from '../actions/recipes';
 
 class RecipeListing extends Component {
+
   static propTypes = {
     Layout: PropTypes.func.isRequired,
     recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     match: PropTypes.shape({ params: PropTypes.shape({}) }),
     fetchRecipes: PropTypes.func.isRequired,
     fetchMeals: PropTypes.func.isRequired,
+    updateRecipes: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -40,6 +43,10 @@ class RecipeListing extends Component {
       }));
   }
 
+   componentWillUnmount () {
+    return updateRecipes()
+   } 
+
   render = () => {
     const { Layout, recipes, match } = this.props;
     const { loading, error } = this.state;
@@ -64,6 +71,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   fetchMeals: getMeals,
   fetchRecipes: getRecipes,
+  updateRecipes: updateRecipes
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeListing);

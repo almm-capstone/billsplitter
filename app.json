@@ -5,10 +5,7 @@
     "slug": "bill-splitter-app",
     "privacy": "public",
     "sdkVersion": "32.0.0",
-    "platforms": [
-      "ios",
-      "android"
-    ],
+    "platforms": ["ios", "android"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/images/app-icon.png",
@@ -20,17 +17,21 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.almm.capstone",
       "publishBundlePath": "ios/appname/Supporting/shell-app.bundle",
-      "publishManifestPath": "ios/appname/Supporting/shell-app-manifest.json"
+      "publishManifestPath": "ios/appname/Supporting/shell-app-manifest.json",
+      "config": {
+        "googlesignin": {
+          "reservedClientId": "com.googleusercontent.apps.997357993032-uaqtile974iu21kf5p5omes84l832ls2"
+        }
+      }
     },
     "android": {
       "package": "com.almm.capstone",
+      "googleServicesFile": "android/google-services.json",
       "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
       "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
     },

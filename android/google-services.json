@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "997357993032",
+    "firebase_url": "https://almm-capstone.firebaseio.com",
+    "project_id": "almm-capstone",
+    "storage_bucket": "almm-capstone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:997357993032:android:9ec707306ec76d0e",
+        "android_client_info": {
+          "package_name": "com.almm.capstone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "997357993032-sot47kjvcqge05ech3q763ehd00nboh4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwuKjSYMdmTX90JaMqgprXybsYXVH-49A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "997357993032-sot47kjvcqge05ech3q763ehd00nboh4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "997357993032-uaqtile974iu21kf5p5omes84l832ls2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.almm.capstone"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

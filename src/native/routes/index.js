@@ -9,6 +9,10 @@ import RecipesContainer from '../../containers/Recipes';
 import RecipeListingComponent from '../components/Recipe/Listing';
 import RecipeSingleComponent from '../components/Recipe/Single';
 
+import ReceiptsContainer from '../../containers/Receipts';
+import ReceiptListingComponent from '../components/Receipt/Listing';
+import ReceiptSingleComponent from '../components/Receipt/Single';
+
 import SignUpContainer from '../../containers/SignUp';
 import SignUpComponent from '../components/User/SignUp';
 
@@ -53,7 +57,16 @@ const Index = (
           icon={() => <Icon name="book" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="recipes" component={RecipesContainer} Layout={RecipeListingComponent} />
+          <Scene key="recipe" component={RecipesContainer} Layout={RecipeListingComponent} />
+        </Stack>
+
+        <Stack
+          key="receipts"
+          title="RECEIPTS"
+          icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="receipt" component={ReceiptsContainer} Layout={ReceiptListingComponent} />
         </Stack>
 
         <Stack
@@ -111,12 +124,22 @@ const Index = (
     <Scene
       back
       clone
+      key="receipt"
+      title="RECEIPT"
+      {...DefaultProps.navbarProps}
+      component={ReceiptsContainer}
+      Layout={ReceiptSingleComponent}
+    />
+    <Scene
+      back
+      clone
       key="recipe"
       title="RECIPE"
       {...DefaultProps.navbarProps}
       component={RecipesContainer}
       Layout={RecipeSingleComponent}
     />
+    
   </Stack>
 );
 

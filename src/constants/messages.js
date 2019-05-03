@@ -22,4 +22,8 @@ export const errorMessages = {
   // Recipes
   recipe404: 'Recipe not found',
   missingMealId: 'Missing meal definition',
+
+ // Receipts
+ receipt404: 'Receipt not found',
 };
+

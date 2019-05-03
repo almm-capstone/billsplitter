@@ -12,10 +12,10 @@ import Error from '../UI/Error';
 import Header from '../UI/Header';
 import Spacer from '../UI/Spacer';
 
-const RecipeListing = ({
+const ReceiptListing = ({
   error,
   loading,
-  recipes,
+  receipts,
   reFetch,
 }) => {
   // Loading
@@ -26,19 +26,19 @@ const RecipeListing = ({
 
   const keyExtractor = item => item.id;
 
-  const onPress = item => Actions.recipe({ match: { params: { id: String(item.id) } } });
+  const onPress = item => Actions.receipt({ match: { params: { id: String(item.id) } } });
 
   return (
     <Container>
       <Content padder>
         <Header
-          title="Top Recipes"
-          content="This is here to show how you can read and display data from a data source (in our case, Firebase)."
+          title="All Receipts"
+          content="This is a listing of all receipts"
         />
 
         <FlatList
           numColumns={2}
-          data={recipes}
+          data={receipts}
           renderItem={({ item }) => (
             <Card transparent style={{ paddingHorizontal: 6 }}>
               <CardItem cardBody>
@@ -68,7 +68,7 @@ const RecipeListing = ({
                     onPress={() => onPress(item)}
                   >
                     <Text>
-                      View Recipe
+                      View Receipt
                     </Text>
                   </Button>
                   <Spacer size={5} />
@@ -91,16 +91,16 @@ const RecipeListing = ({
   );
 };
 
-RecipeListing.propTypes = {
+ReceiptListing.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   reFetch: PropTypes.func,
 };
 
-RecipeListing.defaultProps = {
+ReceiptListing.defaultProps = {
   error: null,
   reFetch: null,
 };
 
-export default RecipeListing;
+export default ReceiptListing;

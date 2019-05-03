@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 99456,
-  "expoServerNgrokUrl": "https://65-f4d.anonymous.billsplitter.exp.direct",
-  "packagerNgrokUrl": "https://packager.65-f4d.anonymous.billsplitter.exp.direct",
-  "ngrokPid": 99474
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null
 }

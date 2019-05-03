@@ -1,0 +1,73 @@
+{
+  "users": {
+    "meng@email": {
+      "firstName": "Meng",
+      "lastName": "Mu",
+      "receipts": {
+        "receipt0": true,
+        "receipt1": true
+      }
+    },
+    "lesley@email": {
+      "firstName": "Lesley",
+      "lastName": "Smith",
+      "receipts": {
+        "receipt0": true
+      }
+    }
+  },
+  "receipts": {
+    "receipt0" : {
+      "id": 1,
+      "title": "Lunch on Sunday",
+      "body": "At brunch restaurant name",
+      "author": "meng@email",
+      "complete": true,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
+      "users": [
+        "lesley@email.com",
+        "meng@email.com"
+      ],
+      "items": {
+        "item0": {
+          "price": 5.00,
+          "name": "beer",
+          "user": "meng@email",
+          "paid": true
+        },
+        "item1": {
+          "price": 5.00,
+          "name": "beer",
+          "user": "lesley@email",
+          "paid": true
+        }
+      }
+    },
+    "receipt1" : {
+      "id": 2,
+      "title": "Dinner on Thursday",
+      "body": "At restaurant name",
+      "author": "lesley@gmail.com",
+      "complete": true,
+      "imageUrl": "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5",
+      "users": [
+        "meng@email",
+        "lesley@email.com"
+      ],
+      "items": {
+        "item0": {
+          "price": 5.00,
+          "name": "beer",
+          "user": "meng@email",
+          "paid": true
+        },
+        "item1": {
+          "price": 5.00,
+          "name": "beer",
+          "user": "lesley@email",
+          "paid": true
+        }
+      }
+    }
+  }
+}

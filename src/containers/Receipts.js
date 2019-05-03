@@ -3,17 +3,16 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Firebase, FirebaseRef } from '../lib/firebase';
 
-import { getRecipes, getMeals, updateRecipes } from '../actions/recipes';
+import { getReceipts, updateReceipts} from '../actions/receipts';
 
-class RecipeListing extends Component {
+class ReceiptListing extends Component {
 
   static propTypes = {
     Layout: PropTypes.func.isRequired,
-    recipes: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     match: PropTypes.shape({ params: PropTypes.shape({}) }),
-    fetchRecipes: PropTypes.func.isRequired,
-    fetchMeals: PropTypes.func.isRequired,
-    updateRecipes: PropTypes.func.isRequired
+    fetchReceipts: PropTypes.func.isRequired,
+    updateReceipts: PropTypes.func.isRequired,
   }
 
   static defaultProps = {
@@ -25,15 +24,14 @@ class RecipeListing extends Component {
     loading: false,
   }
 
+  
   componentDidMount = () => this.fetchData();
 
   fetchData = (data) => {
-    const { fetchRecipes, fetchMeals } = this.props;
+    const { fetchReceipts } = this.props;
 
     this.setState({ loading: true });
-
-    return fetchRecipes(data)
-      .then(() => fetchMeals())
+    return fetchReceipts(data)
       .then(() => this.setState({
         loading: false,
         error: null,
@@ -44,20 +42,21 @@ class RecipeListing extends Component {
   }
 
    componentWillUnmount () {
-    return updateRecipes()
+    return updateReceipts()
    } 
 
   render = () => {
-    const { Layout, recipes, match } = this.props;
+    const { Layout, receipts, match } = this.props;
     const { loading, error } = this.state;
     const id = (match && match.params && match.params.id) ? match.params.id : null;
 
+    
     return (
       <Layout
-        recipeId={id}
+        receiptId={id}
         error={error}
         loading={loading}
-        recipes={recipes}
+        receipts={receipts}
         reFetch={() => this.fetchData()}
       />
     );
@@ -65,13 +64,13 @@ class RecipeListing extends Component {
 }
 
 const mapStateToProps = state => ({
-  recipes: state.recipes.recipes || {},
+    receipts: state.receipts.receipts || []
 });
 
+
 const mapDispatchToProps = {
-  fetchMeals: getMeals,
-  fetchRecipes: getRecipes,
-  updateRecipes: updateRecipes
+  fetchReceipts: getReceipts,
+  updateReceipts: updateReceipts
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeListing);
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiptListing);

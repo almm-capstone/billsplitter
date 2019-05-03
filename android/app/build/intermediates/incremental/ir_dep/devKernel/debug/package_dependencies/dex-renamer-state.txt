@@ -1,0 +1,10 @@
+#Fri May 03 14:58:52 CDT 2019
+path.2=classes3.dex
+path.1=classes2.dex
+path.0=classes.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex
+base.2=/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/transforms/dexMerger/devKernel/debug/10
+base.1=/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/transforms/dexMerger/devKernel/debug/10
+base.0=/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/transforms/dexMerger/devKernel/debug/10

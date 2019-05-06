@@ -1,3 +1,6 @@
 # Don't track content of these folders
 node_modules/
 src/constants/secrets.js
+android/google-services.json
+app.json
+

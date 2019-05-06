@@ -1,11 +1,10 @@
 {
   "devToolsPort": 19002,
-  //"expoServerPort": null,
   "expoServerPort": 19000,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "packagerPort": 19001,
+  "packagerPid": 2540,
+  "expoServerNgrokUrl": "https://cv-pcz.ashleyheestand.billsplitter.exp.direct",
+  "packagerNgrokUrl": "https://packager.cv-pcz.ashleyheestand.billsplitter.exp.direct",
+  "ngrokPid": 2573,
   "webpackServerPort": null
 }

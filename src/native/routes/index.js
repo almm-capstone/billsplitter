@@ -26,7 +26,9 @@ import ProfileComponent from '../components/User/Profile';
 
 import AboutComponent from '../components/About';
 
-import CameraContainer from '../../containers/Camera'
+import CameraContainer from '../../containers/Camera';
+
+import GoogleLogin from '../../containers/GoogleLogin';
 
 const Index = (
   <Stack hideNavBar>
@@ -53,7 +55,11 @@ const Index = (
           icon={() => <Icon name="book" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="recipes" component={RecipesContainer} Layout={RecipeListingComponent} />
+          <Scene
+            key="recipes"
+            component={RecipesContainer}
+            Layout={RecipeListingComponent}
+          />
         </Stack>
 
         <Stack
@@ -71,7 +77,11 @@ const Index = (
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+          <Scene
+            key="profileHome"
+            component={MemberContainer}
+            Layout={ProfileComponent}
+          />
           <Scene
             back
             key="signUp"
@@ -82,11 +92,11 @@ const Index = (
           />
           <Scene
             back
-            key="login"
-            title="LOGIN"
+            key="loginWithGoogle"
+            title="LOGIN WITH GOOGLE"
             {...DefaultProps.navbarProps}
-            component={LoginContainer}
-            Layout={LoginComponent}
+            component={GoogleLogin}
+            // Layout={LoginComponent}
           />
           <Scene
             back

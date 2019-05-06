@@ -24,9 +24,7 @@
       "publishBundlePath": "ios/appname/Supporting/shell-app.bundle",
       "publishManifestPath": "ios/appname/Supporting/shell-app-manifest.json",
       "config": {
-        "googlesignin": {
-          "reservedClientId": "com.googleusercontent.apps.997357993032-uaqtile974iu21kf5p5omes84l832ls2"
-        }
+        "reservedClientId": "com.googleusercontent.apps.997357993032-uaqtile974iu21kf5p5omes84l832ls2"
       }
     },
     "android": {

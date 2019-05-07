@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: host.exp.exponent:expo-permissions:2.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-permissions-2.0.0.aar/32584cfd13b6351e0f9602eab4bf4450/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-permissions-2.0.0.aar/32584cfd13b6351e0f9602eab4bf4450/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-permissions-2.0.0.aar/26cb692e6c66e9e02a07f359897e16e4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-permissions-2.0.0.aar/26cb692e6c66e9e02a07f359897e16e4/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

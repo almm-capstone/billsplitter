@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-he/values-he.xml",
+            "outputFile": "/home/hemmerly/Documents/Senior Phase/Capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-he/values-he.xml",
             "map": [
                 {
-                    "source": "/Users/ashleyheestand/.gradle/caches/transforms-1/files-1.1/android-image-cropper-2.7.0.aar/154f6734454194fb77dbcf9e0ba6ca68/res/values-he/values-he.xml",
+                    "source": "/home/hemmerly/.gradle/caches/transforms-1/files-1.1/android-image-cropper-2.7.0.aar/aeca963d80624a3069a4246f34088ad0/res/values-he/values-he.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10",
                         "startColumns": "4,4,4,4,4,4,4,4,4",

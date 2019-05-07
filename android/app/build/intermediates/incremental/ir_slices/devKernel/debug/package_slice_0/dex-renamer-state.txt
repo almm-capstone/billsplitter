@@ -1,4 +1,4 @@
-#Fri May 03 14:58:56 CDT 2019
-base.0=/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/transforms/dexMerger/devKernel/debug/0
+#Mon May 06 14:13:14 CDT 2019
+base.0=/home/hemmerly/Documents/Senior Phase/Capstone/billsplitter/android/app/build/intermediates/transforms/dexMerger/devKernel/debug/0
 path.0=classes.dex
 renamed.0=classes.dex

@@ -17,7 +17,7 @@ import { Firebase, FirebaseRef } from '../lib/firebase';
   * Get Receipts
   */
 export function getReceipts() {
-  if (Firebase === null) return () => new Promise(resolve => resolve());
+  if (Firebase === null) return () => new Promise(resolve => resolve()); 
 
   return dispatch => new Promise(resolve => FirebaseRef.child('receipts')
     .on('value', (snapshot) => {

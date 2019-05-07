@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+            "outputFile": "/home/hemmerly/Documents/Senior Phase/Capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
             "map": [
                 {
-                    "source": "/Users/ashleyheestand/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/f66c1718274c99cea155b21edd6585d3/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "source": "/home/hemmerly/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.1.1.aar/c1d4bfc49f9c309eb390ef243e49a108/res/values-ldltr-v21/values-ldltr-v21.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

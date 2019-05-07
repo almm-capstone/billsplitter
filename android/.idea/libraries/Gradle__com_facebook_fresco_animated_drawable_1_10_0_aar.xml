@@ -1,11 +1,11 @@
 <component name="libraryTable">
   <library name="Gradle: com.facebook.fresco:animated-drawable:1.10.0@aar">
     <ANNOTATIONS>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/animated-drawable-1.10.0.aar/80c4eea00ce09757145e828934a05335/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/animated-drawable-1.10.0.aar/81b43d2780a18b8abda7995be8248c01/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/animated-drawable-1.10.0.aar/80c4eea00ce09757145e828934a05335/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/animated-drawable-1.10.0.aar/80c4eea00ce09757145e828934a05335/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/animated-drawable-1.10.0.aar/81b43d2780a18b8abda7995be8248c01/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/animated-drawable-1.10.0.aar/81b43d2780a18b8abda7995be8248c01/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

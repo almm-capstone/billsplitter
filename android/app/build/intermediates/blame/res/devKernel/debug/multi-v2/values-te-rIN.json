@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-te-rIN/values-te-rIN.xml",
+            "outputFile": "/home/hemmerly/Documents/Senior Phase/Capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-te-rIN/values-te-rIN.xml",
             "map": [
                 {
-                    "source": "/Users/ashleyheestand/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.6.1.aar/ab4124e85e004a7e9a588f7669f0a843/res/values-te-rIN/values-te-rIN.xml",
+                    "source": "/home/hemmerly/.gradle/caches/transforms-1/files-1.1/exoplayer-ui-2.6.1.aar/2a32b84a325c9a6ea6eecef3fc91327b/res/values-te-rIN/values-te-rIN.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4",

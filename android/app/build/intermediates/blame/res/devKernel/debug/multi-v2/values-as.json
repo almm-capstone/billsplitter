@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-as/values-as.xml",
+            "outputFile": "/home/hemmerly/Documents/Senior Phase/Capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-as/values-as.xml",
             "map": [
                 {
-                    "source": "/Users/ashleyheestand/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/72f39fc81f76912ffe25156b9234e343/res/values-as/values.xml",
+                    "source": "/home/hemmerly/.gradle/caches/transforms-1/files-1.1/play-services-basement-16.0.1.aar/1ec3f9aa22dca504e6ec25448b8ac3ee/res/values-as/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/ashleyheestand/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/95476263bd83677653a7821429ba768f/res/values-as/values.xml",
+                    "source": "/home/hemmerly/.gradle/caches/transforms-1/files-1.1/firebase-messaging-17.1.0.aar/c7a57b7c9a8d316573f4b83ae147e0b7/res/values-as/values.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "0",
@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/ashleyheestand/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/29d8617de9518aaabf67257657b17588/res/values-as/values.xml",
+                    "source": "/home/hemmerly/.gradle/caches/transforms-1/files-1.1/play-services-base-16.0.1.aar/68d31649cb7d95b7df72b282b2698816/res/values-as/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",

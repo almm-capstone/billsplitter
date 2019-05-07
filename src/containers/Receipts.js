@@ -5,6 +5,7 @@ import { Firebase, FirebaseRef } from '../lib/firebase';
 
 import { getReceipts, updateReceipts} from '../actions/receipts';
 
+
 class ReceiptListing extends Component {
 
   static propTypes = {
@@ -27,10 +28,10 @@ class ReceiptListing extends Component {
   
   componentDidMount = () => this.fetchData();
 
-  fetchData = (data) => {
+  fetchData = async (data) => {
     const { fetchReceipts } = this.props;
-
-    this.setState({ loading: true });
+    await this.setState({ loading: true }, function(){console.log('state', this)});
+  
     return fetchReceipts(data)
       .then(() => this.setState({
         loading: false,

@@ -1,5 +1,5 @@
-import * as FirebaseModule from "firebase";
-import firebaseConfig from "../constants/firebase";
+const FirebaseModule = require("firebase");
+const firebaseConfig = require("../constants/firebase");
 
 const {
   apiKey,
@@ -22,7 +22,7 @@ if (apiKey && authDomain && databaseURL && storageBucket && messagingSenderId) {
   firebaseInitialized = true;
 }
 
-export const FirebaseRef = firebaseInitialized
+module.exports.FirebaseRef = firebaseInitialized
   ? FirebaseModule.database().ref()
   : null;
-export const Firebase = firebaseInitialized ? FirebaseModule : null;
+module.exports.Firebase = firebaseInitialized ? FirebaseModule : null;

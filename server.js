@@ -1,6 +1,7 @@
 const express = require("express");
 const ejs = require("ejs");
 const paypal = require("paypal-rest-sdk");
+const { FirebaseRef } = require("./src/lib/firebase");
 
 paypal.configure({
   mode: "sandbox", //sandbox or live
@@ -88,7 +89,7 @@ app.get("/success", (req, res) => {
       throw error;
     } else {
       console.log(JSON.stringify(payment));
-
+      FirebaseRef.child("/users/lesley@email/receipts").set({ 0: payment });
       res.render("success");
     }
   });

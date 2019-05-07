@@ -1,5 +1,5 @@
-export default {
-  apiKey: process.env.FIREBASE_API_KEY,
+module.exports = {
+  apiKey: "AIzaSyBwmylr4mJRaFpv12kF2DI-yQQhqT0dtcw",
   authDomain: "almm-capstone.firebaseapp.com",
   databaseURL: "https://almm-capstone.firebaseio.com",
   projectId: "almm-capstone",

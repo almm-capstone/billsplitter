@@ -1,36 +1,38 @@
-import React from 'react';
-import { Scene, Tabs, Stack } from 'react-native-router-flux';
-import { Icon } from 'native-base';
+import React from "react";
+import { Scene, Tabs, Stack } from "react-native-router-flux";
+import { Icon } from "native-base";
 
-import DefaultProps from '../constants/navigation';
-import AppConfig from '../../constants/config';
+import DefaultProps from "../constants/navigation";
+import AppConfig from "../../constants/config";
 
-import RecipesContainer from '../../containers/Recipes';
-import RecipeListingComponent from '../components/Recipe/Listing';
-import RecipeSingleComponent from '../components/Recipe/Single';
+import RecipesContainer from "../../containers/Recipes";
+import RecipeListingComponent from "../components/Recipe/Listing";
+import RecipeSingleComponent from "../components/Recipe/Single";
 
-import ReceiptsContainer from '../../containers/Receipts';
-import ReceiptListingComponent from '../components/Receipt/Listing';
-import ReceiptSingleComponent from '../components/Receipt/Single';
+import ReceiptsContainer from "../../containers/Receipts";
+import ReceiptListingComponent from "../components/Receipt/Listing";
+import ReceiptSingleComponent from "../components/Receipt/Single";
 
-import SignUpContainer from '../../containers/SignUp';
-import SignUpComponent from '../components/User/SignUp';
+import SignUpContainer from "../../containers/SignUp";
+import SignUpComponent from "../components/User/SignUp";
 
-import LoginContainer from '../../containers/Login';
-import LoginComponent from '../components/User/Login';
+import LoginContainer from "../../containers/Login";
+import LoginComponent from "../components/User/Login";
 
-import ForgotPasswordContainer from '../../containers/ForgotPassword';
-import ForgotPasswordComponent from '../components/User/ForgotPassword';
+import ForgotPasswordContainer from "../../containers/ForgotPassword";
+import ForgotPasswordComponent from "../components/User/ForgotPassword";
 
-import UpdateProfileContainer from '../../containers/UpdateProfile';
-import UpdateProfileComponent from '../components/User/UpdateProfile';
+import UpdateProfileContainer from "../../containers/UpdateProfile";
+import UpdateProfileComponent from "../components/User/UpdateProfile";
 
-import MemberContainer from '../../containers/Member';
-import ProfileComponent from '../components/User/Profile';
+import MemberContainer from "../../containers/Member";
+import ProfileComponent from "../components/User/Profile";
 
-import AboutComponent from '../components/About';
+import AboutComponent from "../components/About";
 
-import CameraContainer from '../../containers/Camera'
+import CameraContainer from "../../containers/Camera";
+
+import Payment from "../../containers/Payment";
 
 const Index = (
   <Stack hideNavBar>
@@ -57,7 +59,11 @@ const Index = (
           icon={() => <Icon name="book" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="recipe" component={RecipesContainer} Layout={RecipeListingComponent} />
+          <Scene
+            key="recipe"
+            component={RecipesContainer}
+            Layout={RecipeListingComponent}
+          />
         </Stack>
 
         <Stack
@@ -66,7 +72,11 @@ const Index = (
           icon={() => <Icon name="book" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="receipt" component={ReceiptsContainer} Layout={ReceiptListingComponent} />
+          <Scene
+            key="receipt"
+            component={ReceiptsContainer}
+            Layout={ReceiptListingComponent}
+          />
         </Stack>
 
         <Stack
@@ -79,12 +89,25 @@ const Index = (
         </Stack>
 
         <Stack
+          key="payment"
+          title="PAYMENT"
+          icon={() => <Icon name="ios-cash" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="payment" component={Payment} />
+        </Stack>
+
+        <Stack
           key="profile"
           title="PROFILE"
           icon={() => <Icon name="contact" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         >
-          <Scene key="profileHome" component={MemberContainer} Layout={ProfileComponent} />
+          <Scene
+            key="profileHome"
+            component={MemberContainer}
+            Layout={ProfileComponent}
+          />
           <Scene
             back
             key="signUp"
@@ -139,7 +162,6 @@ const Index = (
       component={RecipesContainer}
       Layout={RecipeSingleComponent}
     />
-    
   </Stack>
 );
 

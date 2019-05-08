@@ -6,6 +6,7 @@ buildscript {
 
   dependencies {
     classpath 'io.fabric.tools:gradle:1.26.1'
+    
   }
 }
 apply plugin: 'com.android.application'
@@ -25,9 +26,9 @@ android {
     targetSdkVersion 26
     versionCode 1
     versionName '1.0.0'
-    ndk {
-      abiFilters 'armeabi-v7a', 'x86'
-    }
+    // ndk {
+    //   abiFilters 'armeabi-v7a', 'x86'
+    // }
     multiDexEnabled true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     // Deprecated. Used by net.openid:appauth
@@ -105,6 +106,12 @@ apply from: 'expo.gradle'
 
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-ml-vision:17.0.0'
+
+    implementation (project(':react-native-text-detector')) {
+        exclude group: 'com.google.firebase'
+    }
 
   implementation 'com.android.support:multidex:1.0.1'
 
@@ -237,3 +244,6 @@ dependencies {
 
 // This has to be down here for some reason
 apply plugin: 'com.google.gms.google-services'
+
+// Work around for onesignal-gradle-plugin compatibility
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

@@ -340,7 +340,7 @@ DEPENDENCIES:
   - EXSMS (from `../node_modules/expo-sms/ios`)
   - EXTaskManager (from `../node_modules/expo-task-manager/ios`)
   - EXTaskManagerInterface (from `../node_modules/expo-task-manager-interface/ios`)
-  - Firebase/Core
+  - Firebase/Core (~> 5.20.1)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
   - React/ART (from `../node_modules/react-native`)
@@ -559,6 +559,6 @@ SPEC CHECKSUMS:
   TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 937906a9a247922ca63e422abd019b561aadd354
+PODFILE CHECKSUM: e147fcdbc4b960ad64f8fdbe80fafaf48763eac1
 
 COCOAPODS: 1.5.3

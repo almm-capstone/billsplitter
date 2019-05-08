@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: host.exp.exponent:expo-sms:2.0.0@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-sms-2.0.0.aar/0713ba33ec1972d1a8f26abca985fb52/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/expo-sms-2.0.0.aar/0713ba33ec1972d1a8f26abca985fb52/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/21d78070c748075760879151bf14add8/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/21d78070c748075760879151bf14add8/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

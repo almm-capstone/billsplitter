@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
+            "outputFile": "/home/hemmerly/Documents/Senior Phase/Capstone/billsplitter/android/app/build/intermediates/incremental/mergeDevKernelDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
             "map": [
                 {
-                    "source": "/Users/ashleyheestand/Documents/Documents/Senior Phase/capstone/billsplitter/android/app/src/main/res/values-w820dp/dimens.xml",
+                    "source": "/home/hemmerly/Documents/Senior Phase/Capstone/billsplitter/android/app/src/main/res/values-w820dp/dimens.xml",
                     "from": {
                         "startLines": "4",
                         "startColumns": "2",

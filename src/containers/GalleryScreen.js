@@ -7,15 +7,17 @@ import {
   TouchableOpacity,
   Text,
   ScrollView,
+  Dimensions,
+  PixelRatio,
+  Platform,
 } from 'react-native';
 import { FileSystem, FaceDetector, MediaLibrary, Permissions } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 import Photo from './Photo';
 import RNTextDetector from 'react-native-text-detector';
-import {
-  deviceHeight,
-  deviceWidth,
-} from '../../native-base-theme/variables/platform';
+
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 const PHOTOS_DIR = FileSystem.documentDirectory + 'photos';
 
@@ -25,6 +27,7 @@ export default class GalleryScreen extends React.Component {
     images: {},
     photos: [],
     selected: null,
+    image: null,
     visionResp: [],
   };
 
@@ -49,6 +52,7 @@ export default class GalleryScreen extends React.Component {
 
   getPicture = async () => {
     const photo = [this.state.selected];
+    this.setState({ image: photo });
     this.detectText(photo);
 
     // if (photo.length > 0) {
@@ -89,6 +93,7 @@ export default class GalleryScreen extends React.Component {
   mapVisionRespToScreen = (visionResp, imageProperties) => {
     const IMAGE_TO_SCREEN_Y = deviceHeight / 1920;
     const IMAGE_TO_SCREEN_X = deviceWidth / 1080;
+    console.log('device height', deviceHeight);
 
     return visionResp.map(item => {
       return {
@@ -118,20 +123,24 @@ export default class GalleryScreen extends React.Component {
           <TouchableOpacity style={styles.button} onPress={this.props.onPress}>
             <MaterialIcons name="arrow-back" size={25} color="white" />
           </TouchableOpacity>
-
           <TouchableOpacity style={styles.button} onPress={this.getPicture}>
             <Text style={styles.whiteText}>Save selected to gallery</Text>
           </TouchableOpacity>
-
-          {this.state.selected ? (
+          {this.state.image ? (
             <ImageBackground
               source={{ uri: this.state.selected }}
               style={styles.imageBackground}
               key="image"
               resizeMode="cover"
             >
+              <TouchableOpacity
+                style={styles.button}
+                onPress={() => this.setState({ image: null })}
+              >
+                <MaterialIcons name="arrow-back" size={25} color="white" />
+              </TouchableOpacity>
               {this.state.visionResp.map(item => {
-                console.log('an item', item);
+                // console.log('an item', item);
                 return (
                   <TouchableOpacity
                     style={[styles.boundingRect, item.position]}
@@ -142,11 +151,13 @@ export default class GalleryScreen extends React.Component {
             </ImageBackground>
           ) : null}
         </View>
-        <ScrollView contentComponentStyle={{ flex: 1 }}>
-          <View style={styles.pictures}>
-            {this.state.photos.map(this.renderPhoto)}
-          </View>
-        </ScrollView>
+        {!this.state.image ? (
+          <ScrollView contentComponentStyle={{ flex: 1 }}>
+            <View style={styles.pictures}>
+              {this.state.photos.map(this.renderPhoto)}
+            </View>
+          </ScrollView>
+        ) : null}
       </View>
     );
   }

@@ -1,7 +1,3 @@
-import {
-  deviceHeight,
-  deviceWidth,
-} from '../../native-base-theme/variables/platform';
 import React, { Componenent } from 'react';
 import RNTextDetector from 'react-native-text-detector';
 

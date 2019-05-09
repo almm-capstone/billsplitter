@@ -1,7 +1,7 @@
 // Copyright 2015-present 650 Industries. All rights reserved.
 
 #import "AppDelegate.h"
-#import <Firebase.h>
+// #import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -10,7 +10,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [FIRApp configure];
+  // [FIRApp configure];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 

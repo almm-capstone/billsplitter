@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
+  "typings": "index.d.ts",
   "jest": {
     "preset": "jest-expo",
     "transformIgnorePatterns": [
@@ -38,7 +39,7 @@
     "expo": "^32.0.6",
     "expokit": "^32.1.1",
     "express": "^4.16.4",
-    "firebase": "^5.9.2",
+    "firebase": "^5.11.1",
     "native-base": "^2.12.1",
     "paypal-rest-sdk": "^1.8.1",
     "prop-types": "^15.7.2",

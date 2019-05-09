@@ -12,6 +12,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Dimensions,
   Slider,
   Platform,
 } from 'react-native';
@@ -25,6 +26,9 @@ import {
   MaterialCommunityIcons,
   Octicons,
 } from '@expo/vector-icons';
+
+const deviceHeight = Dimensions.get('window').height;
+const deviceWidth = Dimensions.get('window').width;
 
 const landmarkSize = 2;
 
@@ -148,7 +152,7 @@ export default class CameraContainer extends React.Component {
 
   collectPictureSizes = async () => {
     if (this.camera) {
-      const pictureSizes = ['1920x1080'];
+      const pictureSizes = ['300x200'];
       let pictureSizeId = 0;
       this.setState({
         pictureSizes,

@@ -83,17 +83,18 @@ export default class GalleryScreen extends React.Component {
       }
       this.setState(
         {
-          visionResp: this.mapVisionRespToScreen(visionResp, imageProperties),
+          visionResp: this.mapVisionRespToScreen(visionResp, photo),
         },
         // () => console.log('state', this.state),
       );
     }
   };
 
-  mapVisionRespToScreen = (visionResp, imageProperties) => {
-    const IMAGE_TO_SCREEN_Y = deviceHeight / 1920;
-    const IMAGE_TO_SCREEN_X = deviceWidth / 1080;
+  mapVisionRespToScreen = (visionResp, photo) => {
+    const IMAGE_TO_SCREEN_Y = 1 / 3;
+    const IMAGE_TO_SCREEN_X = 1 / 3;
     console.log('device height', deviceHeight);
+    console.log('device width', deviceWidth);
 
     return visionResp.map(item => {
       return {
@@ -131,7 +132,7 @@ export default class GalleryScreen extends React.Component {
               source={{ uri: this.state.selected }}
               style={styles.imageBackground}
               key="image"
-              resizeMode="cover"
+              resizeMode="contain"
             >
               <TouchableOpacity
                 style={styles.button}
@@ -144,7 +145,7 @@ export default class GalleryScreen extends React.Component {
                 return (
                   <TouchableOpacity
                     style={[styles.boundingRect, item.position]}
-                    key={item.id}
+                    key={item.text}
                   />
                 );
               })}

@@ -31,7 +31,7 @@ import expo.modules.sensors.SensorsPackage;
 import expo.modules.sms.SMSPackage;
 import expo.modules.taskManager.TaskManagerPackage;
 import expolib_v1.okhttp3.OkHttpClient;
-
+import com.fetchsky.RNTextDetector.RNTextDetectorPackage;
 // Needed for `react-native link`
 // import com.facebook.react.ReactApplication;
 import io.invertase.firebase.RNFirebasePackage;
@@ -52,6 +52,8 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
         // Needed for `react-native link`
         // new MainReactPackage(),
             new RNFirebasePackage()
+        // new MainReactPackage()
+        new RNTextDetectorPackage()
     );
   }
 

@@ -1,12 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Container, Content, Text, Form, Item, Label, Input, Button,
+  Container,
+  Content,
+  Text,
+  Form,
+  Item,
+  Label,
+  Input,
+  Button,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Messages from '../UI/Messages';
 import Header from '../UI/Header';
 import Spacer from '../UI/Spacer';
+import { FirebaseRef, Firebase } from '../../../lib/firebase';
 
 class SignUp extends React.Component {
   static propTypes = {
@@ -14,12 +22,12 @@ class SignUp extends React.Component {
     error: PropTypes.string,
     loading: PropTypes.bool.isRequired,
     onFormSubmit: PropTypes.func.isRequired,
-  }
+  };
 
   static defaultProps = {
     error: null,
     success: null,
-  }
+  };
 
   state = {
     firstName: '',
@@ -27,7 +35,7 @@ class SignUp extends React.Component {
     email: '',
     password: '',
     password2: '',
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -36,14 +44,19 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange = (name, val) => this.setState({ [name]: val })
+  handleChange = (name, val) => this.setState({ [name]: val });
 
   handleSubmit = () => {
     const { onFormSubmit } = this.props;
     onFormSubmit(this.state)
-      .then(() => setTimeout(() => { Actions.pop(); Actions.login(); }, 1000))
+      .then(() =>
+        setTimeout(() => {
+          Actions.pop();
+          Actions.login();
+        }, 1000),
+      )
       .catch(() => {});
-  }
+  };
 
   render() {
     const { loading, error, success } = this.props;

@@ -9,25 +9,29 @@ class SignUp extends Component {
     Layout: PropTypes.func.isRequired,
     member: PropTypes.shape({}).isRequired,
     onFormSubmit: PropTypes.func.isRequired,
-  }
+  };
 
   state = {
     error: null,
     success: null,
     loading: false,
-  }
+  };
 
-  onFormSubmit = (data) => {
+  onFormSubmit = async data => {
     const { onFormSubmit } = this.props;
 
-    this.setState({ loading: true });
+    await this.setState({ loading: true });
+    console.log('state', this.state);
 
     return onFormSubmit(data)
-      .then(() => this.setState({
-        loading: false,
-        success: 'Success - You are now a member',
-        error: null,
-      })).catch((err) => {
+      .then(() =>
+        this.setState({
+          loading: false,
+          success: 'Success - You are now a member',
+          error: null,
+        }),
+      )
+      .catch(err => {
         this.setState({
           loading: false,
           success: null,
@@ -35,7 +39,7 @@ class SignUp extends Component {
         });
         throw err; // To prevent transition back
       });
-  }
+  };
 
   render = () => {
     const { member, Layout } = this.props;
@@ -50,7 +54,7 @@ class SignUp extends Component {
         onFormSubmit={this.onFormSubmit}
       />
     );
-  }
+  };
 }
 
 const mapStateToProps = state => ({
@@ -61,4 +65,7 @@ const mapDispatchToProps = {
   onFormSubmit: signUp,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(SignUp);

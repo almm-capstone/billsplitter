@@ -81,6 +81,9 @@ target 'appname' do
     :path => "../node_modules/expo-task-manager/ios"
   pod 'EXTaskManagerInterface',
     :path => "../node_modules/expo-task-manager-interface/ios"
+  pod 'Firebase/Core', '~> 5.20.1'
+  pod 'RNTextDetector', 
+  :path => "../node_modules/react-native-text-detector/ios"
 
   pod 'React',
     :path => "../node_modules/react-native",

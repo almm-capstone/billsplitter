@@ -1,0 +1,28 @@
+{
+  "name": "RNTextDetector",
+  "version": "0.0.6",
+  "summary": "Text Detector from image for react native using firebase ML Kit",
+  "description": "Text Detector from image for react native",
+  "license": "MIT",
+  "authors": {
+    "name": "Fetch Sky Technologies"
+  },
+  "homepage": "https://github.com/zsajjad/react-native-text-detector",
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/zsajjad/react-native-text-detector.git",
+    "tag": "master"
+  },
+  "source_files": "*.{h,m}",
+  "requires_arc": true,
+  "dependencies": {
+    "React": [
+
+    ],
+    "TesseractOCRiOS": [
+      "~> 4.0.0"
+    ]
+  }
+}

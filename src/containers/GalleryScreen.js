@@ -91,8 +91,8 @@ export default class GalleryScreen extends React.Component {
   };
 
   mapVisionRespToScreen = (visionResp, photo) => {
-    const IMAGE_TO_SCREEN_Y = 1 / 3;
-    const IMAGE_TO_SCREEN_X = 1 / 3;
+    const IMAGE_TO_SCREEN_Y = 1 / 3.38;
+    const IMAGE_TO_SCREEN_X = 1 / 3.375;
     console.log('device height', deviceHeight);
     console.log('device width', deviceWidth);
 
@@ -132,7 +132,7 @@ export default class GalleryScreen extends React.Component {
               source={{ uri: this.state.selected }}
               style={styles.imageBackground}
               key="image"
-              resizeMode="contain"
+              resizeMode="cover"
             >
               <TouchableOpacity
                 style={styles.button}

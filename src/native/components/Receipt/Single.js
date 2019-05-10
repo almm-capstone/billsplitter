@@ -1,24 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import {
-  Container, Content, Card, CardItem, Body, H3, List, ListItem, Text,
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  H3,
+  List,
+  ListItem,
+  Text,
+  Button,
+  Icon,
+  Form,
+  Input
 } from 'native-base';
 import { errorMessages } from '../../../constants/messages';
 import Error from '../UI/Error';
 import Spacer from '../UI/Spacer';
+import AddItemForm from './AddItemForm';
+const { FirebaseRef } = require('../../../lib/firebase.js');
+import { Actions } from 'react-native-router-flux';
 //import console = require('console');
 
-const ReceiptView = ({
-  error, receipts, receiptId,
-}) => {
+const deleteItem = (itemObj, receiptId) => {
+  console.log('IN DELETE ITEM', itemObj);
+
+  FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
+    .set(null)
+    .then(function() {
+      console.log('Remove succeeded.');
+    })
+    .catch(function(error) {
+      console.log('Remove failed: ' + error.message);
+    });
+};
+
+const ReceiptView = ({ error, receipts, receiptId }) => {
   // Error
   if (error) return <Error content={error} />;
 
   // Get this Receipt from all receipts
   let receipt = null;
   if (receiptId && receipts) {
-    receipt = receipts.find(item => parseInt(item.id, 10) === parseInt(receiptId, 10));
+    receipt = receipts.find(
+      item => parseInt(item.id, 10) === parseInt(receiptId, 10)
+    );
   }
 
   // Receipt not found
@@ -27,22 +55,28 @@ const ReceiptView = ({
   // Build Items listing
   const items = receipt.items.map(itemObj => (
     <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
-      <Text>{itemObj.name} ${itemObj.price}</Text>
-    </ListItem>)
-    );
+      <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
+        <Icon>X</Icon>
+      </Button>
+      <Text>      </Text>
+      <Text>
+        {itemObj.name}    ${itemObj.price}      {itemObj.user_claim}
+      </Text>
+    </ListItem>
+  ));
 
   return (
+    <ScrollView>
     <Container>
       <Content padder>
-        <Image source={{ uri: receipt.image }} style={{ height: 100, width: null, flex: 1 }} />
+        <Image
+          source={{ uri: receipt.image }}
+          style={{ height: 100, width: null, flex: 1 }}
+        />
 
         <Spacer size={25} />
         <H3>{receipt.title}</H3>
-        <Text>
-          by
-          {' '}
-          {receipt.author}
-        </Text>
+        <Text>by {receipt.author}</Text>
         <Spacer size={15} />
 
         <Card>
@@ -62,14 +96,37 @@ const ReceiptView = ({
           </CardItem>
           <CardItem>
             <Content>
-              <List>{items}</List>
+              <List>
+                {items}
+              </List>
             </Content>
+          </CardItem>
+        </Card>
+
+        <Card>
+          <CardItem header bordered>
+            <Text>Add Item</Text>
+          </CardItem>
+          <AddItemForm receiptId={receipt.id} items={items} />
+        </Card>
+
+        <Card>
+          <CardItem header bordered>
+            <Text>Checkout with Paypal!</Text>
+          </CardItem>
+          <CardItem>
+          <Button
+            onPress={() => Actions.payment()}
+          >
+              <Text>Checkout</Text>
+            </Button>
           </CardItem>
         </Card>
 
         <Spacer size={20} />
       </Content>
     </Container>
+    </ScrollView>
   );
 };
 

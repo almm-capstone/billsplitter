@@ -44,9 +44,7 @@ export default class GalleryScreen extends React.Component {
     } else {
       selected = null;
     }
-    this.setState({ selected: selected }, () =>
-      console.log('old state', this.state),
-    );
+    this.setState({ selected: selected }, () => console.log('old state'));
     // console.log('state', this.state);
   };
 
@@ -136,7 +134,7 @@ export default class GalleryScreen extends React.Component {
             >
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => this.setState({ image: null })}
+                onPress={() => this.setState({ image: null, selected: null })}
               >
                 <MaterialIcons name="arrow-back" size={25} color="white" />
               </TouchableOpacity>

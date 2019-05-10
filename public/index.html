@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="theme-color" content="#000000" />
 
@@ -24,11 +27,14 @@
     <title>React App</title>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter-ui.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter-ui.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css"
+    />
 
     <!-- Start Single Page Apps for GitHub Pages -->
-    <script type='text/javascript' src='../config.js'></script>
+    <script type="text/javascript" src="../config.js"></script>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // https://github.com/rafrex/spa-github-pages
@@ -36,19 +42,28 @@
       (function(l) {
         if (l.search) {
           var q = {};
-          l.search.slice(1).split('&').forEach(function(v) {
-            var a = v.split('=');
-            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-          });
+          l.search
+            .slice(1)
+            .split('&')
+            .forEach(function(v) {
+              var a = v.split('=');
+              q[a[0]] = a
+                .slice(1)
+                .join('=')
+                .replace(/~and~/g, '&');
+            });
           if (q.p !== undefined) {
-            window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + (q.p || '') +
-              (q.q ? ('?' + q.q) : '') +
-              l.hash
+            window.history.replaceState(
+              null,
+              null,
+              l.pathname.slice(0, -1) +
+                (q.p || '') +
+                (q.q ? '?' + q.q : '') +
+                l.hash,
             );
           }
         }
-      }(window.location))
+      })(window.location);
     </script>
     <!-- End Single Page Apps for GitHub Pages -->
   </head>
@@ -67,6 +82,23 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: 'AIzaSyBwmylr4mJRaFpv12kF2DI-yQQhqT0dtcw',
+        authDomain: 'almm-capstone.firebaseapp.com',
+        databaseURL: 'https://almm-capstone.firebaseio.com',
+        projectId: 'almm-capstone',
+        storageBucket: 'almm-capstone.appspot.com',
+        messagingSenderId: '997357993032',
+        appId: '1:997357993032:web:26d0d123039f518d',
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
   </body>
 </html>

@@ -34,6 +34,7 @@ import expolib_v1.okhttp3.OkHttpClient;
 import com.fetchsky.RNTextDetector.RNTextDetectorPackage;
 // Needed for `react-native link`
 // import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 
 public class MainApplication extends ExpoApplication implements AppLoaderPackagesProviderInterface<ReactPackage> {
 
@@ -49,6 +50,8 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
         // TODO: add native modules!
 
         // Needed for `react-native link`
+        // new MainReactPackage(),
+            new RNFirebasePackage()
         // new MainReactPackage()
         new RNTextDetectorPackage()
     );

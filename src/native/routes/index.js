@@ -35,6 +35,8 @@ import GalleryScreen from '../../containers/GalleryScreen';
 
 import Payment from '../../containers/Payment';
 
+// import ReceiptForm from "../../containers/receiptForm"
+
 const Index = (
   <Stack hideNavBar>
     <Scene hideNavBar>
@@ -45,59 +47,6 @@ const Index = (
         showLabel={false}
         {...DefaultProps.tabProps}
       >
-        <Stack
-          key="home"
-          title={AppConfig.appName.toUpperCase()}
-          icon={() => <Icon name="planet" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="home" component={AboutComponent} />
-        </Stack>
-
-        <Stack
-          key="recipes"
-          title="RECIPES"
-          icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene
-            key="recipe"
-            component={RecipesContainer}
-            Layout={RecipeListingComponent}
-          />
-        </Stack>
-
-        <Stack
-          key="receipts"
-          title="RECEIPTS"
-          icon={() => <Icon name="book" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene
-            key="receipt"
-            component={ReceiptsContainer}
-            Layout={ReceiptListingComponent}
-          />
-        </Stack>
-
-        <Stack
-          key="camera"
-          title="CAMERA"
-          icon={() => <Icon name="camera" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene back key="camera" component={CameraContainer} />
-        </Stack>
-
-        <Stack
-          key="payment"
-          title="PAYMENT"
-          icon={() => <Icon name="ios-cash" {...DefaultProps.icons} />}
-          {...DefaultProps.navbarProps}
-        >
-          <Scene key="payment" component={Payment} />
-        </Stack>
-
         <Stack
           key="profile"
           title="PROFILE"
@@ -143,7 +92,60 @@ const Index = (
             Layout={UpdateProfileComponent}
           />
         </Stack>
+
+        <Stack
+          key="camera"
+          title="CAMERA"
+          icon={() => <Icon name="camera" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="camera" component={CameraContainer} />
+        </Stack>
+
+        <Stack
+          key="home"
+          title={AppConfig.appName.toUpperCase()}
+          icon={() => <Icon name="planet" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene key="home" component={AboutComponent} />
+        </Stack>
+
+        {/* <Stack
+          key="recipes"
+          title="RECIPES"
+          icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene
+            key="recipe"
+            component={RecipesContainer}
+            Layout={RecipeListingComponent}
+          />
+        </Stack> */}
+
+        <Stack
+          key="receipts"
+          title="RECEIPTS"
+          icon={() => <Icon name="book" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        >
+          <Scene
+            key="receipt"
+            component={ReceiptsContainer}
+            Layout={ReceiptListingComponent}
+          />
+        </Stack>
+
+        {/* <Stack
+          key="payment"
+          title="PAYMENT"
+          icon={() => <Icon name="ios-cash" {...DefaultProps.icons} />}
+          {...DefaultProps.navbarProps}
+        > */}
+
       </Tabs>
+      <Scene key="payment" title="Payment" component={Payment} />
     </Scene>
 
     <Scene

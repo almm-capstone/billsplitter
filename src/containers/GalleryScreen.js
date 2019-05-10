@@ -48,6 +48,14 @@ export default class GalleryScreen extends React.Component {
     // console.log('state', this.state);
   };
 
+  deletePicture = async () => {
+    let selected = this.state.selected;
+    let fileName = selected.slice(PHOTOS_DIR.length + 1);
+    let filteredPhotos = this.state.photos.filter(photo => photo !== fileName);
+    this.setState({ photos: filteredPhotos });
+    await FileSystem.deleteAsync(selected);
+  };
+
   getPicture = async () => {
     const photo = [this.state.selected];
     this.setState({ image: photo });
@@ -123,7 +131,11 @@ export default class GalleryScreen extends React.Component {
             <MaterialIcons name="arrow-back" size={25} color="white" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.getPicture}>
-            <Text style={styles.whiteText}>Save selected to gallery</Text>
+            <MaterialIcons name="library-add" size={25} color="white" />
+            {/* <Text style={styles.whiteText}>Add New Bill</Text> */}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.deletePicture}>
+            <MaterialIcons name="delete" size={25} color="white" />
           </TouchableOpacity>
           {this.state.image ? (
             <ImageBackground

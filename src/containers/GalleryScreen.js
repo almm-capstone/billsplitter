@@ -146,7 +146,12 @@ export default class GalleryScreen extends React.Component {
             >
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => this.setState({ image: null, selected: null })}
+                onPress={() =>
+                  this.setState({
+                    image: null,
+                    selected: null,
+                  })
+                }
               >
                 <MaterialIcons name="arrow-back" size={25} color="white" />
               </TouchableOpacity>

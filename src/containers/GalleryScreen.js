@@ -44,10 +44,16 @@ export default class GalleryScreen extends React.Component {
     } else {
       selected = null;
     }
-    this.setState({ selected: selected }, () =>
-      console.log('old state', this.state),
-    );
+    this.setState({ selected: selected }, () => console.log('old state'));
     // console.log('state', this.state);
+  };
+
+  deletePicture = async () => {
+    let selected = this.state.selected;
+    let fileName = selected.slice(PHOTOS_DIR.length + 1);
+    let filteredPhotos = this.state.photos.filter(photo => photo !== fileName);
+    this.setState({ photos: filteredPhotos });
+    await FileSystem.deleteAsync(selected);
   };
 
   getPicture = async () => {
@@ -125,7 +131,11 @@ export default class GalleryScreen extends React.Component {
             <MaterialIcons name="arrow-back" size={25} color="white" />
           </TouchableOpacity>
           <TouchableOpacity style={styles.button} onPress={this.getPicture}>
-            <Text style={styles.whiteText}>Save selected to gallery</Text>
+            <MaterialIcons name="library-add" size={25} color="white" />
+            {/* <Text style={styles.whiteText}>Add New Bill</Text> */}
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={this.deletePicture}>
+            <MaterialIcons name="delete" size={25} color="white" />
           </TouchableOpacity>
           {this.state.image ? (
             <ImageBackground
@@ -136,7 +146,12 @@ export default class GalleryScreen extends React.Component {
             >
               <TouchableOpacity
                 style={styles.button}
-                onPress={() => this.setState({ image: null })}
+                onPress={() =>
+                  this.setState({
+                    image: null,
+                    selected: null,
+                  })
+                }
               >
                 <MaterialIcons name="arrow-back" size={25} color="white" />
               </TouchableOpacity>

@@ -1,1 +1,0 @@
-../../../../../node_modules/react-native-text-detector/ios/RNTextDetector.h

@@ -28,6 +28,8 @@ export default class GalleryScreen extends React.Component {
     photos: [],
     selected: null,
     image: null,
+    height: null,
+    width: null,
     visionResp: [],
   };
 
@@ -38,14 +40,20 @@ export default class GalleryScreen extends React.Component {
 
   toggleSelection = uri => {
     let selected = this.state.selected;
-    console.log('uri', uri);
     if (selected !== uri) {
       selected = uri;
     } else {
       selected = null;
     }
-    this.setState({ selected: selected }, () => console.log('old state'));
+    this.setState({ selected: selected });
     // console.log('state', this.state);
+  };
+
+  getSize = () => {
+    let photo = this.state.selected;
+    Image.getSize(photo, (width, height) => {
+      this.setState({ width: width, height: height });
+    });
   };
 
   deletePicture = async () => {
@@ -59,6 +67,7 @@ export default class GalleryScreen extends React.Component {
   getPicture = async () => {
     const photo = [this.state.selected];
     this.setState({ image: photo });
+    this.getSize(photo);
     this.detectText(photo);
 
     // if (photo.length > 0) {
@@ -83,7 +92,7 @@ export default class GalleryScreen extends React.Component {
     const photo = this.state.selected;
     if (photo.length > 0) {
       const visionResp = await RNTextDetector.detectFromUri(photo);
-      // console.log('image props', imageProperties);
+      console.log('vision resp', visionResp);
       if (!(visionResp && visionResp.length > 0)) {
         throw 'Unmatched';
       }
@@ -97,10 +106,8 @@ export default class GalleryScreen extends React.Component {
   };
 
   mapVisionRespToScreen = (visionResp, photo) => {
-    const IMAGE_TO_SCREEN_Y = 1 / 3.38;
-    const IMAGE_TO_SCREEN_X = 1 / 3.375;
-    console.log('device height', deviceHeight);
-    console.log('device width', deviceWidth);
+    const IMAGE_TO_SCREEN_Y = deviceHeight / this.state.height;
+    const IMAGE_TO_SCREEN_X = deviceWidth / this.state.width;
 
     return visionResp.map(item => {
       return {

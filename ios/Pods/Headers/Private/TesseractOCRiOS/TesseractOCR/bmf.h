@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/bmf.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/bmf.h

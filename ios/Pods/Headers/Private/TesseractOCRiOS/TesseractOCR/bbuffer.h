@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/bbuffer.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/bbuffer.h

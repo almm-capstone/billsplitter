@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/sudoku.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/sudoku.h

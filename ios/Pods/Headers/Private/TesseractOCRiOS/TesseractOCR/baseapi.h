@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/baseapi.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/baseapi.h

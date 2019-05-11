@@ -1,0 +1,1 @@
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/tess_version.h

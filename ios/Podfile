@@ -82,8 +82,13 @@ target 'appname' do
   pod 'EXTaskManagerInterface',
     :path => "../node_modules/expo-task-manager-interface/ios"
   pod 'Firebase/Core', '~> 5.20.1'
-  pod 'RNTextDetector', 
-  :path => "../node_modules/react-native-text-detector/ios"
+  pod 'RNTextDetector',
+    :path => "../node_modules/react-native-text-detector/ios"
+  # pod 'TesseractOCRiOS',
+  #   :git => 'git://github.com/parallaxe/Tesseract-OCR-iOS.git', :branch => 'macos-support'
+  pod 'TesseractOCRiOS',
+    :git => 'git://github.com/parallaxe/Tesseract-OCR-iOS.git',
+    :branch => 'macos-support'
 
   pod 'React',
     :path => "../node_modules/react-native",
@@ -117,6 +122,8 @@ target 'appname' do
     :inhibit_warnings => true
 
 
+  pod 'react-native-camera', :path => '../node_modules/react-native-camera'
+
   post_install do |installer|
     installer.pods_project.main_group.tab_width = '2';
     installer.pods_project.main_group.indent_width = '2';
@@ -127,7 +134,7 @@ target 'appname' do
       target.native_target.build_configurations.each do |config|
         config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= ['$(inherited)']
         config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] << 'EX_DETACHED=1'
-        
+
         # needed for GoogleMaps 2.x
         config.build_settings['FRAMEWORK_SEARCH_PATHS'] ||= []
         config.build_settings['FRAMEWORK_SEARCH_PATHS'] << '${PODS_ROOT}/GoogleMaps/Base/Frameworks'

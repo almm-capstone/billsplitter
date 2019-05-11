@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/serialis.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/serialis.h

@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/queue.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/queue.h

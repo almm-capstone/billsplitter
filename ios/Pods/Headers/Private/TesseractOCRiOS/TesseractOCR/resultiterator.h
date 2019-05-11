@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/resultiterator.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/resultiterator.h

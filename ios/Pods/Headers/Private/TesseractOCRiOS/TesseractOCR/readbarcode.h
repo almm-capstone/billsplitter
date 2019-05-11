@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/readbarcode.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/readbarcode.h

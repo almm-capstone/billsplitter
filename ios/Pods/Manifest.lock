@@ -249,6 +249,14 @@ PODS:
   - nanopb/encode (0.3.901)
   - React (0.57.1):
     - React/Core (= 0.57.1)
+  - react-native-camera (2.7.0):
+    - React
+    - react-native-camera/RCT (= 2.7.0)
+    - react-native-camera/RN (= 2.7.0)
+  - react-native-camera/RCT (2.7.0):
+    - React
+  - react-native-camera/RN (2.7.0):
+    - React
   - React/ART (0.57.1):
     - React/Core
   - React/Core (0.57.1):
@@ -343,6 +351,7 @@ DEPENDENCIES:
   - Firebase/Core (~> 5.20.1)
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/glog.podspec`)
+  - react-native-camera (from `../node_modules/react-native-camera`)
   - React/ART (from `../node_modules/react-native`)
   - React/Core (from `../node_modules/react-native`)
   - React/CxxBridge (from `../node_modules/react-native`)
@@ -357,6 +366,7 @@ DEPENDENCIES:
   - React/RCTVibration (from `../node_modules/react-native`)
   - React/RCTWebSocket (from `../node_modules/react-native`)
   - RNTextDetector (from `../node_modules/react-native-text-detector/ios`)
+  - TesseractOCRiOS (from `git://github.com/parallaxe/Tesseract-OCR-iOS.git`, branch `macos-support`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -389,7 +399,6 @@ SPEC REPOS:
     - JKBigInteger2
     - lottie-ios
     - nanopb
-    - TesseractOCRiOS
 
 EXTERNAL SOURCES:
   DoubleConversion:
@@ -475,8 +484,13 @@ EXTERNAL SOURCES:
     :podspec: "../node_modules/react-native/third-party-podspecs/glog.podspec"
   React:
     :path: "../node_modules/react-native"
+  react-native-camera:
+    :path: "../node_modules/react-native-camera"
   RNTextDetector:
     :path: "../node_modules/react-native-text-detector/ios"
+  TesseractOCRiOS:
+    :branch: macos-support
+    :git: git://github.com/parallaxe/Tesseract-OCR-iOS.git
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -484,6 +498,9 @@ CHECKOUT OPTIONS:
   ExpoKit:
     :git: http://github.com/expo/expo.git
     :tag: ios/2.10.6
+  TesseractOCRiOS:
+    :commit: d16bb14e136d875bd5a519febe9e3c103d212647
+    :git: git://github.com/parallaxe/Tesseract-OCR-iOS.git
 
 SPEC CHECKSUMS:
   Amplitude-iOS: 4a3c8807b2ea5369dc11e87e23825bff01e5a922
@@ -555,10 +572,11 @@ SPEC CHECKSUMS:
   lottie-ios: a50d5c0160425cd4b01b852bb9578963e6d92d31
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
+  react-native-camera: 9c50d7def800895e7991ccda6203929553ceec9c
   RNTextDetector: 8d5be966fb2bfe907703ef37f6fa742180232804
-  TesseractOCRiOS: 90638afbe43d082433f2e76b384c7901d23956df
+  TesseractOCRiOS: f51bbcd27d84b9ac59950790413a7e4219e84483
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: e147fcdbc4b960ad64f8fdbe80fafaf48763eac1
+PODFILE CHECKSUM: 2e12184382b5aedada867e4a268ab11c9ac8c14d
 
 COCOAPODS: 1.5.3

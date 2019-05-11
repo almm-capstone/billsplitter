@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/helpers.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/helpers.h

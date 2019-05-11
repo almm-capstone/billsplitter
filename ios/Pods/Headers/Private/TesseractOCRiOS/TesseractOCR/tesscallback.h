@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/tesscallback.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/tesscallback.h

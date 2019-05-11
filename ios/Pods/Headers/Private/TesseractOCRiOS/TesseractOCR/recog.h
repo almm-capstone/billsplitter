@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/recog.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/recog.h

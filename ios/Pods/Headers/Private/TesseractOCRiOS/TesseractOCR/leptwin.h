@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/leptwin.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/leptwin.h

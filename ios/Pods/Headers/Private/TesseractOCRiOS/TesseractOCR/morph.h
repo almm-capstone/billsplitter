@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/morph.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/morph.h

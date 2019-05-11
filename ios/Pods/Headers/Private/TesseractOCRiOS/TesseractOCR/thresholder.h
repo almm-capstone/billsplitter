@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/thresholder.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/thresholder.h

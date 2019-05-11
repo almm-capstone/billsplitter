@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/unichar.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/unichar.h

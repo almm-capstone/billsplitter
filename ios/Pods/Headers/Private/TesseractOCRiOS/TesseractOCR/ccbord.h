@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/ccbord.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/ccbord.h

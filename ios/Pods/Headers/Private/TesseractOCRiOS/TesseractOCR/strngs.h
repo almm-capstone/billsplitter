@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/strngs.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/strngs.h

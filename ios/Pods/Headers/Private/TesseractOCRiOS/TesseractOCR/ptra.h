@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/ptra.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/ptra.h

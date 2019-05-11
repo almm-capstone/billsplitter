@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/stack.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/stack.h

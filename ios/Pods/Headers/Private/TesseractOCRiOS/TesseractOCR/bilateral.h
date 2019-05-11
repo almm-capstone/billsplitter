@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/bilateral.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/bilateral.h

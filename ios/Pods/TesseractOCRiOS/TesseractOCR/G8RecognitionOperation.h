@@ -7,8 +7,11 @@
 //  All rights reserved.
 //
 
+#if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
 #import <UIKit/UIKit.h>
-
+#elif TARGET_OS_MAC
+#import <AppKit/AppKit.h>
+#endif
 #import "G8Tesseract.h"
 
 /**
@@ -57,9 +60,6 @@ typedef void(^G8RecognitionOperationCallback)(G8Tesseract *tesseract);
  *  @note It will be called from operation thread.
  */
 @property (nonatomic, copy) G8RecognitionOperationCallback progressCallbackBlock;
-
-/// @deprecated	Use property recognitionCompleteBlock instead
-@property (copy) void (^completionBlock)(void) DEPRECATED_ATTRIBUTE;
 
 /// The default initializer should not be used since the language Tesseract
 /// uses needs to be explicit.

@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/leptonica/watershed.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/leptonica/watershed.h

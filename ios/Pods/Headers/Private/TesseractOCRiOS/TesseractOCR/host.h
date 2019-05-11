@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/host.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/host.h

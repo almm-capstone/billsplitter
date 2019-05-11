@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/genericvector.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/genericvector.h

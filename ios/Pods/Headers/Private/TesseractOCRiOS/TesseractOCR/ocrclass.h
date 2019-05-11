@@ -1,1 +1,1 @@
-../../../../TesseractOCRiOS/TesseractOCR/include/tesseract/ocrclass.h
+../../../../TesseractOCRiOS/TesseractOCR/ios/include/tesseract/ocrclass.h

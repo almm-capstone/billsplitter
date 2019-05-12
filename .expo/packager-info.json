@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 3893,
-  "expoServerNgrokUrl": "https://i2-v9u.ashleyheestand.billsplitter.exp.direct",
-  "packagerNgrokUrl": "https://packager.i2-v9u.ashleyheestand.billsplitter.exp.direct",
-  "ngrokPid": 3912
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null
 }

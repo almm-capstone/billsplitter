@@ -14,7 +14,7 @@ import {
 import { FileSystem, FaceDetector, MediaLibrary, Permissions } from 'expo';
 import { MaterialIcons } from '@expo/vector-icons';
 import Photo from './Photo';
-import RNTextDetector from 'react-native-text-detector';
+// import RNTextDetector from 'react-native-text-detector';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
@@ -88,39 +88,39 @@ export default class GalleryScreen extends React.Component {
     // }
   };
 
-  detectText = async (uri, imageProperties) => {
-    const photo = this.state.selected;
-    if (photo.length > 0) {
-      const visionResp = await RNTextDetector.detectFromUri(photo);
-      console.log('vision resp', visionResp);
-      if (!(visionResp && visionResp.length > 0)) {
-        throw 'Unmatched';
-      }
-      this.setState(
-        {
-          visionResp: this.mapVisionRespToScreen(visionResp, photo),
-        },
-        // () => console.log('state', this.state),
-      );
-    }
-  };
+  // detectText = async (uri, imageProperties) => {
+  //   const photo = this.state.selected;
+  //   if (photo.length > 0) {
+  //     const visionResp = await RNTextDetector.detectFromUri(photo);
+  //     console.log('vision resp', visionResp);
+  //     if (!(visionResp && visionResp.length > 0)) {
+  //       throw 'Unmatched';
+  //     }
+  //     this.setState(
+  //       {
+  //         visionResp: this.mapVisionRespToScreen(visionResp, photo),
+  //       },
+  //       // () => console.log('state', this.state),
+  //     );
+  //   }
+  // };
 
-  mapVisionRespToScreen = (visionResp, photo) => {
-    const IMAGE_TO_SCREEN_Y = deviceHeight / this.state.height;
-    const IMAGE_TO_SCREEN_X = deviceWidth / this.state.width;
+  // mapVisionRespToScreen = (visionResp, photo) => {
+  //   const IMAGE_TO_SCREEN_Y = deviceHeight / this.state.height;
+  //   const IMAGE_TO_SCREEN_X = deviceWidth / this.state.width;
 
-    return visionResp.map(item => {
-      return {
-        ...item,
-        position: {
-          width: item.bounding.width * IMAGE_TO_SCREEN_X,
-          left: item.bounding.left * IMAGE_TO_SCREEN_X,
-          height: item.bounding.height * IMAGE_TO_SCREEN_Y,
-          top: item.bounding.top * IMAGE_TO_SCREEN_Y,
-        },
-      };
-    });
-  };
+  //   return visionResp.map(item => {
+  //     return {
+  //       ...item,
+  //       position: {
+  //         width: item.bounding.width * IMAGE_TO_SCREEN_X,
+  //         left: item.bounding.left * IMAGE_TO_SCREEN_X,
+  //         height: item.bounding.height * IMAGE_TO_SCREEN_Y,
+  //         top: item.bounding.top * IMAGE_TO_SCREEN_Y,
+  //       },
+  //     };
+  //   });
+  // };
 
   renderPhoto = fileName => (
     <Photo

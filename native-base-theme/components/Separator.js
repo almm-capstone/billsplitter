@@ -36,7 +36,7 @@ export default (variables = variable) => {
 		'.noBottomBorder': {
 			borderBottomWidth: 0,
 		},
-		height: 38,
+		height: 2,
 		backgroundColor: '#F0EFF5',
 		flex: 1,
 		justifyContent: 'center',

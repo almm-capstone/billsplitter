@@ -8,6 +8,7 @@ import {
   Image,
   StyleSheet
 } from "react-native";
+// import console = require("console");
 
 export default class Payment extends React.Component {
   state = {

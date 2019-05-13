@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Image, ScrollView, FlatList } from "react-native";
+import { Image, ScrollView, TextInput } from "react-native";
 import {
   Container,
   Content,
@@ -22,7 +22,8 @@ import Spacer from "../UI/Spacer";
 import AddItemForm from "./AddItemForm";
 const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Actions } from "react-native-router-flux";
-//import console = require('console');
+import axios from "axios";
+// import console = require('console');
 
 const deleteItem = (itemObj, receiptId) => {
   console.log("IN DELETE ITEM", itemObj);
@@ -65,6 +66,19 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
     </ListItem>
   ));
 
+  const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
+    let totalFloat = accumulator + Number(currentItem.price);
+    let finalTotal = Math.round(totalFloat * 100) / 100;
+
+    //await axios.post("/pay", finalTotal);
+    return finalTotal;
+  }, 0);
+
+  axios.post(`/api/pay/${totalAmount}`, { totalAmount }).then(res => {
+    console.log(res);
+    console.log(res.data);
+  });
+
   return (
     <ScrollView>
       <Container>
@@ -105,7 +119,11 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
             <CardItem header bordered>
               <Text>Add Item</Text>
             </CardItem>
-            <AddItemForm receiptId={receipt.id} items={items} />
+            <AddItemForm
+              receiptId={receipt.id}
+              items={items}
+              totalAmount={totalAmount}
+            />
           </Card>
 
           <Card>
@@ -113,7 +131,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
               <Text>Checkout with Paypal!</Text>
             </CardItem>
             <CardItem>
-              <Text>Total amount: </Text>
+              <Text>Total amount: {totalAmount}</Text>
             </CardItem>
             <CardItem>
               <Button onPress={() => Actions.payment()}>
@@ -138,5 +156,4 @@ ReceiptView.propTypes = {
 ReceiptView.defaultProps = {
   error: null
 };
-
 export default ReceiptView;

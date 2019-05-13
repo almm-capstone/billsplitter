@@ -19,7 +19,8 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.post("/pay", (req, res) => {
+app.post("/pay/:total", (req, res) => {
+  console.log(req.body);
   const create_payment_json = {
     intent: "sale",
     payer: {
@@ -36,7 +37,7 @@ app.post("/pay", (req, res) => {
             {
               name: "Product",
               sku: "001",
-              price: "25.00",
+              price: "25",
               currency: "USD",
               quantity: 1
             }
@@ -88,7 +89,7 @@ app.get("/success", (req, res) => {
       console.log(error.response);
       throw error;
     } else {
-      console.log(JSON.stringify(payment));
+      //console.log(JSON.stringify(payment));
       FirebaseRef.child("/users/lesley@email/receipts").set({ 0: payment });
       res.render("success");
     }

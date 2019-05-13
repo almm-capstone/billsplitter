@@ -25,11 +25,7 @@ class AddItemForm extends Component {
     price: "",
     user_claim: ""
   };
-  // findItem = () => {
-  //   console.log("CALLED FIND ITEM");
-  //   let count = this.props.items.length;
-  //   return count;
-  // };
+  
 
   addItem = (name, price, user_claim, id) => {
     FirebaseRef.child(
@@ -61,25 +57,6 @@ class AddItemForm extends Component {
     });
   };
 
-  // handleSubmitId = () => {
-  //   this.setState({
-  //     id: `${this.props.items.length + 1}`
-  //   });
-  // };
-
-  // handleSubmit = () => {
-  //   this.setState({
-  //     id: this.findItem()
-  //   }),
-  //   addItem(
-  //     this.state.name,
-  //     this.state.price,
-  //     this.state.user_claim,
-  //     this.state.id
-  //   );
-  //   AlertIOS.alert('Item saved to database!');
-  // };
-
   render() {
     return (
       <ScrollView>
@@ -102,7 +79,7 @@ class AddItemForm extends Component {
                 onChange={this.handleChangeUser}
               />
               <Button
-                // onPress={this.handleSubmitId}
+                
                 onPress={() =>
                   this.addItem(
                     this.state.name,
@@ -111,19 +88,10 @@ class AddItemForm extends Component {
                     this.state.id
                   )
                 }
-                // onPress={() => {
-                //   this.handleSubmitId();
-                //   this.addItem(
-                //     this.state.name,
-                //     this.state.price,
-                //     this.state.user_claim,
-                //     this.state.id
-                //   );
-                // }}
               >
                 <Text>Add Item</Text>
               </Button>
-              {console.log("=============", this.state.id)}
+              
             </Form>
           </Content>
         </CardItem>

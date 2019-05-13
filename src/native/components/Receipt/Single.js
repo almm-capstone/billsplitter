@@ -15,6 +15,7 @@ import {
   Icon,
   Form,
   Input
+
 } from "native-base";
 import { errorMessages } from "../../../constants/messages";
 import Error from "../UI/Error";
@@ -22,7 +23,26 @@ import Spacer from "../UI/Spacer";
 import AddItemForm from "./AddItemForm";
 const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Actions } from "react-native-router-flux";
+import { Firebase } from '../../../lib/firebase';
 //import console = require('console');
+
+const paymentJson = async(receiptId) => {
+
+  let data;
+
+  let currReceipt = await FirebaseRef.child(`/receipts/${receiptId}`);
+  let finalVal = await currReceipt.on('value', function(snapshot) {
+    data = snapshot.val();
+  }, function(errorObject) {
+    console.log('The read failed:' + errorObject.code);
+  });
+  // try {
+  //   await axios.post('/pay', data);
+  // } catch(error) {
+  //   console.error(error)
+  // }
+  Actions.payment(data);
+}
 
 const deleteItem = (itemObj, receiptId) => {
   console.log("IN DELETE ITEM", itemObj);
@@ -67,64 +87,66 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
 
   return (
     <ScrollView>
-      <Container>
-        <Content padder>
-          <Image
-            source={{ uri: receipt.image }}
-            style={{ height: 100, width: null, flex: 1 }}
-          />
+    <Container>
+      <Content padder>
+        <Image
+          source={{ uri: receipt.image }}
+          style={{ height: 100, width: null, flex: 1 }}
+        />
 
-          <Spacer size={25} />
-          <H3>{receipt.title}</H3>
-          <Text>by {receipt.author}</Text>
-          <Spacer size={15} />
+        <Spacer size={25} />
+        <H3>{receipt.title}</H3>
+        <Text>by {receipt.author}</Text>
+        <Spacer size={15} />
 
-          <Card>
-            <CardItem header bordered>
-              <Text>About this receipt</Text>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>{receipt.body}</Text>
-              </Body>
-            </CardItem>
-          </Card>
+        <Card>
+          <CardItem header bordered>
+            <Text>About this receipt</Text>
+          </CardItem>
+          <CardItem>
+            <Body>
+              <Text>{receipt.body}</Text>
+            </Body>
+          </CardItem>
+        </Card>
 
-          <Card>
-            <CardItem header bordered>
-              <Text>Receipt Items</Text>
-            </CardItem>
-            <CardItem>
-              <Content>
-                <List>{items}</List>
-              </Content>
-            </CardItem>
-          </Card>
+        <Card>
+          <CardItem header bordered>
+            <Text>Receipt Items</Text>
+          </CardItem>
+          <CardItem>
+            <Content>
+              <List>
+                {items}
+              </List>
+            </Content>
+          </CardItem>
+        </Card>
 
-          <Card>
-            <CardItem header bordered>
-              <Text>Add Item</Text>
-            </CardItem>
-            <AddItemForm receiptId={receipt.id} items={items} />
-          </Card>
+        <Card>
+          <CardItem header bordered>
+            <Text>Add Item</Text>
+          </CardItem>
+          <AddItemForm receiptId={receipt.id} items={items} />
+        </Card>
 
-          <Card>
-            <CardItem header bordered>
-              <Text>Checkout with Paypal!</Text>
-            </CardItem>
-            <CardItem>
-              <Text>Total amount: </Text>
-            </CardItem>
-            <CardItem>
-              <Button onPress={() => Actions.payment()}>
-                <Text>Checkout</Text>
-              </Button>
-            </CardItem>
-          </Card>
+        <Card>
+          <CardItem header bordered>
+            <Text>Checkout with Paypal!</Text>
+          </CardItem>
+          <CardItem>
+          <Button
+            // onPress={() => Actions.payment(); paymentJson(receipt.id)}
+            onPress={() => paymentJson(receipt.id)}
+          >
+              <Text>Checkout</Text>
+            </Button>
+          </CardItem>
+        </Card>
 
-          <Spacer size={20} />
-        </Content>
-      </Container>
+        <Spacer size={20} />
+      </Content>
+    </Container>
     </ScrollView>
   );
 };

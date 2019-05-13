@@ -1,1 +1,9 @@
-{}
+{
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerPort": 19000,
+  "expoServerNgrokUrl": "https://kp-t4z.ashleyheestand.billsplitter.exp.direct",
+  "packagerNgrokUrl": "https://packager.kp-t4z.ashleyheestand.billsplitter.exp.direct",
+  "ngrokPid": 75750,
+  "devToolsPort": 19002
+}

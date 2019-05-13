@@ -10,11 +10,13 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   ScrollView,
   View,
 } from 'react-native';
 import { Constants, ImagePicker, Permissions } from 'expo';
+import { Input } from 'native-base';
 import uuid from 'uuid';
 import Environment from '../../config/environment';
 import * as firebase from 'firebase';
@@ -29,6 +31,7 @@ export default class NewCamera extends React.Component {
     image: null,
     uploading: false,
     googleResponse: null,
+    receiptLines: '',
   };
 
   async componentDidMount() {
@@ -115,7 +118,7 @@ export default class NewCamera extends React.Component {
   };
 
   _maybeRenderImage = () => {
-    let { image, googleResponse } = this.state;
+    let { image, googleResponse, receiptLines } = this.state;
     if (!image) {
       return;
     }
@@ -148,21 +151,26 @@ export default class NewCamera extends React.Component {
         >
           <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
         </View>
-        <Text
+        {/* <Text
           onPress={this._copyToClipboard}
           onLongPress={this._share}
           style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-        />
+        /> */}
 
         <Text>Raw JSON:</Text>
 
         {googleResponse && (
           <Text
-            onPress={this._copyToClipboard}
-            onLongPress={this._share}
+            // onPress={this._copyToClipboard}
+            // onLongPress={this._share}
             style={{ paddingVertical: 10, paddingHorizontal: 10 }}
           >
-            JSON.stringify(googleResponse.responses)
+            {' '}
+            {receiptLines};
+            <Input
+              onChangeText={receiptLines => this.setState({ receiptLines })}
+              value={receiptLines}
+            />
           </Text>
         )}
       </View>
@@ -262,9 +270,11 @@ export default class NewCamera extends React.Component {
         },
       );
       let responseJson = await response.json();
-      console.log(responseJson);
+      let firstThing = responseJson.responses[0].textAnnotations[0].description;
+      console.log(JSON.stringify(responseJson, false));
       this.setState({
         googleResponse: responseJson,
+        receiptLines: firstThing,
         uploading: false,
       });
     } catch (error) {

@@ -32,6 +32,7 @@
   "dependencies": {
     "@expo/vector-icons": "^10.0.1",
     "@google-cloud/vision": "^0.25.0",
+    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.3.1",

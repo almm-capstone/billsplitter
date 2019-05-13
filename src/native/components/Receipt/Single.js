@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Image, ScrollView } from 'react-native';
+import React from "react";
+import PropTypes from "prop-types";
+import { Image, ScrollView, FlatList } from "react-native";
 import {
   Container,
   Content,
@@ -15,25 +15,45 @@ import {
   Icon,
   Form,
   Input
-} from 'native-base';
-import { errorMessages } from '../../../constants/messages';
-import Error from '../UI/Error';
-import Spacer from '../UI/Spacer';
-import AddItemForm from './AddItemForm';
-const { FirebaseRef } = require('../../../lib/firebase.js');
-import { Actions } from 'react-native-router-flux';
+
+} from "native-base";
+import { errorMessages } from "../../../constants/messages";
+import Error from "../UI/Error";
+import Spacer from "../UI/Spacer";
+import AddItemForm from "./AddItemForm";
+const { FirebaseRef } = require("../../../lib/firebase.js");
+import { Actions } from "react-native-router-flux";
+import { Firebase } from '../../../lib/firebase';
 //import console = require('console');
 
+const paymentJson = async(receiptId) => {
+
+  let data;
+
+  let currReceipt = await FirebaseRef.child(`/receipts/${receiptId}`);
+  let finalVal = await currReceipt.on('value', function(snapshot) {
+    data = snapshot.val();
+  }, function(errorObject) {
+    console.log('The read failed:' + errorObject.code);
+  });
+  // try {
+  //   await axios.post('/pay', data);
+  // } catch(error) {
+  //   console.error(error)
+  // }
+  Actions.payment(data);
+}
+
 const deleteItem = (itemObj, receiptId) => {
-  console.log('IN DELETE ITEM', itemObj);
+  console.log("IN DELETE ITEM", itemObj);
 
   FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
     .set(null)
     .then(function() {
-      console.log('Remove succeeded.');
+      console.log("Remove succeeded.");
     })
     .catch(function(error) {
-      console.log('Remove failed: ' + error.message);
+      console.log("Remove failed: " + error.message);
     });
 };
 
@@ -58,9 +78,9 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
-      <Text>      </Text>
+      <Text> </Text>
       <Text>
-        {itemObj.name}    ${itemObj.price}      {itemObj.user_claim}
+        {itemObj.name} ${itemObj.price} {itemObj.user_claim}
       </Text>
     </ListItem>
   ));
@@ -116,7 +136,8 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
           </CardItem>
           <CardItem>
           <Button
-            onPress={() => Actions.payment()}
+            // onPress={() => Actions.payment(); paymentJson(receipt.id)}
+            onPress={() => paymentJson(receipt.id)}
           >
               <Text>Checkout</Text>
             </Button>
@@ -133,11 +154,11 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
 ReceiptView.propTypes = {
   error: PropTypes.string,
   receiptId: PropTypes.string.isRequired,
-  receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired
 };
 
 ReceiptView.defaultProps = {
-  error: null,
+  error: null
 };
 
 export default ReceiptView;

@@ -20,7 +20,8 @@ app.get("/", (req, res) => {
 });
 
 app.post("/pay", (req, res) => {
-  const create_payment_json = {
+  console.log(req.body)
+  let create_payment_json = {
     intent: "sale",
     payer: {
       payment_method: "paypal"
@@ -44,14 +45,14 @@ app.post("/pay", (req, res) => {
         },
         amount: {
           currency: "USD",
-          total: "25.00"
+          total: '$25.00',
         },
         description: "This is a product."
       }
     ]
   };
 
-  paypal.payment.create(create_payment_json, function(error, payment) {
+  paypal.payment.create(data, function(error, payment) {
     if (error) {
       throw error;
     } else {

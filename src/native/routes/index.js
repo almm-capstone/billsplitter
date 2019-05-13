@@ -30,8 +30,8 @@ import ProfileComponent from '../components/User/Profile';
 
 import AboutComponent from '../components/About';
 
-import CameraContainer from '../../containers/Camera';
-import GalleryScreen from '../../containers/GalleryScreen';
+import CameraContainer from '../../containers/NewCamera';
+// import GalleryScreen from '../../containers/GalleryScreen';
 
 import Payment from '../../containers/Payment';
 
@@ -143,7 +143,6 @@ const Index = (
           icon={() => <Icon name="ios-cash" {...DefaultProps.icons} />}
           {...DefaultProps.navbarProps}
         > */}
-
       </Tabs>
       <Scene key="payment" title="Payment" component={Payment} />
     </Scene>
@@ -174,14 +173,14 @@ const Index = (
       {...DefaultProps.navbarProps}
       component={CameraContainer}
     />
-    <Scene
+    {/* <Scene
       back
       clone
       key="galleryScreen"
       title="GALLERY SCREEN"
       {...DefaultProps.navbarProps}
       component={GalleryScreen}
-    />
+    /> */}
   </Stack>
 );
 

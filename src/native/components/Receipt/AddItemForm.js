@@ -27,7 +27,6 @@ class AddItemForm extends Component {
   }
 
   findItem = () => {
-    console.log('CALLED FIND ITEM')
     let count = this.props.items.length;
     return count;
   }

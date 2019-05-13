@@ -1,9 +1,9 @@
 {
   "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 14643,
+  "packagerPort": null,
+  "packagerPid": null,
   "devToolsPort": 19002,
-  "expoServerNgrokUrl": "https://kp-t4z.anonymous.billsplitter.exp.direct",
-  "packagerNgrokUrl": "https://packager.kp-t4z.anonymous.billsplitter.exp.direct",
-  "ngrokPid": 14663
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null
 }

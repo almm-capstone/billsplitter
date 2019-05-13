@@ -23,7 +23,29 @@ import AddItemForm from "./AddItemForm";
 const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
-// import console = require('console');
+import { Firebase } from "../../../lib/firebase";
+//import console = require('console');
+
+const paymentJson = async receiptId => {
+  let data;
+
+  let currReceipt = await FirebaseRef.child(`/receipts/${receiptId}`);
+  let finalVal = await currReceipt.on(
+    "value",
+    function(snapshot) {
+      data = snapshot.val();
+    },
+    function(errorObject) {
+      console.log("The read failed:" + errorObject.code);
+    }
+  );
+  // try {
+  //   await axios.post('/pay', data);
+  // } catch(error) {
+  //   console.error(error)
+  // }
+  Actions.payment(data);
+};
 
 const deleteItem = (itemObj, receiptId) => {
   console.log("IN DELETE ITEM", itemObj);

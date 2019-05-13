@@ -234,10 +234,15 @@
 			<key>orderHint</key>
 			<integer>44</integer>
 		</dict>
-		<key>yoga.xcscheme_^#shared#^_</key>
+		<key>react-native-camera.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>47</integer>
+		</dict>
+		<key>yoga.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>48</integer>
 		</dict>
 	</dict>
 </dict>

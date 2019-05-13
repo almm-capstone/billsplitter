@@ -8,7 +8,7 @@ import {
   Image,
   StyleSheet
 } from "react-native";
-// import console = require("console");
+import axios from "axios";
 
 export default class Payment extends React.Component {
   state = {
@@ -24,7 +24,8 @@ export default class Payment extends React.Component {
       return;
     }
   };
-  render() {
+  render(data) {
+    console.log(data);
     return (
       <View style={{ marginTop: 100 }}>
         <Modal

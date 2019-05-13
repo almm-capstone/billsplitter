@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Image, ScrollView } from 'react-native';
+import React from "react";
+import PropTypes from "prop-types";
+import { Image, ScrollView, FlatList } from "react-native";
 import {
   Container,
   Content,
@@ -15,25 +15,25 @@ import {
   Icon,
   Form,
   Input
-} from 'native-base';
-import { errorMessages } from '../../../constants/messages';
-import Error from '../UI/Error';
-import Spacer from '../UI/Spacer';
-import AddItemForm from './AddItemForm';
-const { FirebaseRef } = require('../../../lib/firebase.js');
-import { Actions } from 'react-native-router-flux';
+} from "native-base";
+import { errorMessages } from "../../../constants/messages";
+import Error from "../UI/Error";
+import Spacer from "../UI/Spacer";
+import AddItemForm from "./AddItemForm";
+const { FirebaseRef } = require("../../../lib/firebase.js");
+import { Actions } from "react-native-router-flux";
 //import console = require('console');
 
 const deleteItem = (itemObj, receiptId) => {
-  console.log('IN DELETE ITEM', itemObj);
+  console.log("IN DELETE ITEM", itemObj);
 
   FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
     .set(null)
     .then(function() {
-      console.log('Remove succeeded.');
+      console.log("Remove succeeded.");
     })
     .catch(function(error) {
-      console.log('Remove failed: ' + error.message);
+      console.log("Remove failed: " + error.message);
     });
 };
 
@@ -58,74 +58,73 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
-      <Text>      </Text>
+      <Text> </Text>
       <Text>
-        {itemObj.name}    ${itemObj.price}      {itemObj.user_claim}
+        {itemObj.name} ${itemObj.price} {itemObj.user_claim}
       </Text>
     </ListItem>
   ));
 
   return (
     <ScrollView>
-    <Container>
-      <Content padder>
-        <Image
-          source={{ uri: receipt.image }}
-          style={{ height: 100, width: null, flex: 1 }}
-        />
+      <Container>
+        <Content padder>
+          <Image
+            source={{ uri: receipt.image }}
+            style={{ height: 100, width: null, flex: 1 }}
+          />
 
-        <Spacer size={25} />
-        <H3>{receipt.title}</H3>
-        <Text>by {receipt.author}</Text>
-        <Spacer size={15} />
+          <Spacer size={25} />
+          <H3>{receipt.title}</H3>
+          <Text>by {receipt.author}</Text>
+          <Spacer size={15} />
 
-        <Card>
-          <CardItem header bordered>
-            <Text>About this receipt</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>{receipt.body}</Text>
-            </Body>
-          </CardItem>
-        </Card>
+          <Card>
+            <CardItem header bordered>
+              <Text>About this receipt</Text>
+            </CardItem>
+            <CardItem>
+              <Body>
+                <Text>{receipt.body}</Text>
+              </Body>
+            </CardItem>
+          </Card>
 
-        <Card>
-          <CardItem header bordered>
-            <Text>Receipt Items</Text>
-          </CardItem>
-          <CardItem>
-            <Content>
-              <List>
-                {items}
-              </List>
-            </Content>
-          </CardItem>
-        </Card>
+          <Card>
+            <CardItem header bordered>
+              <Text>Receipt Items</Text>
+            </CardItem>
+            <CardItem>
+              <Content>
+                <List>{items}</List>
+              </Content>
+            </CardItem>
+          </Card>
 
-        <Card>
-          <CardItem header bordered>
-            <Text>Add Item</Text>
-          </CardItem>
-          <AddItemForm receiptId={receipt.id} items={items} />
-        </Card>
+          <Card>
+            <CardItem header bordered>
+              <Text>Add Item</Text>
+            </CardItem>
+            <AddItemForm receiptId={receipt.id} items={items} />
+          </Card>
 
-        <Card>
-          <CardItem header bordered>
-            <Text>Checkout with Paypal!</Text>
-          </CardItem>
-          <CardItem>
-          <Button
-            onPress={() => Actions.payment()}
-          >
-              <Text>Checkout</Text>
-            </Button>
-          </CardItem>
-        </Card>
+          <Card>
+            <CardItem header bordered>
+              <Text>Checkout with Paypal!</Text>
+            </CardItem>
+            <CardItem>
+              <Text>Total amount: </Text>
+            </CardItem>
+            <CardItem>
+              <Button onPress={() => Actions.payment()}>
+                <Text>Checkout</Text>
+              </Button>
+            </CardItem>
+          </Card>
 
-        <Spacer size={20} />
-      </Content>
-    </Container>
+          <Spacer size={20} />
+        </Content>
+      </Container>
     </ScrollView>
   );
 };
@@ -133,11 +132,11 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
 ReceiptView.propTypes = {
   error: PropTypes.string,
   receiptId: PropTypes.string.isRequired,
-  receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired
 };
 
 ReceiptView.defaultProps = {
-  error: null,
+  error: null
 };
 
 export default ReceiptView;

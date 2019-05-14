@@ -15,7 +15,7 @@ import {
   ScrollView,
   View,
 } from 'react-native';
-import { Constants, ImagePicker, Permissions } from 'expo';
+import { Constants, ImagePicker, ImageManipulater, Permissions } from 'expo';
 import { Input } from 'native-base';
 import uuid from 'uuid';
 import Environment from '../../config/environment';

@@ -35,7 +35,7 @@ class ReceiptForm extends Component {
     body: '',
     image: '',
     title: '',
-    items: {}, //{ price: “”, name: [], user_claim: “” },
+    items: [], //{ price: “”, name: [], user_claim: “” },
     users: [],
     switchValue: 0,
   };
@@ -89,7 +89,7 @@ class ReceiptForm extends Component {
       this.state.image,
       this.state.title,
       this.state.items,
-      this.state.users
+      this.state.users,
     );
     //addItem(this.state.item)
     AlertIOS.alert('Item saved successfully');
@@ -132,8 +132,8 @@ class ReceiptForm extends Component {
           />
 
           <Button
-            title='add more items'
-            color='white'
+            title="add more items"
+            color="white"
             value={this.state.switchValue}
             onPress={this.onSwitchChange}
           />
@@ -157,7 +157,7 @@ class ReceiptForm extends Component {
 
           <TouchableHighlight
             style={styles.button}
-            underlayColor='white'
+            underlayColor="white"
             onPress={this.handleSubmit}
           >
             <Text style={styles.buttonText}>Add</Text>

@@ -1,9 +1,9 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 81146,
+  "packagerPid": 85088,
   "expoServerPort": 19000,
   "expoServerNgrokUrl": "https://kp-t4z.ashleyheestand.billsplitter.exp.direct",
   "packagerNgrokUrl": "https://packager.kp-t4z.ashleyheestand.billsplitter.exp.direct",
-  "ngrokPid": 81159,
+  "ngrokPid": 85106,
   "devToolsPort": 19002
 }

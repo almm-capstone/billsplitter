@@ -22,6 +22,7 @@ import Environment from '../../config/environment';
 import * as firebase from 'firebase';
 import { Firebase as firebaseConfig, FirebaseRef } from '../lib/firebase';
 import { Actions } from 'react-native-router-flux';
+import ReceiptItems from './ListItems';
 
 // firebase.initializeApp(firebaseConfig);
 
@@ -41,7 +42,7 @@ export default class NewCamera extends React.Component {
   }
 
   render() {
-    let { image } = this.state;
+    let { image, receiptLines } = this.state;
 
     return (
       <View style={styles.container}>
@@ -163,7 +164,7 @@ export default class NewCamera extends React.Component {
         {googleResponse && (
           <Button
             title="Edit Receipt"
-            onPress={() => Actions.receiptItems()}
+            onPress={() => Actions.receiptItems({ items: { receiptLines } })}
             // onLongPress={this._share}
             style={{ paddingVertical: 10, paddingHorizontal: 10 }}
           />
@@ -176,6 +177,18 @@ export default class NewCamera extends React.Component {
 
   _renderItem = item => {
     <Text>response: {JSON.stringify(item)}</Text>;
+  };
+
+  _renderList = () => {
+    let { receiptLines } = this.state;
+    if (!receiptLines) {
+      return;
+    }
+    return (
+      <Text>
+        <ReceiptItems items={receiptLines} />
+      </Text>
+    );
   };
 
   _share = () => {

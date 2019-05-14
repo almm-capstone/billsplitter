@@ -21,6 +21,7 @@ import uuid from 'uuid';
 import Environment from '../../config/environment';
 import * as firebase from 'firebase';
 import { Firebase as firebaseConfig, FirebaseRef } from '../lib/firebase';
+import { Actions } from 'react-native-router-flux';
 
 // firebase.initializeApp(firebaseConfig);
 
@@ -31,7 +32,7 @@ export default class NewCamera extends React.Component {
     image: null,
     uploading: false,
     googleResponse: null,
-    receiptLines: '',
+    receiptLines: null,
   };
 
   async componentDidMount() {
@@ -157,21 +158,15 @@ export default class NewCamera extends React.Component {
           style={{ paddingVertical: 10, paddingHorizontal: 10 }}
         /> */}
 
-        <Text>Raw JSON:</Text>
+        {/* <Text>Edit Receipt:</Text> */}
 
         {googleResponse && (
-          <Text
-            // onPress={this._copyToClipboard}
+          <Button
+            title="Edit Receipt"
+            onPress={() => Actions.receiptItems()}
             // onLongPress={this._share}
             style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-          >
-            {' '}
-            {receiptLines};
-            <Input
-              onChangeText={receiptLines => this.setState({ receiptLines })}
-              value={receiptLines}
-            />
-          </Text>
+          />
         )}
       </View>
     );
@@ -271,7 +266,7 @@ export default class NewCamera extends React.Component {
       );
       let responseJson = await response.json();
       let firstThing = responseJson.responses[0].textAnnotations[0].description;
-      console.log(JSON.stringify(responseJson, false));
+      console.log(firstThing);
       this.setState({
         googleResponse: responseJson,
         receiptLines: firstThing,

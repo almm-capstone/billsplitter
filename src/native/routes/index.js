@@ -32,6 +32,7 @@ import AboutComponent from '../components/About';
 
 import CameraContainer from '../../containers/NewCamera';
 // import GalleryScreen from '../../containers/GalleryScreen';
+import ListItems from '../../containers/ListItems';
 
 import Payment from '../../containers/Payment';
 
@@ -173,14 +174,14 @@ const Index = (
       {...DefaultProps.navbarProps}
       component={CameraContainer}
     />
-    {/* <Scene
+    <Scene
       back
       clone
-      key="galleryScreen"
-      title="GALLERY SCREEN"
+      key="receiptItems"
+      title="RECEIPT ITEMS"
       {...DefaultProps.navbarProps}
-      component={GalleryScreen}
-    /> */}
+      component={ListItems}
+    />
   </Stack>
 );
 

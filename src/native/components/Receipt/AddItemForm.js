@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 const { FirebaseRef } = require("../../../lib/firebase.js");
+=======
+
+import React, { Component } from 'react';
+const { FirebaseRef } = require('../../../lib/firebase.js');
+>>>>>>> b3d9d24c65d65adf05e895ef478d23af8fd6b1f0
 import {
   Container,
   Content,
@@ -13,39 +19,35 @@ import {
   Button,
   Icon,
   Form,
-  Input
-} from "native-base";
-import { Image, ScrollView } from "react-native";
+  Input,
+} from 'native-base';
+import { Image, ScrollView } from 'react-native';
 // import console = require("console");
-
-class AddItemForm extends Component {
+class AddItemForm extends React.Component {
   state = {
-    id: "",
-    name: "",
-    price: "",
-    user_claim: ""
+    id: '',
+    name: '',
+    price: '',
+    quantity: 0,
+    user_claim: '',
   };
-  // findItem = () => {
-  //   console.log("CALLED FIND ITEM");
-  //   let count = this.props.items.length;
-  //   return count;
-  // };
 
   addItem = (name, price, user_claim, id) => {
     FirebaseRef.child(
-      `receipts/${this.props.receiptId}/items/${this.props.items.length}`
+      `receipts/${this.props.receiptId}/items/${this.props.items.length}`,
     ).set({
       name,
       price,
+      quantity,
       user_claim,
-      id
+      id,
     });
   };
 
   handleChangeName = e => {
     this.setState({
       name: e.nativeEvent.text,
-      id: `${this.props.items.length}`
+      id: `${this.props.items.length}`,
     });
   };
 
@@ -55,36 +57,24 @@ class AddItemForm extends Component {
     });
   };
 
-  handleChangeUser = e => {
+  handleChangeQuantity = e => {
     this.setState({
-      user_claim: e.nativeEvent.text
+      quantity: e.nativeEvent.quantity,
     });
   };
 
-  // handleSubmitId = () => {
-  //   this.setState({
-  //     id: `${this.props.items.length + 1}`
-  //   });
-  // };
-
-  // handleSubmit = () => {
-  //   this.setState({
-  //     id: this.findItem()
-  //   }),
-  //   addItem(
-  //     this.state.name,
-  //     this.state.price,
-  //     this.state.user_claim,
-  //     this.state.id
-  //   );
-  //   AlertIOS.alert('Item saved to database!');
-  // };
+  handleChangeUser = e => {
+    this.setState({
+      user_claim: e.nativeEvent.text,
+    });
+  };
 
   render() {
     return (
-        <CardItem containerStyle={{height: 50}}>
+      <ScrollView>
+        <CardItem>
           <Content>
-            <Form scrollEnabled={false}>
+            <Form>
               <Text>Item Name :</Text>
               <Input
                 placeholder="Enter item name here"
@@ -95,36 +85,34 @@ class AddItemForm extends Component {
                 placeholder="Enter item price here"
                 onChange={this.handleChangePrice}
               />
+              <Text>Quantity :</Text>
+              <Input
+                placeholder="Enter quantity here"
+                onChange={this.handleChangeQuantity}
+              />
               <Text>User</Text>
               <Input
                 placeholder="Enter user here"
                 onChange={this.handleChangeUser}
               />
+
               <Button
-                // onPress={this.handleSubmitId}
                 onPress={() =>
                   this.addItem(
                     this.state.name,
                     this.state.price,
+                    this.state.quantity,
                     this.state.user_claim,
-                    this.state.id
+                    this.state.id,
                   )
                 }
-                // onPress={() => {
-                //   this.handleSubmitId();
-                //   this.addItem(
-                //     this.state.name,
-                //     this.state.price,
-                //     this.state.user_claim,
-                //     this.state.id
-                //   );
-                // }}
               >
                 <Text>Add Item</Text>
               </Button>
             </Form>
           </Content>
         </CardItem>
+      </ScrollView>
     );
   }
 }

@@ -1,26 +1,26 @@
-import Store from '../store/receipts';
+import Store from "../store/receipts";
 
 export const initialState = Store;
 
 export default function receiptReducer(state = initialState, action) {
   switch (action.type) {
-      case 'RECEIPTS_REPLACE': {
+    case "RECEIPTS_REPLACE": {
       let receipts = [];
 
       // Pick out the props I need
-      if (action.data && typeof action.data === 'object') {
+      if (action.data && typeof action.data === "object") {
         receipts = action.data.map(item => ({
           id: item.id,
           users: item.users,
           body: item.body,
           image: item.image,
           author: item.author,
-          items: item.items,
+          items: item.items
         }));
       }
       return {
         ...state,
-        receipts,
+        receipts
       };
     }
     default:

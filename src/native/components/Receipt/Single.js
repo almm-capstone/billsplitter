@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, ScrollView, View, Picker } from 'react-native';
+import { Image, ScrollView, View, Picker, TextInput } from 'react-native';
 import {
   Container,
   Content,
@@ -23,40 +23,50 @@ import AddItemForm from './AddItemForm';
 const { FirebaseRef } = require('../../../lib/firebase.js');
 import { Actions } from 'react-native-router-flux';
 import Swiper from 'react-native-swiper';
-import axios from 'axios';
-import { Firebase } from '../../../lib/firebase';
 import PickedUser from './Picker.js';
+import axios from "axios";
+import { Firebase } from "../../../lib/firebase";
+import AddUserForm from "./AddUserForm";
+import InvitationEmail from "../../../containers/InvitationEmail";
 
 
-
-const paymentJson = async(receiptId) => {
-
+const paymentJson = async receiptId => {
   let data;
 
   let currReceipt = await FirebaseRef.child(`/receipts/${receiptId}`);
-  let finalVal = await currReceipt.on('value', function(snapshot) {
-    data = snapshot.val();
-  }, function(errorObject) {
-    console.log('The read failed:' + errorObject.code);
-  });
-  // try {
-  //   await axios.post('/pay', data);
-  // } catch(error) {
-  //   console.error(error)
-  // }
+  let finalVal = await currReceipt.on(
+    "value",
+    function(snapshot) {
+      data = snapshot.val();
+    },
+    function(errorObject) {
+      console.log("The read failed:" + errorObject.code);
+    }
+  );
   Actions.payment(data);
-}
+};
 
 const deleteItem = (itemObj, receiptId) => {
-  console.log('IN DELETE ITEM', itemObj);
+  console.log("IN DELETE ITEM", itemObj);
 
   FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
     .set(null)
     .then(function() {
-      console.log('Remove succeeded.');
+      console.log("Remove succeeded.");
     })
     .catch(function(error) {
-      console.log('Remove failed: ' + error.message);
+      console.log("Remove failed: " + error.message);
+    });
+};
+
+const deleteUser = (userId, receiptId) => {
+  FirebaseRef.child(`receipts/${receiptId}/users/${userId}`)
+    .set(null)
+    .then(function() {
+      console.log("Remove succeeded.");
+    })
+    .catch(function(error) {
+      console.log("Remove failed: " + error.message);
     });
 };
 
@@ -85,12 +95,28 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
-      <Text>      </Text>
+      <Text> </Text>
       <Text>
-        {itemObj.name}    ${itemObj.price}      {itemObj.user_claim}
+        {itemObj.name} ${itemObj.price} {itemObj.user_claim}
       </Text>
     </ListItem>
   ));
+  const users = receipt.users.map(user => (
+    <ListItem key={user.id} rightIcon={{ style: { opacity: 0 } }}>
+      <Button onPress={() => deleteUser(user.id, receipt.id)}>
+        <Icon>X</Icon>
+      </Button>
+      <Text> </Text>
+      <Text>{user.email}</Text>
+    </ListItem>
+  ));
+  // const users = receipt
+
+  const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
+    let totalFloat = accumulator + Number(currentItem.price);
+    let finalTotal = Math.round(totalFloat * 100) / 100;
+    return finalTotal;
+  }, 0);
 
   return (
     <Swiper
@@ -115,6 +141,18 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
         <Text>Add Item</Text>
         <AddItemForm receiptId={receipt.id} items={items} />
       </View>
+
+      <View>
+        <Text>Invited Users</Text>
+        <List>{users}</List>
+        <InvitationEmail users={users} />
+      </View>
+
+      <View>
+        <Text>Add More Users</Text>
+        <AddUserForm receiptId={receipt.id} users={users} />
+      </View>
+
       <View>
       <Text>Checkout with Paypal!</Text>
           <Button
@@ -127,17 +165,17 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
 
         <Spacer size={20} />
     </Swiper>
+
   );
 };
 
 ReceiptView.propTypes = {
   error: PropTypes.string,
   receiptId: PropTypes.string.isRequired,
-  receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired
 };
 
 ReceiptView.defaultProps = {
-  error: null,
+  error: null
 };
-
 export default ReceiptView;

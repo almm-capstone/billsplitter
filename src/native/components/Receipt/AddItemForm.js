@@ -1,43 +1,66 @@
-import React, { Component } from "react";
-const { FirebaseRef } = require("../../../lib/firebase.js");
-import { Content, CardItem, Text, Button, Form, Input } from "native-base";
-import { ScrollView } from "react-native";
+
+import React, { Component } from 'react';
+const { FirebaseRef } = require('../../../lib/firebase.js');
+import {
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  H3,
+  List,
+  ListItem,
+  Text,
+  Button,
+  Icon,
+  Form,
+  Input,
+} from 'native-base';
+import { Image, ScrollView } from 'react-native';
 // import console = require("console");
 class AddItemForm extends React.Component {
   state = {
-    id: "",
-    name: "",
-    price: "",
-    user_claim: ""
+    id: '',
+    name: '',
+    price: '',
+    quantity: 0,
+    user_claim: '',
   };
 
   addItem = (name, price, user_claim, id) => {
     FirebaseRef.child(
-      `receipts/${this.props.receiptId}/items/${this.props.items.length}`
+      `receipts/${this.props.receiptId}/items/${this.props.items.length}`,
     ).set({
       name,
       price,
+      quantity,
       user_claim,
-      id
+      id,
     });
   };
 
   handleChangeName = e => {
     this.setState({
       name: e.nativeEvent.text,
-      id: `${this.props.items.length}`
+      id: `${this.props.items.length}`,
     });
   };
 
   handleChangePrice = e => {
     this.setState({
-      price: e.nativeEvent.text
+      price: e.nativeEvent.text,
+    });
+  };
+
+  handleChangeQuantity = e => {
+    this.setState({
+      quantity: e.nativeEvent.quantity,
     });
   };
 
   handleChangeUser = e => {
     this.setState({
-      user_claim: e.nativeEvent.text
+      user_claim: e.nativeEvent.text,
     });
   };
 
@@ -57,18 +80,25 @@ class AddItemForm extends React.Component {
                 placeholder="Enter item price here"
                 onChange={this.handleChangePrice}
               />
+              <Text>Quantity :</Text>
+              <Input
+                placeholder="Enter quantity here"
+                onChange={this.handleChangeQuantity}
+              />
               <Text>User</Text>
               <Input
                 placeholder="Enter user here"
                 onChange={this.handleChangeUser}
               />
+
               <Button
                 onPress={() =>
                   this.addItem(
                     this.state.name,
                     this.state.price,
+                    this.state.quantity,
                     this.state.user_claim,
-                    this.state.id
+                    this.state.id,
                   )
                 }
               >

@@ -1,24 +1,24 @@
-import React, { Component } from "react";
-const { FirebaseRef } = require("../../../lib/firebase.js");
-import { Content, CardItem, Text, Button, Form, Input } from "native-base";
-import { ScrollView } from "react-native";
+import React, { Component } from 'react';
+const { FirebaseRef } = require('../../../lib/firebase.js');
+import { Content, CardItem, Text, Button, Form, Input } from 'native-base';
+import { ScrollView } from 'react-native';
 // import console = require("console");
 class AddUserForm extends React.Component {
   state = {
-    user: "",
-    id: 0
+    user: '',
+    id: 0,
   };
 
   addItem = user => {
     FirebaseRef.child(
-      `receipts/${this.props.receiptId}/users/${this.props.users.length}`
+      `receipts/${this.props.receiptId}/users/${this.props.users.length}`,
     ).set({ email: user, id: this.state.id });
   };
 
   handleChangeUser = e => {
     this.setState({
       user: e.nativeEvent.text,
-      id: this.props.users.length
+      id: this.props.users.length,
     });
   };
 

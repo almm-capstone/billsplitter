@@ -29,6 +29,7 @@ export function signUp(formData) {
               .set({
                 firstName,
                 lastName,
+                email,
                 signedUp: Firebase.database.ServerValue.TIMESTAMP,
                 lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
               })

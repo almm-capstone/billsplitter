@@ -58,7 +58,7 @@ class ReceiptListing extends Component {
   render = () => {
     console.log('current user', this.state.currentUser);
     console.log('state', this.state);
-    console.log('props', this.props.receipts[0].users);
+    console.log('props', this.props.receipts);
     // console.log("===================", Firebase);
     // Firebase.database()
     //   .ref("/users")
@@ -67,8 +67,19 @@ class ReceiptListing extends Component {
     const { loading, error } = this.state;
     const id =
       match && match.params && match.params.id ? match.params.id : null;
-
+ 
+    if (this.currentUser) {
+    
     return (
+        const myReceipts = this.props.receipts.filter(receipt =>  receipt.author === this.state.currentUser )
+        const otherReceipts = []
+        this.props.receipts.forEach(receipt => {
+          if(receipt.users.)
+        })
+
+    
+    )
+      
       <Layout
         receiptId={id}
         error={error}

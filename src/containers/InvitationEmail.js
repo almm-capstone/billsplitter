@@ -4,7 +4,7 @@ import email from "react-native-email";
 
 export default class InvitationEmail extends React.Component {
   state = {
-    newUsers: this.props.users
+    newUsers: ""
   };
 
   handleEmail = () => {
@@ -15,6 +15,8 @@ export default class InvitationEmail extends React.Component {
     }).catch(console.error);
   };
   render() {
+    console.log("===============", this.props.users);
+
     return (
       <View style={styles.container}>
         <Button title="Send Email" onPress={this.handleEmail} />

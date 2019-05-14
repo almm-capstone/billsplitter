@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> b3d9d24c65d65adf05e895ef478d23af8fd6b1f0
   "devToolsPort": 19002,
   "expoServerPort": null,
   "packagerPort": null,
@@ -10,16 +6,4 @@
   "expoServerNgrokUrl": null,
   "packagerNgrokUrl": null,
   "ngrokPid": null
-<<<<<<< HEAD
-=======
-  "packagerPort": 19001,
-  "packagerPid": 85088,
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://kp-t4z.ashleyheestand.billsplitter.exp.direct",
-  "packagerNgrokUrl": "https://packager.kp-t4z.ashleyheestand.billsplitter.exp.direct",
-  "ngrokPid": 85106,
-  "devToolsPort": 19002
->>>>>>> 01fdd34c8ee9f3166b9b0a793a7eef15f82c7e6b
-=======
->>>>>>> b3d9d24c65d65adf05e895ef478d23af8fd6b1f0
 }

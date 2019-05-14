@@ -20,10 +20,9 @@ import { errorMessages } from "../../../constants/messages";
 import Error from "../UI/Error";
 import Spacer from "../UI/Spacer";
 import AddItemForm from "./AddItemForm";
-const { FirebaseRef } = require("../../../lib/firebase.js");
+const { FirebaseRef, Firebase } = require("../../../lib/firebase.js");
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
-import { Firebase } from "../../../lib/firebase";
 import AddUserForm from "./AddUserForm";
 import InvitationEmail from "../../../containers/InvitationEmail";
 //import console = require('console');
@@ -71,7 +70,6 @@ const deleteUser = (userId, receiptId) => {
 const ReceiptView = ({ error, receipts, receiptId }) => {
   // Error
   if (error) return <Error content={error} />;
-
   // Get this Receipt from all receipts
   let receipt = null;
   if (receiptId && receipts) {

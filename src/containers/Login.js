@@ -1,41 +1,47 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-
-import { login } from '../actions/member';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { login } from "../actions/member";
+import Single from "../native/components/Receipt/Single";
+import { View, Text } from "react-native";
+import { Button } from "native-base";
+import { Actions } from "react-native-router-flux";
 
 class Login extends Component {
   static propTypes = {
     Layout: PropTypes.func.isRequired,
     member: PropTypes.shape({}).isRequired,
-    onFormSubmit: PropTypes.func.isRequired,
-  }
+    onFormSubmit: PropTypes.func.isRequired
+  };
 
   state = {
     error: null,
     success: null,
-    loading: false,
-  }
+    loading: false
+  };
 
-  onFormSubmit = (data) => {
+  onFormSubmit = data => {
     const { onFormSubmit } = this.props;
 
     this.setState({ loading: true });
 
     return onFormSubmit(data)
-      .then(() => this.setState({
-        loading: false,
-        success: 'Success - Logged in',
-        error: null,
-      })).catch((err) => {
+      .then(() =>
+        this.setState({
+          loading: false,
+          success: "Success - Logged in",
+          error: null
+        })
+      )
+      .catch(err => {
         this.setState({
           loading: false,
           success: null,
-          error: err,
+          error: err
         });
         throw err; // To prevent transition back
       });
-  }
+  };
 
   render = () => {
     const { member, Layout } = this.props;
@@ -50,15 +56,18 @@ class Login extends Component {
         onFormSubmit={this.onFormSubmit}
       />
     );
-  }
+  };
 }
 
 const mapStateToProps = state => ({
-  member: state.member || {},
+  member: state.member || {}
 });
 
 const mapDispatchToProps = {
-  onFormSubmit: login,
+  onFormSubmit: login
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

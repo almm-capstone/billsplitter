@@ -61,6 +61,7 @@
     "react-native-image-crop-picker": "^0.24.0",
     "react-native-is-iphonex": "^1.0.1",
     "react-native-router-flux": "4.0.6",
+    "react-native-swiper": "^1.5.14",
     "react-native-text-detector": "0.0.6",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.2.2",

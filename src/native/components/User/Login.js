@@ -7,6 +7,7 @@ import { Actions } from 'react-native-router-flux';
 import Messages from '../UI/Messages';
 import Header from '../UI/Header';
 import Spacer from '../UI/Spacer';
+// import console = require('console');
 
 class Login extends React.Component {
   static propTypes = {

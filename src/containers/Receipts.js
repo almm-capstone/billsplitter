@@ -1,9 +1,10 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { Firebase, FirebaseRef } from "../lib/firebase";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { Firebase, FirebaseRef } from '../lib/firebase';
 
-import { getReceipts, updateReceipts } from "../actions/receipts";
+import { getReceipts, updateReceipts } from '../actions/receipts';
+import { getMemberData } from '../actions/member';
 
 class ReceiptListing extends Component {
   static propTypes = {
@@ -11,19 +12,25 @@ class ReceiptListing extends Component {
     receipts: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     match: PropTypes.shape({ params: PropTypes.shape({}) }),
     fetchReceipts: PropTypes.func.isRequired,
-    updateReceipts: PropTypes.func.isRequired
+    updateReceipts: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
-    match: null
+    match: null,
   };
 
   state = {
     error: null,
-    loading: false
+    loading: false,
+    currentUser: null,
   };
 
-  componentDidMount = () => this.fetchData();
+  componentDidMount = async () => {
+    this.fetchData();
+    const { currentUser } = await Firebase.auth();
+    // console.log('current user', currentUser);
+    this.setState({ currentUser: currentUser.email });
+  };
 
   fetchData = data => {
     const { fetchReceipts } = this.props;
@@ -33,14 +40,14 @@ class ReceiptListing extends Component {
       .then(() =>
         this.setState({
           loading: false,
-          error: null
-        })
+          error: null,
+        }),
       )
       .catch(err =>
         this.setState({
           loading: false,
-          error: err
-        })
+          error: err,
+        }),
       );
   };
 
@@ -49,6 +56,9 @@ class ReceiptListing extends Component {
   }
 
   render = () => {
+    console.log('current user', this.state.currentUser);
+    console.log('state', this.state);
+    console.log('props', this.props.receipts[0].users);
     // console.log("===================", Firebase);
     // Firebase.database()
     //   .ref("/users")
@@ -71,15 +81,16 @@ class ReceiptListing extends Component {
 }
 
 const mapStateToProps = state => ({
-  receipts: state.receipts.receipts || []
+  receipts: state.receipts.receipts || [],
 });
 
 const mapDispatchToProps = {
   fetchReceipts: getReceipts,
-  updateReceipts: updateReceipts
+  updateReceipts: updateReceipts,
+  getMemberData: getMemberData,
 };
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ReceiptListing);

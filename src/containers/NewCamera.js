@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ActivityIndicator,
   Button,
@@ -12,13 +12,13 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
-  View,
-} from 'react-native';
-import { Constants, ImagePicker, Permissions } from 'expo';
-import uuid from 'uuid';
-import Environment from '../../config/environment';
-import * as firebase from 'firebase';
-import { Firebase as firebaseConfig, FirebaseRef } from '../lib/firebase';
+  View
+} from "react-native";
+import { Constants, ImagePicker, Permissions } from "expo";
+import uuid from "uuid";
+import Environment from "../../config/environment";
+import * as firebase from "firebase";
+import { Firebase as firebaseConfig, FirebaseRef } from "../lib/firebase";
 
 // firebase.initializeApp(firebaseConfig);
 
@@ -28,7 +28,7 @@ export default class NewCamera extends React.Component {
   state = {
     image: null,
     uploading: false,
-    googleResponse: null,
+    googleResponse: null
   };
 
   async componentDidMount() {
@@ -102,10 +102,10 @@ export default class NewCamera extends React.Component {
           style={[
             StyleSheet.absoluteFill,
             {
-              backgroundColor: 'rgba(0,0,0,0.4)',
-              alignItems: 'center',
-              justifyContent: 'center',
-            },
+              backgroundColor: "rgba(0,0,0,0.4)",
+              alignItems: "center",
+              justifyContent: "center"
+            }
           ]}
         >
           <ActivityIndicator color="#fff" animating size="large" />
@@ -126,7 +126,7 @@ export default class NewCamera extends React.Component {
           marginTop: 20,
           width: 250,
           borderRadius: 3,
-          elevation: 2,
+          elevation: 2
         }}
       >
         <Button
@@ -139,11 +139,11 @@ export default class NewCamera extends React.Component {
           style={{
             borderTopRightRadius: 3,
             borderTopLeftRadius: 3,
-            shadowColor: 'rgba(0,0,0,1)',
+            shadowColor: "rgba(0,0,0,1)",
             shadowOpacity: 0.2,
             shadowOffset: { width: 4, height: 4 },
             shadowRadius: 5,
-            overflow: 'hidden',
+            overflow: "hidden"
           }}
         >
           <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
@@ -178,20 +178,20 @@ export default class NewCamera extends React.Component {
   _share = () => {
     Share.share({
       message: JSON.stringify(this.state.googleResponse.responses),
-      title: 'Check it out',
-      url: this.state.image,
+      title: "Check it out",
+      url: this.state.image
     });
   };
 
   _copyToClipboard = () => {
     Clipboard.setString(this.state.image);
-    alert('Copied to clipboard');
+    alert("Copied to clipboard");
   };
 
   _takePhoto = async () => {
     let pickerResult = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [4, 3]
     });
 
     this._handleImagePicked(pickerResult);
@@ -200,7 +200,7 @@ export default class NewCamera extends React.Component {
   _pickImage = async () => {
     let pickerResult = await ImagePicker.launchImageLibraryAsync({
       allowsEditing: true,
-      aspect: [4, 3],
+      aspect: [4, 3]
     });
 
     this._handleImagePicked(pickerResult);
@@ -216,7 +216,7 @@ export default class NewCamera extends React.Component {
       }
     } catch (e) {
       console.log(e);
-      alert('Upload failed, sorry :(');
+      alert("Upload failed, sorry :(");
     } finally {
       this.setState({ uploading: false });
     }
@@ -234,7 +234,7 @@ export default class NewCamera extends React.Component {
               // { type: 'LANDMARK_DETECTION', maxResults: 5 },
               // { type: 'FACE_DETECTION', maxResults: 5 },
               // { type: 'LOGO_DETECTION', maxResults: 5 },
-              { type: 'TEXT_DETECTION', maxResults: 5 },
+              { type: "TEXT_DETECTION", maxResults: 5 }
               // { type: 'DOCUMENT_TEXT_DETECTION', maxResults: 5 },
               // { type: 'SAFE_SEARCH_DETECTION', maxResults: 5 },
               // { type: 'IMAGE_PROPERTIES', maxResults: 5 },
@@ -243,29 +243,29 @@ export default class NewCamera extends React.Component {
             ],
             image: {
               source: {
-                imageUri: image,
-              },
-            },
-          },
-        ],
+                imageUri: image
+              }
+            }
+          }
+        ]
       });
       let response = await fetch(
-        'https://vision.googleapis.com/v1/images:annotate?key=' +
-          Environment['GOOGLE_CLOUD_VISION_API_KEY'],
+        "https://vision.googleapis.com/v1/images:annotate?key=" +
+          Environment["GOOGLE_CLOUD_VISION_API_KEY"],
         {
           headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
+            Accept: "application/json",
+            "Content-Type": "application/json"
           },
-          method: 'POST',
-          body: body,
-        },
+          method: "POST",
+          body: body
+        }
       );
       let responseJson = await response.json();
       console.log(responseJson);
       this.setState({
         googleResponse: responseJson,
-        uploading: false,
+        uploading: false
       });
     } catch (error) {
       console.log(error);
@@ -283,10 +283,10 @@ async function uploadImageAsync(uri) {
     };
     xhr.onerror = function(e) {
       console.log(e);
-      reject(new TypeError('Network request failed'));
+      reject(new TypeError("Network request failed"));
     };
-    xhr.responseType = 'blob';
-    xhr.open('GET', uri, true);
+    xhr.responseType = "blob";
+    xhr.open("GET", uri, true);
     xhr.send(null);
   });
 
@@ -305,45 +305,45 @@ async function uploadImageAsync(uri) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    paddingBottom: 10,
+    backgroundColor: "#fff",
+    paddingBottom: 10
   },
   developmentModeText: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
+    color: "rgba(0,0,0,0.4)",
     fontSize: 14,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: "center"
   },
   contentContainer: {
-    paddingTop: 30,
+    paddingTop: 30
   },
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
-    marginBottom: 20,
+    marginBottom: 20
   },
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 3,
-    marginLeft: -10,
+    marginLeft: -10
   },
   getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
+    alignItems: "center",
+    marginHorizontal: 50
   },
 
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center"
   },
 
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
-  },
+    alignItems: "center"
+  }
 });

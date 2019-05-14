@@ -24,6 +24,8 @@ const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Actions } from "react-native-router-flux";
 import axios from "axios";
 import { Firebase } from "../../../lib/firebase";
+import AddUserForm from "./AddUserForm";
+import InvitationEmail from "../../../containers/InvitationEmail";
 //import console = require('console');
 
 const paymentJson = async receiptId => {
@@ -39,11 +41,6 @@ const paymentJson = async receiptId => {
       console.log("The read failed:" + errorObject.code);
     }
   );
-  // try {
-  //   await axios.post('/pay', data);
-  // } catch(error) {
-  //   console.error(error)
-  // }
   Actions.payment(data);
 };
 
@@ -51,6 +48,17 @@ const deleteItem = (itemObj, receiptId) => {
   console.log("IN DELETE ITEM", itemObj);
 
   FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
+    .set(null)
+    .then(function() {
+      console.log("Remove succeeded.");
+    })
+    .catch(function(error) {
+      console.log("Remove failed: " + error.message);
+    });
+};
+
+const deleteUser = (userId, receiptId) => {
+  FirebaseRef.child(`receipts/${receiptId}/users/${userId}`)
     .set(null)
     .then(function() {
       console.log("Remove succeeded.");
@@ -87,19 +95,22 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       </Text>
     </ListItem>
   ));
+  const users = receipt.users.map(user => (
+    <ListItem key={user.id} rightIcon={{ style: { opacity: 0 } }}>
+      <Button onPress={() => deleteUser(user.id, receipt.id)}>
+        <Icon>X</Icon>
+      </Button>
+      <Text> </Text>
+      <Text>{user.email}</Text>
+    </ListItem>
+  ));
+  // const users = receipt
 
   const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
     let totalFloat = accumulator + Number(currentItem.price);
     let finalTotal = Math.round(totalFloat * 100) / 100;
-
-    //await axios.post("/pay", finalTotal);
     return finalTotal;
   }, 0);
-
-  axios.post(`/api/pay/${totalAmount}`, { totalAmount }).then(res => {
-    console.log(res);
-    console.log(res.data);
-  });
 
   return (
     <ScrollView>
@@ -146,6 +157,27 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
               items={items}
               totalAmount={totalAmount}
             />
+          </Card>
+
+          <Card>
+            <CardItem header bordered>
+              <Text>Invited users</Text>
+            </CardItem>
+            <CardItem>
+              <Content>
+                <List>{users}</List>
+              </Content>
+            </CardItem>
+            <CardItem>
+              <InvitationEmail users={users} />
+            </CardItem>
+          </Card>
+
+          <Card>
+            <CardItem header bordered>
+              <Text>Add More Users</Text>
+            </CardItem>
+            <AddUserForm receiptId={receipt.id} users={users} />
           </Card>
 
           <Card>

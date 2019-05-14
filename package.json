@@ -31,10 +31,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.1",
-<<<<<<< HEAD
-=======
     "@google-cloud/vision": "^0.25.0",
->>>>>>> 410d8c9c115b453682d782e3ad22bb7b1cae2f04
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "babel-polyfill": "^6.26.0",
@@ -58,8 +55,10 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
     "react-native-camera": "^2.7.0",
     "react-native-debugger": "^1.1.0",
+    "react-native-email": "^1.0.2",
     "react-native-firebase": "^5.0.0",
     "react-native-ignore-warnings": "^0.1.1",
+    "react-native-image-crop-picker": "^0.24.0",
     "react-native-is-iphonex": "^1.0.1",
     "react-native-router-flux": "4.0.6",
     "react-native-text-detector": "0.0.6",

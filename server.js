@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/pay", (req, res) => {
-  console.log(req.body);
   let create_payment_json = {
     intent: "sale",
     payer: {

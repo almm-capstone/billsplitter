@@ -8,8 +8,7 @@ import {
   Image,
   StyleSheet
 } from "react-native";
-import axios from 'axios';
-
+import axios from "axios";
 
 export default class Payment extends React.Component {
   state = {

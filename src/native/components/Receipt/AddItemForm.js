@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react';
 const { FirebaseRef } = require('../../../lib/firebase.js');
 import {
@@ -17,8 +18,7 @@ import {
 } from 'native-base';
 import { Image, ScrollView } from 'react-native';
 // import console = require("console");
-
-class AddItemForm extends Component {
+class AddItemForm extends React.Component {
   state = {
     id: '',
     name: '',

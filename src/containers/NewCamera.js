@@ -10,15 +10,19 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   ScrollView,
   View,
 } from 'react-native';
-import { Constants, ImagePicker, Permissions } from 'expo';
+import { Constants, ImagePicker, ImageManipulater, Permissions } from 'expo';
+import { Input } from 'native-base';
 import uuid from 'uuid';
 import Environment from '../../config/environment';
 import * as firebase from 'firebase';
 import { Firebase as firebaseConfig, FirebaseRef } from '../lib/firebase';
+import { Actions } from 'react-native-router-flux';
+import ReceiptItems from './ListItems';
 
 // firebase.initializeApp(firebaseConfig);
 
@@ -29,6 +33,7 @@ export default class NewCamera extends React.Component {
     image: null,
     uploading: false,
     googleResponse: null,
+    receiptLines: null,
   };
 
   async componentDidMount() {
@@ -37,7 +42,7 @@ export default class NewCamera extends React.Component {
   }
 
   render() {
-    let { image } = this.state;
+    let { image, receiptLines } = this.state;
 
     return (
       <View style={styles.container}>
@@ -115,7 +120,7 @@ export default class NewCamera extends React.Component {
   };
 
   _maybeRenderImage = () => {
-    let { image, googleResponse } = this.state;
+    let { image, googleResponse, receiptLines } = this.state;
     if (!image) {
       return;
     }
@@ -148,22 +153,21 @@ export default class NewCamera extends React.Component {
         >
           <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
         </View>
-        <Text
+        {/* <Text
           onPress={this._copyToClipboard}
           onLongPress={this._share}
           style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-        />
+        /> */}
 
-        <Text>Raw JSON:</Text>
+        {/* <Text>Edit Receipt:</Text> */}
 
         {googleResponse && (
-          <Text
-            onPress={this._copyToClipboard}
-            onLongPress={this._share}
+          <Button
+            title="Edit Receipt"
+            onPress={() => Actions.receiptItems({ items: { receiptLines } })}
+            // onLongPress={this._share}
             style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-          >
-            JSON.stringify(googleResponse.responses)
-          </Text>
+          />
         )}
       </View>
     );
@@ -173,6 +177,18 @@ export default class NewCamera extends React.Component {
 
   _renderItem = item => {
     <Text>response: {JSON.stringify(item)}</Text>;
+  };
+
+  _renderList = () => {
+    let { receiptLines } = this.state;
+    if (!receiptLines) {
+      return;
+    }
+    return (
+      <Text>
+        <ReceiptItems items={receiptLines} />
+      </Text>
+    );
   };
 
   _share = () => {
@@ -262,9 +278,11 @@ export default class NewCamera extends React.Component {
         },
       );
       let responseJson = await response.json();
-      console.log(responseJson);
+      let firstThing = responseJson.responses[0].textAnnotations[0].description;
+      console.log(firstThing);
       this.setState({
         googleResponse: responseJson,
+        receiptLines: firstThing,
         uploading: false,
       });
     } catch (error) {

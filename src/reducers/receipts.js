@@ -11,7 +11,7 @@ export default function receiptReducer(state = initialState, action) {
       if (action.data && typeof action.data === 'object') {
         receipts = action.data.map(item => ({
           id: item.id,
-          title: item.title,
+          users: item.users,
           body: item.body,
           image: item.image,
           author: item.author,

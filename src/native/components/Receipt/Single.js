@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, ScrollView } from 'react-native';
+import { Image, ScrollView, View, Picker } from 'react-native';
 import {
   Container,
   Content,
@@ -14,7 +14,7 @@ import {
   Button,
   Icon,
   Form,
-  Input
+  Input,
 } from 'native-base';
 import { errorMessages } from '../../../constants/messages';
 import Error from '../UI/Error';
@@ -22,9 +22,12 @@ import Spacer from '../UI/Spacer';
 import AddItemForm from './AddItemForm';
 const { FirebaseRef } = require('../../../lib/firebase.js');
 import { Actions } from 'react-native-router-flux';
+import Swiper from 'react-native-swiper';
 import axios from 'axios';
 import { Firebase } from '../../../lib/firebase';
-//import console = require('console');
+import PickedUser from './Picker.js';
+
+
 
 const paymentJson = async(receiptId) => {
 
@@ -58,6 +61,10 @@ const deleteItem = (itemObj, receiptId) => {
 };
 
 const ReceiptView = ({ error, receipts, receiptId }) => {
+
+  state = {
+    pickerVal: 0,
+  }
   // Error
   if (error) return <Error content={error} />;
 
@@ -72,7 +79,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
   // Receipt not found
   if (!receipt) return <Error content={errorMessages.receipt404} />;
 
-  // Build Items listing
+  // Items Delete listing
   const items = receipt.items.map(itemObj => (
     <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
       <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
@@ -86,68 +93,40 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
   ));
 
   return (
-    <ScrollView>
-    <Container>
-      <Content padder>
-        <Image
-          source={{ uri: receipt.image }}
-          style={{ height: 100, width: null, flex: 1 }}
-        />
+    <Swiper
+      loop={true}
+      index={0}
+    >
+      <View>
+        <Text>Assign Items</Text>
+        <List>
+            <PickedUser receipt={receipt} receiptId={receipt.id} />
+        </List>
+      </View>
 
-        <Spacer size={25} />
-        <H3>{receipt.title}</H3>
-        <Text>by {receipt.author}</Text>
-        <Spacer size={15} />
+      <View>
+        <Text>Delete Items</Text>
+          <List>
+            {items}
+          </List>
+      </View>
 
-        <Card>
-          <CardItem header bordered>
-            <Text>About this receipt</Text>
-          </CardItem>
-          <CardItem>
-            <Body>
-              <Text>{receipt.body}</Text>
-            </Body>
-          </CardItem>
-        </Card>
-
-        <Card>
-          <CardItem header bordered>
-            <Text>Receipt Items</Text>
-          </CardItem>
-          <CardItem>
-            <Content>
-              <List>
-                {items}
-              </List>
-            </Content>
-          </CardItem>
-        </Card>
-
-        <Card>
-          <CardItem header bordered>
-            <Text>Add Item</Text>
-          </CardItem>
-          <AddItemForm receiptId={receipt.id} items={items} />
-        </Card>
-
-        <Card>
-          <CardItem header bordered>
-            <Text>Checkout with Paypal!</Text>
-          </CardItem>
-          <CardItem>
+      <View>
+        <Text>Add Item</Text>
+        <AddItemForm receiptId={receipt.id} items={items} />
+      </View>
+      <View>
+      <Text>Checkout with Paypal!</Text>
           <Button
             // onPress={() => Actions.payment(); paymentJson(receipt.id)}
             onPress={() => paymentJson(receipt.id)}
           >
               <Text>Checkout</Text>
             </Button>
-          </CardItem>
-        </Card>
+      </View>
 
         <Spacer size={20} />
-      </Content>
-    </Container>
-    </ScrollView>
+    </Swiper>
   );
 };
 

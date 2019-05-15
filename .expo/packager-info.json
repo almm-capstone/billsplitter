@@ -1,10 +1,4 @@
 {
-<<<<<<< HEAD
-  "expoServerPort": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
-=======
   "devToolsPort": 19002,
 
   "expoServerPort": 19000,
@@ -13,6 +7,4 @@
   "expoServerNgrokUrl": "https://ew-pyg.ashleyheestand.billsplitter.exp.direct",
   "packagerNgrokUrl": "https://packager.ew-pyg.ashleyheestand.billsplitter.exp.direct",
   "ngrokPid": 7591
-
->>>>>>> 6570c17f349c608a10eb3dde98ce8db05a146acf
 }

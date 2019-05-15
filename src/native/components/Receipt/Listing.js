@@ -29,6 +29,8 @@ const ReceiptListing = ({
 
   const onPress = item => Actions.receipt({ match: { params: { id: String(item.id) } } });
 
+
+  console.log('listing',currentUser)
   return (
     <Container>
       <Content padder>

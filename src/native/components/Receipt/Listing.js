@@ -17,6 +17,7 @@ const ReceiptListing = ({
   loading,
   receipts,
   reFetch,
+  currentUser
 }) => {
   // Loading
   if (loading) return <Loading />;
@@ -28,7 +29,7 @@ const ReceiptListing = ({
 
   const onPress = item => Actions.receipt({ match: { params: { id: String(item.id) } } });
 
-  console.log(this.state);
+console.log('listing',currentUser)
 
   return (
     <Container>

@@ -29,7 +29,6 @@ import { Firebase } from "../../../lib/firebase";
 import AddUserForm from "./AddUserForm";
 import InvitationEmail from "../../../containers/InvitationEmail";
 
-
 const paymentJson = async receiptId => {
   let data;
 
@@ -70,11 +69,12 @@ const deleteUser = (userId, receiptId) => {
     });
 };
 
-const ReceiptView = ({ error, receipts, receiptId }) => {
+const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 
   state = {
     pickerVal: 0,
   }
+
   // Error
   if (error) return <Error content={error} />;
 
@@ -85,6 +85,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       item => parseInt(item.id, 10) === parseInt(receiptId, 10)
     );
   }
+  console.log('single',currentUser)
 
   // Receipt not found
   if (!receipt) return <Error content={errorMessages.receipt404} />;

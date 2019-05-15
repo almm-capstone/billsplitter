@@ -29,6 +29,7 @@ import axios from "axios";
 import AddUserForm from "./AddUserForm";
 import InvitationEmail from "../../../containers/InvitationEmail";
 import ReviewForm from "./ReviewForm";
+import PayeeSummary from "./PayeeSummary"
 
 const paymentJson = async receiptId => {
   let data;
@@ -132,12 +133,25 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
     return finalTotal;
   }, 0);
 
-  return (
-    <Swiper
+const authorView = (
+<Swiper
       style={styles.wrapper}
       loop={true}
       index={0}
     >
+
+    <View styles={styles.slide5}>
+        <Text style={styles.text}>Add More Users</Text>
+        <AddUserForm receiptId={receipt.id} users={users} />
+      </View>
+
+      <View style={styles.slide2}>
+        <Text style={styles.text}>Delete Items</Text>
+          <List>
+            {items}
+          </List>
+      </View>
+
       <View style={styles.slide1}>
         <Text style={styles.text}>Assign Items</Text>
 
@@ -145,65 +159,74 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
           <PickedUser receipt={receipt} receiptId={receipt.id} />
         </List>
       </View>
-      <View style={styles.slide2}>
-        <Text style={styles.text}>Delete Items</Text>
-          <List>
-            {items}
-          </List>
-
-      </View>
 
       <View>
         <Text style={styles.text}>Add Item</Text>
         <AddItemForm receiptId={receipt.id} items={items} />
       </View>
 
-
-       {/* <View style={styles.slide4}>
-         <Text style={styles.text}>Invited Users</Text>
-
-      <View>
-        <Text>Invited Users</Text>
-
-        <List>{users}</List>
-        <InvitationEmail users={users} />
-      </View> */}
-
-      <View styles={styles.slide5}>
-        <Text style={styles.text}>Add More Users</Text>
-        <AddUserForm receiptId={receipt.id} users={users} />
-      </View>
-
-
-      <View styles={styles.slide6}>
-      <Text style={styles.text}>Checkout with Paypal!</Text>
-          <Button
-            // onPress={() => Actions.payment(); paymentJson(receipt.id)}
-            onPress={() => paymentJson(receipt.id)}
-          >
-              <Text styles={styles.text}>Checkout</Text>
-            </Button>
-      </View>
-
-
       <View>
         <Text>Review before closing...</Text>
         <ReviewForm items={items} users={users} />
       </View>
 
-{/* //       <View>
-//         <Text>Checkout with Paypal!</Text>
-//         <Button
-//           // onPress={() => Actions.payment(); paymentJson(receipt.id)}
-//           onPress={() => paymentJson(receipt.id)}
-//         >
-//           <Text>Checkout</Text>
-//         </Button>
-//       </View> */}
-       <Spacer size={20} />
-
+      
     </Swiper>
+)
 
+const assignUser = (user, itemObj) => {
+  FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
+    .update({
+      user_claim: user,
+    });
+}
+const payeeView = (
+<Swiper
+      style={styles.wrapper}
+      loop={true}
+      index={0}
+    > 
+    <View style={styles.slide1}>
+        <Text style={styles.text}>Claim Items</Text>
+
+        <List>
+        <View>
+          {receipt.items
+            .filter(item => item.user_claim === "")
+            .map(itemObj => (              
+              <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
+                <Button
+                  onPress={() =>
+                    assignUser(currentUser, itemObj.id)
+                  }
+                >
+                  <Icon>+</Icon>
+                </Button>
+                <Text>
+                  {itemObj.name} ${itemObj.price}
+                </Text>
+              </ListItem>
+            ))}
+        </View>
+        </List>
+      </View>
+      <View>
+        <Text>Review before closing...</Text>
+        <PayeeSummary items={items} users={users} />
+      </View>
+
+
+      
+    </Swiper>
+)
+
+let toDisplay 
+if (isAuthor) toDisplay = authorView
+else if (isOnBill) toDisplay = payeeView
+else toDisplay = (<Text>This is not the bill you are looking for</Text>)
+
+  return (
+    toDisplay
   );
 };
 

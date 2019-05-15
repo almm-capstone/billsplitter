@@ -1,7 +1,7 @@
 {
   "hostType": "lan",
   "lanType": "ip",
-  "dev": true,
-  "minify": false,
-  "urlRandomness": "ew-pyg"
+  "dev": false,
+  "minify": true,
+  "urlRandomness": "ae-yb2"
 }

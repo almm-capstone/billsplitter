@@ -3,21 +3,60 @@ import { StyleSheet, Button, View } from "react-native";
 import email from "react-native-email";
 
 export default class InvitationEmail extends React.Component {
-  state = {
-    newUsers: this.props.users
+  allUsers = () => {
+    let users = [];
+    for (let i = 0; i < this.props.users.length; i++) {
+      users.push(this.props.users[i].props.children[2].props.children);
+    }
+    return users;
   };
 
   handleEmail = () => {
-    const to = ["tiaan@email.com", "foo@bar.com"]; // string or array of email addresses
+    // console.log("LIST", this.props.list);
+    // console.log("TOTAL", this.props.total);
+    let summary = () => {
+      let content = [];
+      this.props.list.map((el, ind) => {
+        content.push(
+          `${ind}. item name: ${el[0]} \n item price: $${
+            el[2]
+          } \n item payee: ${el[4]}` + "\n\n"
+        );
+      });
+      return content.slice(",").join(" ");
+    };
+
+    let totalSummary = () => {
+      let result = [];
+      let keys = Object.keys(this.props.total);
+      keys.map(key => {
+        result.push(`${key}: $${this.props.total[key]}` + "\n");
+      });
+      return result.slice(",").join(" ");
+    };
+
+    const to = this.allUsers(); //["admin@email.com", "lesley@email.com"]; // string or array of email addresses
     email(to, {
-      subject: "Show how to use",
-      body: "Some body right here"
+      subject: "Don't forget to pay your tabs!!!",
+      body: `Hey lovely,
+      Here is a summary of the receipt: \n
+      ${summary()} \n
+      Total Amount Summary: 
+      ${totalSummary()} \n
+      
+      Have A Wonderful Day!
+      `
     }).catch(console.error);
   };
+
   render() {
+    //console.log("USERS", this.totalSummary()); //this.props.users[1].props.children[2].props.children);
     return (
       <View style={styles.container}>
-        <Button title="Send Email" onPress={this.handleEmail} />
+        <Button
+          title="Close Receipt and Send the Summary via Emails to All Payees!"
+          onPress={this.handleEmail}
+        />
       </View>
     );
   }

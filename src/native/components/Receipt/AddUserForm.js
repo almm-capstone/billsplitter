@@ -28,7 +28,7 @@ class AddUserForm extends React.Component {
         <CardItem>
           <Content>
             <Form>
-              <Text>Item Name :</Text>
+              <Text> User email :</Text>
               <Input
                 placeholder="Enter your friend's email here!"
                 onChange={this.handleChangeUser}

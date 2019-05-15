@@ -1,6 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Image, ScrollView, View, Picker, TextInput } from 'react-native';
+
+import React from "react";
+import PropTypes from "prop-types";
+import { Image, ScrollView, View, Picker, TextInput } from "react-native";
+
 import {
   Container,
   Content,
@@ -14,20 +16,20 @@ import {
   Button,
   Icon,
   Form,
-  Input,
-} from 'native-base';
-import { errorMessages } from '../../../constants/messages';
-import Error from '../UI/Error';
-import Spacer from '../UI/Spacer';
-import AddItemForm from './AddItemForm';
-const { FirebaseRef } = require('../../../lib/firebase.js');
-import { Actions } from 'react-native-router-flux';
-import Swiper from 'react-native-swiper';
-import PickedUser from './Picker.js';
+  Input
+} from "native-base";
+import { errorMessages } from "../../../constants/messages";
+import Error from "../UI/Error";
+import Spacer from "../UI/Spacer";
+import AddItemForm from "./AddItemForm";
+const { FirebaseRef, Firebase } = require("../../../lib/firebase.js");
+import { Actions } from "react-native-router-flux";
+import Swiper from "react-native-swiper";
+import PickedUser from "./Picker.js";
 import axios from "axios";
-import { Firebase } from "../../../lib/firebase";
 import AddUserForm from "./AddUserForm";
 import InvitationEmail from "../../../containers/InvitationEmail";
+import ReviewForm from "./ReviewForm";
 
 const paymentJson = async receiptId => {
   let data;
@@ -69,15 +71,13 @@ const deleteUser = (userId, receiptId) => {
     });
 };
 
-const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
-
+const ReceiptView = ({ error, receipts, receiptId }) => {
   state = {
-    pickerVal: 0,
-  }
+    pickerVal: 0
+  };
 
   // Error
   if (error) return <Error content={error} />;
-
   // Get this Receipt from all receipts
   let receipt = null;
   if (receiptId && receipts) {
@@ -113,29 +113,18 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   ));
   // const users = receipt
 
-  const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
-    let totalFloat = accumulator + Number(currentItem.price);
-    let finalTotal = Math.round(totalFloat * 100) / 100;
-    return finalTotal;
-  }, 0);
-
   return (
-    <Swiper
-      loop={true}
-      index={0}
-    >
+    <Swiper loop={true} index={0}>
       <View>
         <Text>Assign Items</Text>
         <List>
-            <PickedUser receipt={receipt} receiptId={receipt.id} />
+          <PickedUser receipt={receipt} receiptId={receipt.id} />
         </List>
       </View>
 
       <View>
         <Text>Delete Items</Text>
-          <List>
-            {items}
-          </List>
+        <List>{items}</List>
       </View>
 
       <View>
@@ -143,11 +132,11 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
         <AddItemForm receiptId={receipt.id} items={items} />
       </View>
 
-      <View>
+      {/* <View>
         <Text>Invited Users</Text>
         <List>{users}</List>
         <InvitationEmail users={users} />
-      </View>
+      </View> */}
 
       <View>
         <Text>Add More Users</Text>
@@ -155,16 +144,20 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
       </View>
 
       <View>
-      <Text>Checkout with Paypal!</Text>
-          <Button
-            // onPress={() => Actions.payment(); paymentJson(receipt.id)}
-            onPress={() => paymentJson(receipt.id)}
-          >
-              <Text>Checkout</Text>
-            </Button>
+        <Text>Review before closing...</Text>
+        <ReviewForm items={items} users={users} />
       </View>
 
-        <Spacer size={20} />
+      <View>
+        <Text>Checkout with Paypal!</Text>
+        <Button
+          // onPress={() => Actions.payment(); paymentJson(receipt.id)}
+          onPress={() => paymentJson(receipt.id)}
+        >
+          <Text>Checkout</Text>
+        </Button>
+      </View>
+      <Spacer size={20} />
     </Swiper>
 
   );

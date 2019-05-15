@@ -1,8 +1,14 @@
-import React, { Component } from "react";
-import { Picker, View, ScrollView } from "react-native";
-import { ListItem, Button, Icon, Text } from "native-base";
-import { Firebase } from "../../../lib/firebase";
-const { FirebaseRef } = require("../../../lib/firebase.js");
+import React, { Component } from 'react';
+import { Picker, View, ScrollView } from 'react-native';
+import {
+  ListItem,
+  Button,
+  Icon,
+  Text
+ } from 'native-base';
+import { Firebase } from '../../../lib/firebase';
+const { FirebaseRef } = require('../../../lib/firebase.js');
+
 
 class PickedUser extends Component {
   constructor(props) {
@@ -23,9 +29,10 @@ class PickedUser extends Component {
     ));
 
     const assignUser = (user, itemObj) => {
-      FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`).update({
-        user_claim: user
-      });
+      FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
+        .update({
+          user_claim: user,
+        });
     };
 
     return (
@@ -62,6 +69,7 @@ class PickedUser extends Component {
         </View>
       </ScrollView>
     );
+
   }
 }
 

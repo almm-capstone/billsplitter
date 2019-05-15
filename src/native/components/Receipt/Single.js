@@ -1,6 +1,8 @@
+
 import React from "react";
 import PropTypes from "prop-types";
 import { Image, ScrollView, View, Picker, TextInput } from "react-native";
+
 import {
   Container,
   Content,
@@ -73,6 +75,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
   state = {
     pickerVal: 0
   };
+
   // Error
   if (error) return <Error content={error} />;
   // Get this Receipt from all receipts
@@ -82,6 +85,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       item => parseInt(item.id, 10) === parseInt(receiptId, 10)
     );
   }
+  console.log('single',currentUser)
 
   // Receipt not found
   if (!receipt) return <Error content={errorMessages.receipt404} />;
@@ -155,6 +159,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       </View>
       <Spacer size={20} />
     </Swiper>
+
   );
 };
 

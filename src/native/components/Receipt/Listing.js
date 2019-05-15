@@ -17,6 +17,7 @@ const ReceiptListing = ({
   loading,
   receipts,
   reFetch,
+  currentUser
 }) => {
   // Loading
   if (loading) return <Loading />;
@@ -27,8 +28,6 @@ const ReceiptListing = ({
   const keyExtractor = item => item.id;
 
   const onPress = item => Actions.receipt({ match: { params: { id: String(item.id) } } });
-
-  console.log(this.state);
 
   return (
     <Container>

@@ -20,10 +20,18 @@ class ReceiptListing extends Component {
 
   state = {
     error: null,
-    loading: false
+    loading: false,
+    currentUser: null
   };
 
-  componentDidMount = () => this.fetchData();
+
+  componentDidMount = async () => {
+    this.fetchData();
+    const { currentUser } = await Firebase.auth();
+    // console.log('current user', currentUser);
+    this.setState({ currentUser: currentUser.email });
+  };
+
 
   fetchData = data => {
     const { fetchReceipts } = this.props;
@@ -49,12 +57,8 @@ class ReceiptListing extends Component {
   }
 
   render = () => {
-    // console.log("===================", Firebase);
-    // Firebase.database()
-    //   .ref("/users")
-    //   .push("grace@email.com");
-    const { Layout, receipts, match } = this.props;
-    const { loading, error } = this.state;
+    const { Layout, receipts, match} = this.props;
+    const { loading, error, currentUser} = this.state;
     const id =
       match && match.params && match.params.id ? match.params.id : null;
 
@@ -65,6 +69,7 @@ class ReceiptListing extends Component {
         loading={loading}
         receipts={receipts}
         reFetch={() => this.fetchData()}
+        currentUser={currentUser}
       />
     );
   };

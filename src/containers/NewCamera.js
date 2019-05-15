@@ -13,17 +13,16 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  View,
-} from 'react-native';
-import { Constants, ImagePicker, ImageManipulater, Permissions } from 'expo';
-import { Input } from 'native-base';
-import uuid from 'uuid';
-import Environment from '../../config/environment';
-import * as firebase from 'firebase';
-import { Firebase as firebaseConfig, FirebaseRef } from '../lib/firebase';
-import { Actions } from 'react-native-router-flux';
-import ReceiptItems from './ListItems';
-
+  View
+} from "react-native";
+import { Constants, ImagePicker, ImageManipulater, Permissions } from "expo";
+import { Input } from "native-base";
+import uuid from "uuid";
+import Environment from "../../config/environment";
+import * as firebase from "firebase";
+import { Firebase as firebaseConfig, FirebaseRef } from "../lib/firebase";
+import { Actions } from "react-native-router-flux";
+import ReceiptItems from "./ListItems";
 
 // firebase.initializeApp(firebaseConfig);
 
@@ -34,7 +33,7 @@ export default class NewCamera extends React.Component {
     image: null,
     uploading: false,
     googleResponse: null,
-    receiptLines: null,
+    receiptLines: null
   };
 
   async componentDidMount() {
@@ -284,7 +283,7 @@ export default class NewCamera extends React.Component {
       this.setState({
         googleResponse: responseJson,
         receiptLines: firstThing,
-        uploading: false,
+        uploading: false
       });
     } catch (error) {
       console.log(error);

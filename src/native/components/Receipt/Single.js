@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, ScrollView, View, Picker, TextInput } from 'react-native';
+import { Image, ScrollView, View, Picker, TextInput, StyleSheet } from 'react-native';
+
 import {
   Container,
   Content,
@@ -14,20 +15,20 @@ import {
   Button,
   Icon,
   Form,
-  Input,
-} from 'native-base';
-import { errorMessages } from '../../../constants/messages';
-import Error from '../UI/Error';
-import Spacer from '../UI/Spacer';
-import AddItemForm from './AddItemForm';
-const { FirebaseRef } = require('../../../lib/firebase.js');
-import { Actions } from 'react-native-router-flux';
-import Swiper from 'react-native-swiper';
-import PickedUser from './Picker.js';
+  Input
+} from "native-base";
+import { errorMessages } from "../../../constants/messages";
+import Error from "../UI/Error";
+import Spacer from "../UI/Spacer";
+import AddItemForm from "./AddItemForm";
+const { FirebaseRef, Firebase } = require("../../../lib/firebase.js");
+import { Actions } from "react-native-router-flux";
+import Swiper from "react-native-swiper";
+import PickedUser from "./Picker.js";
 import axios from "axios";
-import { Firebase } from "../../../lib/firebase";
 import AddUserForm from "./AddUserForm";
 import InvitationEmail from "../../../containers/InvitationEmail";
+import ReviewForm from "./ReviewForm";
 
 const paymentJson = async receiptId => {
   let data;
@@ -69,15 +70,13 @@ const deleteUser = (userId, receiptId) => {
     });
 };
 
-const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
-
+const ReceiptView = ({ error, receipts, receiptId }) => {
   state = {
-    pickerVal: 0,
-  }
+    pickerVal: 0
+  };
 
   // Error
   if (error) return <Error content={error} />;
-
   // Get this Receipt from all receipts
   let receipt = null;
   if (receiptId && receipts) {
@@ -112,6 +111,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   ));
   // const users = receipt
 
+
   //Is Author
   let isAuthor =  false
   if (receipt.author === currentUser) isAuthor = true
@@ -134,54 +134,124 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 
   return (
     <Swiper
+      style={styles.wrapper}
       loop={true}
       index={0}
     >
-      <View>
-        <Text>Assign Items</Text>
+      <View style={styles.slide1}>
+        <Text style={styles.text}>Assign Items</Text>
+
         <List>
-            <PickedUser receipt={receipt} receiptId={receipt.id} />
+          <PickedUser receipt={receipt} receiptId={receipt.id} />
         </List>
       </View>
-
-      <View>
-        <Text>Delete Items</Text>
+      <View style={styles.slide2}>
+        <Text style={styles.text}>Delete Items</Text>
           <List>
             {items}
           </List>
+
       </View>
 
       <View>
-        <Text>Add Item</Text>
+        <Text style={styles.text}>Add Item</Text>
         <AddItemForm receiptId={receipt.id} items={items} />
       </View>
 
-      <View>
+
+//       <View style={styles.slide4}>
+//         <Text style={styles.text}>Invited Users</Text>
+
+      {/* <View>
         <Text>Invited Users</Text>
+
         <List>{users}</List>
         <InvitationEmail users={users} />
-      </View>
+      </View> */}
 
-      <View>
-        <Text>Add More Users</Text>
+      <View styles={styles.slide5}>
+        <Text style={styles.text}>Add More Users</Text>
         <AddUserForm receiptId={receipt.id} users={users} />
       </View>
 
-      <View>
-      <Text>Checkout with Paypal!</Text>
+
+      <View styles={styles.slide6}>
+      <Text style={styles.text}>Checkout with Paypal!</Text>
           <Button
             // onPress={() => Actions.payment(); paymentJson(receipt.id)}
             onPress={() => paymentJson(receipt.id)}
           >
-              <Text>Checkout</Text>
+              <Text styles={styles.text}>Checkout</Text>
             </Button>
       </View>
 
-        <Spacer size={20} />
+
+      <View>
+        <Text>Review before closing...</Text>
+        <ReviewForm items={items} users={users} />
+      </View>
+
+//       <View>
+//         <Text>Checkout with Paypal!</Text>
+//         <Button
+//           // onPress={() => Actions.payment(); paymentJson(receipt.id)}
+//           onPress={() => paymentJson(receipt.id)}
+//         >
+//           <Text>Checkout</Text>
+//         </Button>
+//       </View>
+//       <Spacer size={20} />
+
     </Swiper>
 
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide4: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide5: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide6: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  text: {
+    color: 'darkcyan',
+    fontSize: 30,
+    fontWeight: 'bold',
+  }
+})
 
 ReceiptView.propTypes = {
   error: PropTypes.string,

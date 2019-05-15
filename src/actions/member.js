@@ -1,6 +1,5 @@
-import { errorMessages } from '../constants/messages';
-import { Firebase, FirebaseRef } from '../lib/firebase';
-
+import { errorMessages } from "../constants/messages";
+import { Firebase, FirebaseRef } from "../lib/firebase";
 /**
  * Sign Up to Firebase
  */
@@ -30,7 +29,7 @@ export function signUp(formData) {
                 firstName,
                 lastName,
                 signedUp: Firebase.database.ServerValue.TIMESTAMP,
-                lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+                lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP
               })
               .then(resolve);
           }
@@ -58,10 +57,10 @@ function getUserData(dispatch) {
 
   const ref = FirebaseRef.child(`users/${UID}`);
 
-  return ref.on('value', snapshot => {
+  return ref.on("value", snapshot => {
     const userData = snapshot.val() || [];
 
-    return dispatch({ type: 'USER_DETAILS_UPDATE', data: userData });
+    return dispatch({ type: "USER_DETAILS_UPDATE", data: userData });
   });
 }
 
@@ -105,7 +104,7 @@ export function login(formData) {
               if (userDetails.uid) {
                 // Update last logged in data
                 FirebaseRef.child(`users/${userDetails.uid}`).update({
-                  lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP,
+                  lastLoggedIn: Firebase.database.ServerValue.TIMESTAMP
                 });
 
                 // Send verification Email when email hasn't been verified
@@ -113,24 +112,26 @@ export function login(formData) {
                   Firebase.auth()
                     .currentUser.sendEmailVerification()
                     .catch(() =>
-                      console.log('Verification email failed to send'),
+                      console.log("Verification email failed to send")
                     );
                 }
 
                 // Get User Data from DB (different to auth user data)
                 getUserData(dispatch);
               }
-
               return resolve(
-                dispatch({ type: 'USER_LOGIN', data: userDetails }),
+                dispatch({ type: "USER_LOGIN", data: userDetails })
               );
             })
-            .catch(reject),
+            .catch(reject)
         );
     }).catch(err => {
       throw err.message;
     });
 }
+
+// let testUser = Firebase.auth().currentUser;
+// console.log("==========================", testUser);
 
 /**
  * Reset Password
@@ -146,7 +147,7 @@ export function resetPassword(formData) {
       // Go to Firebase
       return Firebase.auth()
         .sendPasswordResetEmail(email)
-        .then(() => resolve(dispatch({ type: 'USER_RESET' })))
+        .then(() => resolve(dispatch({ type: "USER_RESET" })))
         .catch(reject);
     }).catch(err => {
       throw err.message;
@@ -164,7 +165,7 @@ export function updateProfile(formData) {
     firstName,
     lastName,
     changeEmail,
-    changePassword,
+    changePassword
   } = formData;
 
   return dispatch =>
@@ -224,8 +225,8 @@ export function logout() {
     new Promise((resolve, reject) =>
       Firebase.auth()
         .signOut()
-        .then(() => resolve(dispatch({ type: 'USER_RESET' })))
-        .catch(reject),
+        .then(() => resolve(dispatch({ type: "USER_RESET" })))
+        .catch(reject)
     ).catch(err => {
       throw err.message;
     });

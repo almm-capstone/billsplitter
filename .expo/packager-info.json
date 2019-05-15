@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://97-23a.anonymous.billsplitter.exp.direct",
+  "packagerNgrokUrl": "https://packager.97-23a.anonymous.billsplitter.exp.direct",
+  "ngrokPid": 79317
 }

@@ -26,6 +26,7 @@ import {
   Input,
 } from 'native-base';
 import { Firebase } from '../lib/firebase.js';
+import { Action, Actions } from 'react-native-router-flux'
 
 export default class ReceiptItems extends Component {
   state = {
@@ -92,8 +93,10 @@ export default class ReceiptItems extends Component {
     });
     console.log('parsed receipt', parsedReceipt);
     this.setState({ parsedReceipt: parsedReceipt });
-    this.createBill()
+    setTimeout(() => this.createBill(), 5000);
+    setTimeout(() => Actions.receipt({ match: { params: { id: String(1) } } }), 5000);
   };
+
 
   // findId = () => {
   //   // FirebaseRef.child('receipts').on('value', function(snapshot) {
@@ -127,7 +130,7 @@ export default class ReceiptItems extends Component {
         email: this.state.currentUser
       });
 
-    await this.state.parsedReceipt.forEach((item) => {
+    this.state.parsedReceipt.forEach((item) => {
       FirebaseRef.child(`receipts/${id}/items/${otherId}`)
         .set({
           id: otherId,

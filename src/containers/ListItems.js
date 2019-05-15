@@ -25,12 +25,20 @@ import {
   Form,
   Input,
 } from 'native-base';
+import { Firebase } from '../lib/firebase.js';
 
 export default class ReceiptItems extends Component {
   state = {
     receipt: this.props.items.receiptLines.split('\n'),
     parsedReceipt: [],
     bill: {},
+    currentUser: null,
+  };
+
+  componentDidMount = async () => {
+    const { currentUser } = await Firebase.auth();
+    // console.log('current user', currentUser);
+    this.setState({ currentUser: currentUser.email });
   };
 
   deleteItem = item => {
@@ -84,11 +92,55 @@ export default class ReceiptItems extends Component {
     });
     console.log('parsed receipt', parsedReceipt);
     this.setState({ parsedReceipt: parsedReceipt });
+    this.createBill()
   };
 
-  createBill = (author, body, image) => {};
+  // findId = () => {
+  //   // FirebaseRef.child('receipts').on('value', function(snapshot) {
+  //   //   return snapshot.val().length;
+  //   // });
+  //   let count = 1;
+  //   count++;
+  //   return count;
+  // }
+
+  // findOtherId = () => {
+  //   let count = -1;
+  //   count++;
+  //   return count;
+  // }
+
+  createBill = async() => {
+    let id = 1
+    let otherId = 0
+    FirebaseRef.child(`receipts/${id}`)
+      .set({
+        id: id,
+        author: this.state.currentUser,
+        body: Date.now(),
+        image: "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5"
+      });
+
+    FirebaseRef.child(`receipts/${id}/users/${otherId}`)
+      .set({
+        id: otherId,
+        email: this.state.currentUser
+      });
+
+    await this.state.parsedReceipt.forEach((item) => {
+      FirebaseRef.child(`receipts/${id}/items/${otherId}`)
+        .set({
+          id: otherId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          user_claim: '',
+        });
+    });
+  };
 
   render() {
+    // console.log(this.findId(), 'IN FIND ID')
     let { items } = this.props;
     // console.log('props', items.receiptLines);
     let receipt = this.state.receipt;

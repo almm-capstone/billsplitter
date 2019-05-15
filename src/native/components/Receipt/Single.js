@@ -117,7 +117,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   if (receipt.author === currentUser) isAuthor = true
 
   //Is On Bill
-  let isOnBill = false  
+  let isOnBill = false
 
   receipt.users.map(userObj=> {
     if (userObj != null){
@@ -187,7 +187,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 
 
       <View>
-        <Text>Review before closing...</Text>
+        <Text style={styles.text}>Review before closing...</Text>
         <ReviewForm items={items} users={users} />
       </View>
 
@@ -200,7 +200,6 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 //           <Text>Checkout</Text>
 //         </Button>
 //       </View> */}
-       <Spacer size={20} />
 
     </Swiper>
 

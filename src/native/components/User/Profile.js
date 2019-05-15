@@ -29,14 +29,14 @@ const Profile = ({ member, logout }) => (
                 content={`You are currently logged in as ${member.email}`}
               />
             </Content>
-            {/* <ListItem onPress={Actions.userbills} icon>
+            <ListItem onPress={Actions.userbills} icon>
               <Left>
                 <Icon name="ios-american-football" />
               </Left>
               <Body>
                 <Text>Check My Profile</Text>
               </Body>
-            </ListItem> */}
+            </ListItem>
 
             <ListItem onPress={Actions.updateProfile} icon>
               <Left>

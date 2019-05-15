@@ -96,8 +96,8 @@ const Index = (
         </Stack>
         {/* <Scene
           key="userbills"
-          title="userbills"
-          component={ReceiptsContainer}
+          title="All Receipts"
+          component={ReceiptSingleComponent}
         /> */}
         <Stack
           key="camera"

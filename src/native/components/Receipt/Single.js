@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Image, ScrollView, TextInput } from "react-native";
+import { Image, ScrollView, View, Picker, TextInput } from "react-native";
 import {
   Container,
   Content,
@@ -22,10 +22,12 @@ import Spacer from "../UI/Spacer";
 import AddItemForm from "./AddItemForm";
 const { FirebaseRef, Firebase } = require("../../../lib/firebase.js");
 import { Actions } from "react-native-router-flux";
+import Swiper from "react-native-swiper";
+import PickedUser from "./Picker.js";
 import axios from "axios";
 import AddUserForm from "./AddUserForm";
 import InvitationEmail from "../../../containers/InvitationEmail";
-//import console = require('console');
+import ReviewForm from "./ReviewForm";
 
 const paymentJson = async receiptId => {
   let data;
@@ -68,6 +70,9 @@ const deleteUser = (userId, receiptId) => {
 };
 
 const ReceiptView = ({ error, receipts, receiptId }) => {
+  state = {
+    pickerVal: 0
+  };
   // Error
   if (error) return <Error content={error} />;
   // Get this Receipt from all receipts
@@ -81,7 +86,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
   // Receipt not found
   if (!receipt) return <Error content={errorMessages.receipt404} />;
 
-  // Build Items listing
+  // Items Delete listing
   const items = receipt.items.map(itemObj => (
     <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
       <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
@@ -104,98 +109,52 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
   ));
   // const users = receipt
 
-  const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
-    let totalFloat = accumulator + Number(currentItem.price);
-    let finalTotal = Math.round(totalFloat * 100) / 100;
-    return finalTotal;
-  }, 0);
-
   return (
-    <ScrollView>
-      <Container>
-        <Content padder>
-          <Image
-            source={{ uri: receipt.image }}
-            style={{ height: 100, width: null, flex: 1 }}
-          />
+    <Swiper loop={true} index={0}>
+      <View>
+        <Text>Assign Items</Text>
+        <List>
+          <PickedUser receipt={receipt} receiptId={receipt.id} />
+        </List>
+      </View>
 
-          <Spacer size={25} />
-          <H3>{receipt.title}</H3>
-          <Text>by {receipt.author}</Text>
-          <Spacer size={15} />
+      <View>
+        <Text>Delete Items</Text>
+        <List>{items}</List>
+      </View>
 
-          <Card>
-            <CardItem header bordered>
-              <Text>About this receipt</Text>
-            </CardItem>
-            <CardItem>
-              <Body>
-                <Text>{receipt.body}</Text>
-              </Body>
-            </CardItem>
-          </Card>
+      <View>
+        <Text>Add Item</Text>
+        <AddItemForm receiptId={receipt.id} items={items} />
+      </View>
 
-          <Card>
-            <CardItem header bordered>
-              <Text>Receipt Items</Text>
-            </CardItem>
-            <CardItem>
-              <Content>
-                <List>{items}</List>
-              </Content>
-            </CardItem>
-          </Card>
+      {/* <View>
+        <Text>Invited Users</Text>
+        <List>{users}</List>
+        <InvitationEmail users={users} />
+      </View> */}
 
-          <Card>
-            <CardItem header bordered>
-              <Text>Add Item</Text>
-            </CardItem>
-            <AddItemForm
-              receiptId={receipt.id}
-              items={items}
-              totalAmount={totalAmount}
-            />
-          </Card>
+      <View>
+        <Text>Add More Users</Text>
+        <AddUserForm receiptId={receipt.id} users={users} />
+      </View>
 
-          <Card>
-            <CardItem header bordered>
-              <Text>Invited users</Text>
-            </CardItem>
-            <CardItem>
-              <Content>
-                <List>{users}</List>
-              </Content>
-            </CardItem>
-            <CardItem>
-              <InvitationEmail users={users} />
-            </CardItem>
-          </Card>
+      <View>
+        <Text>Review before closing...</Text>
+        <ReviewForm items={items} users={users} />
+      </View>
 
-          <Card>
-            <CardItem header bordered>
-              <Text>Add More Users</Text>
-            </CardItem>
-            <AddUserForm receiptId={receipt.id} users={users} />
-          </Card>
-
-          <Card>
-            <CardItem header bordered>
-              <Text>Checkout with Paypal!</Text>
-            </CardItem>
-            <CardItem>
-              <Text>Total amount: {totalAmount}</Text>
-            </CardItem>
-            <CardItem>
-              <Button onPress={() => Actions.payment()}>
-                <Text>Checkout</Text>
-              </Button>
-            </CardItem>
-          </Card>
-
-          <Spacer size={20} />
-        </Content>
-      </Container>
-    </ScrollView>
+      <View>
+        <Text>Checkout with Paypal!</Text>
+        <Button
+          // onPress={() => Actions.payment(); paymentJson(receipt.id)}
+          onPress={() => paymentJson(receipt.id)}
+        >
+          <Text>Checkout</Text>
+        </Button>
+      </View>
+      <Spacer size={20} />
+    </Swiper>
   );
 };
 

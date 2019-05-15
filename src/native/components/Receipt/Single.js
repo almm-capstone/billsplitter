@@ -113,6 +113,23 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   ));
   // const users = receipt
 
+   //Is Author
+   let isAuthor =  false
+   if (receipt.author === currentUser) isAuthor = true
+ 
+   //Is On Bill
+   let isOnBill = false  
+ 
+   receipt.users.map(userObj=> {
+     if (userObj != null){
+       if (Object.values(userObj).includes(currentUser)) isOnBill = true
+     }
+   })
+ 
+
+   console.log('isauthor',isAuthor,'isOnBill',isOnBill)
+ 
+
   const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
     let totalFloat = accumulator + Number(currentItem.price);
     let finalTotal = Math.round(totalFloat * 100) / 100;

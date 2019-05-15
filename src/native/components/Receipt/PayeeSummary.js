@@ -3,14 +3,9 @@ const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Content, CardItem, Text, Button, Form, Input } from "native-base";
 import { ScrollView, View } from "react-native";
 import InvitationEmail from "../../../containers/InvitationEmail";
-// import console = require("console");
-// import console = require("console");
-// import console = require("console");
-class ReviewForm extends React.Component {
-  // console.log(
-  //   "========reviewform",
-  //   this.props.items[0].props.children[2].props.children
-  // );
+
+
+class PayeeSummary extends React.Component {
 
   reviewList = () => {
     let result = [];
@@ -85,13 +80,7 @@ class ReviewForm extends React.Component {
               })}
             </Form>            
 
-            <View>
-              <InvitationEmail
-                users={this.props.users}
-                total={this.totalAmount()}
-                list={this.reviewList()}
-              />
-            </View>
+            
           </Content>
         </CardItem>
       </ScrollView>
@@ -99,4 +88,4 @@ class ReviewForm extends React.Component {
   }
 }
 
-export default ReviewForm;
+export default PayeeSummary;

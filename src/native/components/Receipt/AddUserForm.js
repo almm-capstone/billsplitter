@@ -3,6 +3,7 @@ const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Content, CardItem, Text, Button, Form, Input } from "native-base";
 import { ScrollView } from "react-native";
 // import console = require("console");
+
 class AddUserForm extends React.Component {
   state = {
     user: "",

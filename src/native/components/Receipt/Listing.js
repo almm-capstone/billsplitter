@@ -1,10 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  FlatList, TouchableOpacity, RefreshControl, Image,
+  FlatList,
+  TouchableOpacity,
+  RefreshControl,
+  Image,
 } from 'react-native';
 import {
-  Container, Content, Card, CardItem, Body, Text, Button,
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Body,
+  Text,
+  Button,
 } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 import Loading from '../UI/Loading';
@@ -12,13 +21,7 @@ import Error from '../UI/Error';
 import Header from '../UI/Header';
 import Spacer from '../UI/Spacer';
 
-const ReceiptListing = ({
-  error,
-  loading,
-  receipts,
-  reFetch,
-  currentUser
-}) => {
+const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
   // Loading
   if (loading) return <Loading />;
 
@@ -27,7 +30,8 @@ const ReceiptListing = ({
 
   const keyExtractor = item => item.id;
 
-  const onPress = item => Actions.receipt({ match: { params: { id: String(item.id) } } });
+  const onPress = item =>
+    Actions.receipt({ match: { params: { id: String(item.id) } } });
 
   
   return (
@@ -44,7 +48,10 @@ const ReceiptListing = ({
           renderItem={({ item }) => (
             <Card transparent style={{ paddingHorizontal: 6 }}>
               <CardItem cardBody>
-                <TouchableOpacity onPress={() => onPress(item)} style={{ flex: 1 }}>
+                <TouchableOpacity
+                  onPress={() => onPress(item)}
+                  style={{ flex: 1 }}
+                >
                   <Image
                     source={{ uri: item.image }}
                     style={{
@@ -59,19 +66,10 @@ const ReceiptListing = ({
               <CardItem cardBody>
                 <Body>
                   <Spacer size={10} />
-                  <Text style={{ fontWeight: '800' }}>
-                    {item.title}
-                  </Text>
+                  <Text style={{ fontWeight: '800' }}>{item.title}</Text>
                   <Spacer size={15} />
-                  <Button
-                    block
-                    bordered
-                    small
-                    onPress={() => onPress(item)}
-                  >
-                    <Text>
-                      View Receipt
-                    </Text>
+                  <Button block bordered small onPress={() => onPress(item)}>
+                    <Text>View Receipt</Text>
                   </Button>
                   <Spacer size={5} />
                 </Body>
@@ -79,12 +77,9 @@ const ReceiptListing = ({
             </Card>
           )}
           keyExtractor={keyExtractor}
-          refreshControl={(
-            <RefreshControl
-              refreshing={loading}
-              onRefresh={reFetch}
-            />
-          )}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={reFetch} />
+          }
         />
 
         <Spacer size={20} />

@@ -118,7 +118,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   if (receipt.author === currentUser) isAuthor = true
 
   //Is On Bill
-  let isOnBill = false  
+  let isOnBill = false
 
   receipt.users.map(userObj=> {
     if (userObj != null){

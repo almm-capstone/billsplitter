@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "AppName",
+    "name": "TABS",
     "description": "This is a bill-splitter app built using React Native and Firebase",
     "slug": "bill-splitter-app",
     "privacy": "public",
@@ -12,7 +12,7 @@
     "splash": {
       "image": "./src/images/launch.png",
       "resizeMode": "contain",
-      "backgroundColor": "#473be7"
+      "backgroundColor": "#ffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

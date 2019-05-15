@@ -168,7 +168,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#4630EB',
+    backgroundColor: '#008e97',
   },
   pictures: {
     flex: 1,

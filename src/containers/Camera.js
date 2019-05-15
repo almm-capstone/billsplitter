@@ -442,7 +442,7 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#4630EB',
+    backgroundColor: '#008e97',
   },
   options: {
     position: 'absolute',

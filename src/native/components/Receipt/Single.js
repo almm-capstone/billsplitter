@@ -70,7 +70,7 @@ const deleteUser = (userId, receiptId) => {
     });
 };
 
-const ReceiptView = ({ error, receipts, receiptId }) => {
+const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   state = {
     pickerVal: 0
   };
@@ -159,10 +159,10 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
       </View>
 
 
-//       <View style={styles.slide4}>
-//         <Text style={styles.text}>Invited Users</Text>
+       {/* <View style={styles.slide4}>
+         <Text style={styles.text}>Invited Users</Text>
 
-      {/* <View>
+      <View>
         <Text>Invited Users</Text>
 
         <List>{users}</List>
@@ -191,7 +191,7 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
         <ReviewForm items={items} users={users} />
       </View>
 
-//       <View>
+{/* //       <View>
 //         <Text>Checkout with Paypal!</Text>
 //         <Button
 //           // onPress={() => Actions.payment(); paymentJson(receipt.id)}
@@ -199,8 +199,8 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
 //         >
 //           <Text>Checkout</Text>
 //         </Button>
-//       </View>
-//       <Spacer size={20} />
+//       </View> */}
+       <Spacer size={20} />
 
     </Swiper>
 

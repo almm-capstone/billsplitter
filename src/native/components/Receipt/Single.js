@@ -85,7 +85,6 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
       item => parseInt(item.id, 10) === parseInt(receiptId, 10)
     );
   }
-  console.log('single',currentUser)
 
   // Receipt not found
   if (!receipt) return <Error content={errorMessages.receipt404} />;
@@ -112,6 +111,20 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
     </ListItem>
   ));
   // const users = receipt
+
+  //Is Author
+  let isAuthor =  false
+  if (receipt.author === currentUser) isAuthor = true
+
+  //Is On Bill
+  let isOnBill = false  
+
+  receipt.users.map(userObj=> {
+    if (userObj != null){
+      if (Object.values(userObj).includes(currentUser)) isOnBill = true
+    }
+  })
+
 
   const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
     let totalFloat = accumulator + Number(currentItem.price);

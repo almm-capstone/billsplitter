@@ -1,11 +1,5 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
 const { FirebaseRef } = require("../../../lib/firebase.js");
-=======
-
-import React, { Component } from 'react';
-const { FirebaseRef } = require('../../../lib/firebase.js');
->>>>>>> b3d9d24c65d65adf05e895ef478d23af8fd6b1f0
 import {
   Container,
   Content,

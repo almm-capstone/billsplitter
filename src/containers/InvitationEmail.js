@@ -16,7 +16,7 @@ export default class InvitationEmail extends React.Component {
   };
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <Button title="Send Email" onPress={this.handleEmail} />
       </View>
     );

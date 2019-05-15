@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Image, ScrollView, View, Picker, TextInput } from 'react-native';
+import { Image, ScrollView, View, Picker, TextInput, StyleSheet } from 'react-native';
 import {
   Container,
   Content,
@@ -120,54 +120,100 @@ const ReceiptView = ({ error, receipts, receiptId }) => {
 
   return (
     <Swiper
+      style={styles.wrapper}
       loop={true}
       index={0}
     >
-      <View>
-        <Text>Assign Items</Text>
+      <View style={styles.slide1}>
+        <Text style={styles.text}>Assign Items</Text>
         <List>
             <PickedUser receipt={receipt} receiptId={receipt.id} />
         </List>
       </View>
 
-      <View>
-        <Text>Delete Items</Text>
+      <View style={styles.slide2}>
+        <Text style={styles.text}>Delete Items</Text>
           <List>
             {items}
           </List>
       </View>
 
       <View>
-        <Text>Add Item</Text>
+        <Text style={styles.text}>Add Item</Text>
         <AddItemForm receiptId={receipt.id} items={items} />
       </View>
 
-      <View>
-        <Text>Invited Users</Text>
+      <View style={styles.slide4}>
+        <Text style={styles.text}>Invited Users</Text>
         <List>{users}</List>
         <InvitationEmail users={users} />
       </View>
 
-      <View>
-        <Text>Add More Users</Text>
+      <View styles={styles.slide5}>
+        <Text style={styles.text}>Add More Users</Text>
         <AddUserForm receiptId={receipt.id} users={users} />
       </View>
 
-      <View>
-      <Text>Checkout with Paypal!</Text>
+      <View styles={styles.slide6}>
+      <Text style={styles.text}>Checkout with Paypal!</Text>
           <Button
             // onPress={() => Actions.payment(); paymentJson(receipt.id)}
             onPress={() => paymentJson(receipt.id)}
           >
-              <Text>Checkout</Text>
+              <Text styles={styles.text}>Checkout</Text>
             </Button>
       </View>
 
-        <Spacer size={20} />
     </Swiper>
 
   );
 };
+
+const styles = StyleSheet.create({
+  wrapper: {
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide4: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide5: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  slide6: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 25,
+  },
+  text: {
+    color: 'darkcyan',
+    fontSize: 30,
+    fontWeight: 'bold',
+  }
+})
 
 ReceiptView.propTypes = {
   error: PropTypes.string,

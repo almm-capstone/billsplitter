@@ -115,7 +115,7 @@ export default class Photo extends React.Component {
       >
         <Image style={styles.picture} source={{ uri }} />
         {this.state.selected && (
-          <Ionicons name="md-checkmark-circle" size={30} color="#4630EB" />
+          <Ionicons name="md-checkmark-circle" size={30} color="#008e97" />
         )}
         <View style={styles.facesContainer}>{this.renderFaces()}</View>
       </TouchableOpacity>

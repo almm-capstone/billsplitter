@@ -25,7 +25,7 @@ class PickedUser extends Component {
     const receiptId = this.props.receiptId;
 
     const receiptUsers = receipt.users.map(user => (
-      <Picker.Item key={user.id} label={user.email} value={user.id} />
+      <Picker.Item key={user.id} label={user.email} value={user.id}/>
     ));
 
     const assignUser = (user, itemObj) => {

@@ -21,13 +21,14 @@ class ReceiptListing extends Component {
   state = {
     error: null,
     loading: false,
-    currentUser: null
+    currentUser: null,
+    userName: null
   };
 
 
   componentDidMount = async () => {
     this.fetchData();
-    const { currentUser } = await Firebase.auth();
+    const { currentUser } = await Firebase.auth();    
     // console.log('current user', currentUser);
     this.setState({ currentUser: currentUser.email });
   };

@@ -1,6 +1,6 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { View } from "react-native";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { View } from 'react-native';
 import {
   Container,
   Content,
@@ -9,12 +9,12 @@ import {
   Body,
   Left,
   Text,
-  Icon
-} from "native-base";
-import { Actions } from "react-native-router-flux";
-import Header from "../UI/Header";
+  Icon,
+} from 'native-base';
+import { Actions } from 'react-native-router-flux';
+import Header from '../UI/Header';
 // import console = require("console");
-const { FirebaseRef, Firebase } = require("../../../lib/firebase");
+const { FirebaseRef, Firebase } = require('../../../lib/firebase');
 
 const Profile = ({ member, logout }) => (
   <Container>
@@ -29,14 +29,14 @@ const Profile = ({ member, logout }) => (
                 content={`You are currently logged in as ${member.email}`}
               />
             </Content>
-            <ListItem onPress={Actions.userbills} icon>
+            {/* <ListItem onPress={Actions.userbills} icon>
               <Left>
                 <Icon name="ios-american-football" />
               </Left>
               <Body>
                 <Text>Check My Profile</Text>
               </Body>
-            </ListItem>
+            </ListItem> */}
 
             <ListItem onPress={Actions.updateProfile} icon>
               <Left>
@@ -97,11 +97,11 @@ const Profile = ({ member, logout }) => (
 
 Profile.propTypes = {
   member: PropTypes.shape({}),
-  logout: PropTypes.func.isRequired
+  logout: PropTypes.func.isRequired,
 };
 
 Profile.defaultProps = {
-  member: {}
+  member: {},
 };
 
 export default Profile;

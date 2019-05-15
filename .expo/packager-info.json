@@ -1,9 +1,11 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19004,
-  "packagerPid": 6217,
-  "expoServerNgrokUrl": "https://ew-pyg.ashleyheestand.billsplitter.exp.direct",
-  "packagerNgrokUrl": "https://packager.ew-pyg.ashleyheestand.billsplitter.exp.direct",
-  "ngrokPid": 6233
+
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": "https://97-23a.anonymous.billsplitter.exp.direct",
+  "packagerNgrokUrl": "https://packager.97-23a.anonymous.billsplitter.exp.direct",
+  "ngrokPid": 79317
+
 }

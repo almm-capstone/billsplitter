@@ -40,11 +40,11 @@ export default class InvitationEmail extends React.Component {
       subject: "Don't forget to pay your tabs!!!",
       body: `Hey lovely,
 
-      Total Amount Summary: 
-      ${totalSummary().toFixed(2)} \n
+      Total Amount Summary 
+      ${totalSummary()} \n
 
       Here is a summary of the receipt: \n
-      ${summary().toFixed(2)} \n      
+      ${summary()} \n      
       
       Have A Wonderful Day!
       `

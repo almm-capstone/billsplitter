@@ -4,9 +4,7 @@ import { Content, CardItem, Text, Button, Form, Input } from "native-base";
 import { ScrollView, View } from "react-native";
 import InvitationEmail from "../../../containers/InvitationEmail";
 
-
 class PayeeSummary extends React.Component {
-
   reviewList = () => {
     let result = [];
     for (let i = 0; i < this.props.items.length; i++) {
@@ -17,8 +15,8 @@ class PayeeSummary extends React.Component {
 
   totalAmount = () => {
     let total = {};
-    let tax = .10;
-    let tip = .20
+    let tax = 0.1;
+    let tip = 0.2;
     for (let i = 0; i < this.props.items.length; i++) {
       let currentPayee = this.props.items[i].props.children[2].props
         .children[4];
@@ -26,9 +24,11 @@ class PayeeSummary extends React.Component {
         .children[2];
 
       if (!total[currentPayee]) {
-        total[currentPayee] = currentAmount+(currentAmount*tax)+(currentAmount*tip);
+        total[currentPayee] =
+          currentAmount + currentAmount * tax + currentAmount * tip;
       } else {
-        total[currentPayee] += currentAmount+(currentAmount*tax)+(currentAmount*tip);
+        total[currentPayee] +=
+          currentAmount + currentAmount * tax + currentAmount * tip;
       }
     }
     return total;
@@ -40,33 +40,32 @@ class PayeeSummary extends React.Component {
       <ScrollView>
         <CardItem>
           <Content>
-          <Form>
-            <Text>Amounts Owed and Unclaimed items</Text>
-            <Text></Text>
+            <Form>
+              <Text>Amounts Owed and Unclaimed items</Text>
+              <Text />
               {Object.keys(this.totalAmount()).map((key, ind) => {
-                return key ? (                  
+                return key ? (
                   <Text key={key}>
-                    {key} needs to pay: ${this.totalAmount()[key].toFixed(2)} in total!
+                    {key} needs to pay: ${this.totalAmount()[key].toFixed(2)} in
+                    total!
                   </Text>
                 ) : (
                   this.reviewList().map(el => {
                     if (!el[4]) {
-                      return (                   
-                          <Text key={key + "hello"}>
-                            {" "}                          
-                            ⚠️{el[0]} still need(s) to be claimed!
-                          </Text>
+                      return (
+                        <Text key={key + "hello"}>
+                          {" "}
+                          ⚠️{el[0]} still need(s) to be claimed!
+                        </Text>
                       );
                     }
                   })
-                )
-                ;
+                );
               })}
             </Form>
-            <Text></Text>
+            <Text />
             <Text>Itemized List</Text>
-            <Text>          
-            </Text>
+            <Text />
             <Form>
               {this.reviewList().map((el, ind) => {
                 return (
@@ -78,9 +77,7 @@ class PayeeSummary extends React.Component {
                   </View>
                 );
               })}
-            </Form>            
-
-            
+            </Form>
           </Content>
         </CardItem>
       </ScrollView>

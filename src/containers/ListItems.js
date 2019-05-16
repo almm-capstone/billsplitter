@@ -94,7 +94,7 @@ export default class ReceiptItems extends Component {
     console.log('parsed receipt', parsedReceipt);
     this.setState({ parsedReceipt: parsedReceipt });
     setTimeout(() => this.createBill(), 5000);
-    setTimeout(() => Actions.receipt({ match: { params: { id: String(1) } } }), 5000);
+    setTimeout(() => Actions.receipt({ match: { params: { id: String(2) } } }), 5000);
   };
 
 
@@ -114,7 +114,7 @@ export default class ReceiptItems extends Component {
   // }
 
   createBill = async() => {
-    let id = 1
+    let id = 2
     let otherId = 0
     FirebaseRef.child(`receipts/${id}`)
       .set({

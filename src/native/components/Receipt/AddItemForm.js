@@ -27,7 +27,7 @@ class AddItemForm extends React.Component {
     user_claim: ""
   };
 
-  addItem = (name, price, user_claim, id) => {
+  addItem = (name, price, user_claim, id, quantity) => {
     FirebaseRef.child(
       `receipts/${this.props.receiptId}/items/${this.props.items.length}`
     ).set({

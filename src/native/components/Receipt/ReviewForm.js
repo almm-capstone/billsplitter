@@ -49,16 +49,16 @@ class ReviewForm extends React.Component {
             <Text>Amounts Owed and Unclaimed items</Text>
             <Text></Text>
               {Object.keys(this.totalAmount()).map((key, ind) => {
-                return key ? (                  
+                return key ? (
                   <Text key={key}>
                     {key} needs to pay: ${this.totalAmount()[key].toFixed(2)} in total!
                   </Text>
                 ) : (
                   this.reviewList().map(el => {
                     if (!el[4]) {
-                      return (                   
+                      return (
                           <Text key={key + "hello"}>
-                            {" "}                          
+                            {" "}
                             ⚠️{el[0]} still need(s) to be claimed!
                           </Text>
                       );
@@ -70,7 +70,7 @@ class ReviewForm extends React.Component {
             </Form>
             <Text></Text>
             <Text>Itemized List</Text>
-            <Text>          
+            <Text>
             </Text>
             <Form>
               {this.reviewList().map((el, ind) => {
@@ -83,7 +83,7 @@ class ReviewForm extends React.Component {
                   </View>
                 );
               })}
-            </Form>            
+            </Form>
 
             <View>
               <InvitationEmail

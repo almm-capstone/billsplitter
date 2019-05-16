@@ -72,7 +72,7 @@ class ReviewForm extends React.Component {
                 return (
                   <View key={ind}>
                     <Text style={styles.smText}>Item Name: {el[0]}</Text>
-                    <Text style={styles.smText}>Item Price: ${el[2].toFixed(2)}</Text>
+                    <Text style={styles.smText}>Item Price: ${Number(el[2]).toFixed(2)}</Text>
                     <Text style={styles.smText}>Item Payee: {el[4]}</Text>
                     <Text style={styles.smText}>{"\n"}</Text>
                   </View>

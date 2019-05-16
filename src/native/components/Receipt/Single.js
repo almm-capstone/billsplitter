@@ -22,7 +22,10 @@ import {
   Button,
   Icon,
   Form,
-  Input
+  Input,
+  Thumbnail,
+  Left,
+  Right,
 } from "native-base";
 import { errorMessages } from "../../../constants/messages";
 import Error from "../UI/Error";
@@ -97,17 +100,35 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   if (!receipt) return <Error content={errorMessages.receipt404} />;
 
   // Items Delete listing
+  // const items = receipt.items.map(itemObj => (
+  //   <ListItem key={itemObj.id}>
+  //     <Button rounded danger onPress={() => deleteItem(itemObj.id, receipt.id)}>
+  //       <Icon>X</Icon>
+  //     </Button>
+  //     <Text>  </Text>
+  //     <Text>
+  //       {itemObj.name} ${itemObj.price} {itemObj.user_claim}
+  //     </Text>
+  //   </ListItem>
+  // ));
+
   const items = receipt.items.map(itemObj => (
-    <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
+    <ListItem style={styles.row} thumbnail key={itemObj.id}>
+    <Left>
       <Button rounded danger onPress={() => deleteItem(itemObj.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
-      <Text> </Text>
-      <Text>
-        {itemObj.name} ${itemObj.price} {itemObj.user_claim}
-      </Text>
+    </Left>
+    <Body>
+      <Text>{itemObj.name}</Text>
+      <Text note numberOfLines={2}>{itemObj.user_claim}</Text>
+    </Body>
+    <Right>
+      <Text>${Number(itemObj.price)}</Text>
+    </Right>
     </ListItem>
   ));
+
   const users = receipt.users.map(user => (
     <ListItem key={user.id} rightIcon={{ style: { opacity: 0 } }}>
       <Button rounded onPress={() => deleteUser(user.id, receipt.id)}>
@@ -147,8 +168,10 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
       </View>
 
       <View style={styles.slide2}>
+      <Content>
         <Text style={styles.text}>Delete Items</Text>
         <List>{items}</List>
+        </Content>
       </View>
 
       <View style={styles.slide7}>
@@ -228,7 +251,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 25
+    padding: 25,
+    width: 400,
+    height: 100
   },
   slide3: {
     flex: 1,
@@ -259,6 +284,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     padding: 25
+  },
+  row: {
+    width: 300
   },
   text: {
     color: "darkcyan",

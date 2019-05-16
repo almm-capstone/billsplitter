@@ -24,8 +24,7 @@ export default class Payment extends React.Component {
       return;
     }
   };
-  render(data) {
-    console.log(data);
+  render() {
     return (
       <View style={{ marginTop: 100 }}>
         <Modal
@@ -33,9 +32,10 @@ export default class Payment extends React.Component {
           onRequestClose={() => this.setState({ showModal: false })}
         >
           <WebView
-            source={{ uri: "http://localhost:3000" }}
-            onNavigationStateChange={data => this.handleResponse(data)}
-            injectedJavaScript={`document.f1.submit()`}
+            //source={{ uri: "http://localhost:3000" }}
+            source={{ uri: "https://www.sandbox.paypal.com/us/signin" }}
+            onNavigationStateChange={res => this.handleResponse(res)}
+            //injectedJavaScript={`document.f1.submit()`}
           />
         </Modal>
         <TouchableOpacity

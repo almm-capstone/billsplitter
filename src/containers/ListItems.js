@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 const { FirebaseRef } = require('../lib/firebase.js');
 import {
   View,
-  Button,
   TextInput,
   FlatList,
   AlertIOS,
@@ -12,12 +11,17 @@ import {
   ScrollView,
 } from 'react-native';
 import {
+  Button,
   Container,
   Content,
   Card,
   CardItem,
+  Col,
+  Row,
   Body,
   H3,
+  Grid,
+  Left,
   List,
   ListItem,
   Text,
@@ -154,34 +158,42 @@ export default class ReceiptItems extends Component {
     let receipt = this.state.receipt;
     // console.log('receipt', receipt);
     const receiptItems = receipt.map(itemObj => (
-      <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
-        <Text>{itemObj}</Text>
-        <Button onPress={() => this.deleteItem(itemObj)} title="Delete" />
-      </ListItem>
+      <Content>
+        <ListItem icon key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
+          <Button light onPress={() => this.deleteItem(itemObj)}>
+            <Icon name="trash" />
+          </Button>
+          <Body>
+            <Text>{itemObj}</Text>
+          </Body>
+        </ListItem>
+      </Content>
     ));
 
     return (
       <ScrollView>
-        <Button onPress={() => this.processReceipt()} title="Process Receipt" />
         <Container>
           <Card>
             <CardItem header bordered>
-              <Text>Receipt Items</Text>
+              <Content scrollEnabled={false}>
+                <Form>
+                  <Text>Name your receipt: </Text>
+                  <Input
+                    placeholder="Enter receipt name here"
+                    onChange={this.handleChangeName}
+                  />
+                </Form>
+              </Content>
+              <Button light success onPress={() => this.processReceipt()}>
+                <Icon name="cloud-done" />
+              </Button>
             </CardItem>
             <CardItem>
               <Content>
+                <Text>Edit items</Text>
                 <List>{receiptItems}</List>
               </Content>
             </CardItem>
-            <Content>
-              <Form>
-                <Text>Name your Receipt: </Text>
-                <Input
-                  placeholder="Enter receipt name here"
-                  onChange={this.handleChangeName}
-                />
-              </Form>
-            </Content>
           </Card>
         </Container>
       </ScrollView>

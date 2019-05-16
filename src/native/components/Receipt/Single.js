@@ -1,6 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Image, ScrollView, View, Picker, TextInput, StyleSheet } from 'react-native';
+import React from "react";
+import PropTypes from "prop-types";
+import {
+  Image,
+  ScrollView,
+  View,
+  Picker,
+  TextInput,
+  StyleSheet
+} from "react-native";
 
 import {
   Container,
@@ -29,7 +36,7 @@ import axios from "axios";
 import AddUserForm from "./AddUserForm";
 import InvitationEmail from "../../../containers/InvitationEmail";
 import ReviewForm from "./ReviewForm";
-import PayeeSummary from "./PayeeSummary"
+import PayeeSummary from "./PayeeSummary";
 
 const paymentJson = async receiptId => {
   let data;
@@ -112,20 +119,18 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   ));
   // const users = receipt
 
-
   //Is Author
-  let isAuthor =  false
-  if (receipt.author === currentUser) isAuthor = true
+  let isAuthor = false;
+  if (receipt.author === currentUser) isAuthor = true;
 
   //Is On Bill
-  let isOnBill = false
+  let isOnBill = false;
 
-  receipt.users.map(userObj=> {
-    if (userObj != null){
-      if (Object.values(userObj).includes(currentUser)) isOnBill = true
+  receipt.users.map(userObj => {
+    if (userObj != null) {
+      if (Object.values(userObj).includes(currentUser)) isOnBill = true;
     }
-  })
-
+  });
 
   const totalAmount = receipt.items.reduce((accumulator, currentItem) => {
     let totalFloat = accumulator + Number(currentItem.price);
@@ -133,23 +138,16 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
     return finalTotal;
   }, 0);
 
-const authorView = (
-<Swiper
-      style={styles.wrapper}
-      loop={true}
-      index={0}
-    >
-
-    <View styles={styles.slide5}>
+  const authorView = (
+    <Swiper style={styles.wrapper} loop={true} index={0}>
+      <View styles={styles.slide5}>
         <Text style={styles.text}>Add More Users</Text>
         <AddUserForm receiptId={receipt.id} users={users} />
       </View>
 
       <View style={styles.slide2}>
         <Text style={styles.text}>Delete Items</Text>
-          <List>
-            {items}
-          </List>
+        <List>{items}</List>
       </View>
 
       <View style={styles.slide1}>
@@ -169,112 +167,98 @@ const authorView = (
         <Text>Review before closing...</Text>
         <ReviewForm items={items} users={users} />
       </View>
-
-      
     </Swiper>
-)
+  );
 
-const assignUser = (user, itemObj) => {
-  FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`)
-    .update({
-      user_claim: user,
+  const assignUser = (user, itemObj) => {
+    FirebaseRef.child(`receipts/${receiptId}/items/${itemObj}`).update({
+      user_claim: user
     });
-}
-const payeeView = (
-<Swiper
-      style={styles.wrapper}
-      loop={true}
-      index={0}
-    > 
-    <View style={styles.slide1}>
+  };
+  const payeeView = (
+    <Swiper style={styles.wrapper} loop={true} index={0}>
+      <View style={styles.slide1}>
         <Text style={styles.text}>Claim Items</Text>
 
         <List>
-        <View>
-          {receipt.items
-            .filter(item => item.user_claim === "")
-            .map(itemObj => (              
-              <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
-                <Button
-                  onPress={() =>
-                    assignUser(currentUser, itemObj.id)
-                  }
+          <View>
+            {receipt.items
+              .filter(item => item.user_claim === "")
+              .map(itemObj => (
+                <ListItem
+                  key={itemObj.id}
+                  rightIcon={{ style: { opacity: 0 } }}
                 >
-                  <Icon>+</Icon>
-                </Button>
-                <Text>
-                  {itemObj.name} ${itemObj.price}
-                </Text>
-              </ListItem>
-            ))}
-        </View>
+                  <Button onPress={() => assignUser(currentUser, itemObj.id)}>
+                    <Icon>+</Icon>
+                  </Button>
+                  <Text>
+                    {itemObj.name} ${itemObj.price}
+                  </Text>
+                </ListItem>
+              ))}
+          </View>
         </List>
       </View>
       <View>
         <Text>Review before closing...</Text>
         <PayeeSummary items={items} users={users} />
       </View>
-
-
-      
     </Swiper>
-)
-
-let toDisplay 
-if (isAuthor) toDisplay = authorView
-else if (isOnBill) toDisplay = payeeView
-else toDisplay = (<Text>This is not the bill you are looking for</Text>)
-
-  return (
-    toDisplay
   );
+
+  let toDisplay;
+  if (isAuthor) toDisplay = authorView;
+  else if (isOnBill) toDisplay = payeeView;
+  else toDisplay = <Text>This is not the bill you are looking for</Text>;
+
+  return toDisplay;
 };
 
 const styles = StyleSheet.create({
-  wrapper: {
-  },
+  wrapper: {},
   slide1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25
   },
   slide2: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25
   },
   slide3: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25
   },
   slide4: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25
   },
   slide5: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25
   },
   slide6: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 25,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 25
   },
   text: {
-    color: 'darkcyan',
+    color: "darkcyan",
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold"
   }
-})
+});
 
 ReceiptView.propTypes = {
   error: PropTypes.string,

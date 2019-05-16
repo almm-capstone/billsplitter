@@ -65,14 +65,30 @@ class ReviewForm extends React.Component {
                   this.reviewList().map(el => {
                     if (!el[4]) {
                       return (
-                        <Text key={key + "hello"}>
-                          {" "}
-                          ⚠️{el[0]} ${this.totalAmount()[key]} still need to be
-                          claimed!
-                        </Text>
+                          <Text key={key + "hello"}>
+                            {" "}
+                            ⚠️{el[0]} still need(s) to be claimed!
+                          </Text>
                       );
                     }
                   })
+                )
+                ;
+              })}
+            </Form>
+            <Text></Text>
+            <Text>Itemized List</Text>
+            <Text>
+            </Text>
+            <Form>
+              {this.reviewList().map((el, ind) => {
+                return (
+                  <View key={ind}>
+                    <Text>Item Name: {el[0]}</Text>
+                    <Text>Item Price: ${el[2].toFixed(2)}</Text>
+                    <Text>Item Payee: {el[4]}</Text>
+                    <Text>{"\n"}</Text>
+                  </View>
                 );
               })}
             </Form>

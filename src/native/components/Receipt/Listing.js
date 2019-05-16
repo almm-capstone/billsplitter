@@ -33,7 +33,6 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
   const onPress = item =>
     Actions.receipt({ match: { params: { id: String(item.id) } } });
 
-  
   return (
     <Container>
       <Content padder>
@@ -69,7 +68,7 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
                   <Text style={{ fontWeight: '800' }}>{item.title}</Text>
                   <Spacer size={15} />
                   <Button block bordered small onPress={() => onPress(item)}>
-                    <Text>View Receipt</Text>
+                    <Text>{item.body}</Text>
                   </Button>
                   <Spacer size={5} />
                 </Body>

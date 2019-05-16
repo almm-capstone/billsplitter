@@ -33,20 +33,22 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
   const onPress = item =>
     Actions.receipt({ match: { params: { id: String(item.id) } } });
 
-const receiptsToFilter = receipts.map(receipt=>{
-    if (receipt.users) return receipt.users.map(user=>{
-      if (user.email === currentUser) return receipt
-    })
-  })
+  const receiptsToFilter = receipts.map(receipt => {
+    if (receipt.users)
+      return receipt.users.map(user => {
+        if (user.email === currentUser) return receipt;
+      });
+  });
 
-  const receiptsToFlatten = receiptsToFilter.filter(receipt => receipt[0] !== undefined)
+  const receiptsToFlatten = receiptsToFilter.filter(
+    receipt => receipt[0] !== undefined,
+  );
 
   function flattener(arr) {
-    return Array.prototype.concat(...arr)
+    return Array.prototype.concat(...arr);
   }
 
-  const receiptsToShow = flattener(receiptsToFlatten)
-  
+  const receiptsToShow = flattener(receiptsToFlatten);
 
   return (
     <Container>
@@ -64,7 +66,7 @@ const receiptsToFilter = receipts.map(receipt=>{
               <CardItem cardBody>
                 <TouchableOpacity
                   onPress={() => onPress(item)}
-                  style={{ flex:1 }}
+                  style={{ flex: 1 }}
                 >
                   <Image
                     source={{ uri: item.image }}
@@ -73,8 +75,8 @@ const receiptsToFilter = receipts.map(receipt=>{
                       width: 150,
                       flex: 0,
                       borderRadius: 5,
-                      alignItems: "center",
-                      alignSelf: "center"
+                      alignItems: 'center',
+                      alignSelf: 'center',
                     }}
                   />
                 </TouchableOpacity>

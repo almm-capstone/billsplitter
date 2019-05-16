@@ -2,7 +2,6 @@ import React, { Component } from "react";
 const { FirebaseRef } = require("../lib/firebase.js");
 import {
   View,
-  Button,
   TextInput,
   FlatList,
   AlertIOS,
@@ -12,21 +11,33 @@ import {
   ScrollView
 } from "react-native";
 import {
+  Button,
   Container,
   Content,
   Card,
   CardItem,
+  Col,
+  Row,
   Body,
   H3,
+  Grid,
+  Left,
   List,
   ListItem,
   Text,
   Icon,
   Form,
+<<<<<<< HEAD
+  Input,
+} from 'native-base';
+import { Firebase } from '../lib/firebase.js';
+import { Action, Actions } from 'react-native-router-flux';
+=======
   Input
 } from "native-base";
 import { Firebase } from "../lib/firebase.js";
 import { Actions } from "react-native-router-flux";
+>>>>>>> 10c98375c36f5e7511394a3a5d9be27838ee8a64
 
 export default class ReceiptItems extends Component {
   state = {
@@ -34,6 +45,9 @@ export default class ReceiptItems extends Component {
     parsedReceipt: [],
     bill: {},
     currentUser: null,
+<<<<<<< HEAD
+    name: '',
+=======
     receiptID: 0,
     itemID: 0,
     userID: 0
@@ -53,6 +67,7 @@ export default class ReceiptItems extends Component {
     let currentUserId = 0;
     currentUserId = snapshot.val().length - 1;
     this.setState({ userID: currentUserId });
+>>>>>>> 10c98375c36f5e7511394a3a5d9be27838ee8a64
   };
 
   componentDidMount = async () => {
@@ -132,13 +147,33 @@ export default class ReceiptItems extends Component {
     );
   };
 
+  handleChangeName = e => {
+    this.setState({ name: e.nativeEvent.text });
+  };
+
+  // findId = () => {
+  //   // FirebaseRef.child('receipts').on('value', function(snapshot) {
+  //   //   return snapshot.val().length;
+  //   // });
+  //   let count = 1;
+  //   count++;
+  //   return count;
+  // }
+
+  // findOtherId = () => {
+  //   let count = -1;
+  //   count++;
+  //   return count;
+  // }
+
+
   createBill = () => {
     // add a new receipt:
     FirebaseRef.child("receipts").off("value", this.handleSetReceiptID);
     FirebaseRef.child(`receipts/${this.state.receiptID}`).set({
       id: this.state.receiptID,
       author: this.state.currentUser,
-      body: Date.now(),
+      body: this.state.name,
       image:
         "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5"
     });
@@ -169,6 +204,7 @@ export default class ReceiptItems extends Component {
         price: item.price,
         quantity: item.quantity,
         user_claim: ""
+>>>>>>> 10c98375c36f5e7511394a3a5d9be27838ee8a64
       });
     });
   };
@@ -176,23 +212,39 @@ export default class ReceiptItems extends Component {
   render() {
     let receipt = this.state.receipt;
     const receiptItems = receipt.map(itemObj => (
-      <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
-        <Text>{itemObj}</Text>
-        <Button onPress={() => this.deleteItem(itemObj)} title="Delete" />
-      </ListItem>
+      <Content>
+        <ListItem icon key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
+          <Button light onPress={() => this.deleteItem(itemObj)}>
+            <Icon name="trash" />
+          </Button>
+          <Body>
+            <Text>{itemObj}</Text>
+          </Body>
+        </ListItem>
+      </Content>
     ));
 
     return (
       <ScrollView>
-        <Button onPress={() => this.processReceipt()} title="Process Receipt" />
-
         <Container>
           <Card>
             <CardItem header bordered>
-              <Text>Receipt Items</Text>
+              <Content scrollEnabled={false}>
+                <Form>
+                  <Text>Name your receipt: </Text>
+                  <Input
+                    placeholder="Enter receipt name here"
+                    onChange={this.handleChangeName}
+                  />
+                </Form>
+              </Content>
+              <Button light success onPress={() => this.processReceipt()}>
+                <Icon name="cloud-done" />
+              </Button>
             </CardItem>
             <CardItem>
               <Content>
+                <Text>Edit items</Text>
                 <List>{receiptItems}</List>
               </Content>
             </CardItem>

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 const { FirebaseRef } = require("../../../lib/firebase.js");
-import { Content, CardItem, Text, Button, Form, Input } from "native-base";
-import { ScrollView } from "react-native";
+import { Content, CardItem, Text, Button, Form, Input, Item } from "native-base";
+import { ScrollView, StyleSheet } from "react-native";
+import Spacer from '../UI/Spacer';
 // import console = require("console");
 
 class AddUserForm extends React.Component {
@@ -26,15 +27,19 @@ class AddUserForm extends React.Component {
   render() {
     return (
       <ScrollView>
-        <CardItem>
-          <Content>
+        <Spacer size={10} />
+        <CardItem style={styles.wrapper}>
+          <Content scrollEnabled={false}>
             <Form>
-              <Text> User email :</Text>
+              <Text style={styles.text}> User email :</Text>
+              <Item rounded>
               <Input
                 placeholder="Enter your friend's email here!"
                 onChange={this.handleChangeUser}
               />
-              <Button onPress={() => this.addItem(this.state.user)}>
+              </Item>
+              <Spacer size={15} />
+              <Button rounded onPress={() => this.addItem(this.state.user)}>
                 <Text>Add User</Text>
               </Button>
             </Form>
@@ -44,5 +49,14 @@ class AddUserForm extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {},
+  text: {
+    color: "darkcyan",
+    fontSize: 30,
+    fontWeight: "bold",
+  },
+})
 
 export default AddUserForm;

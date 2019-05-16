@@ -33,6 +33,23 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
   const onPress = item =>
     Actions.receipt({ match: { params: { id: String(item.id) } } });
 
+  const receiptsToFilter = receipts.map(receipt => {
+    if (receipt.users)
+      return receipt.users.map(user => {
+        if (user.email === currentUser) return receipt;
+      });
+  });
+
+  const receiptsToFlatten = receiptsToFilter.filter(
+    receipt => receipt[0] !== undefined,
+  );
+
+  function flattener(arr) {
+    return Array.prototype.concat(...arr);
+  }
+
+  const receiptsToShow = flattener(receiptsToFlatten);
+
   return (
     <Container>
       <Content padder>
@@ -43,7 +60,7 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
 
         <FlatList
           numColumns={2}
-          data={receipts}
+          data={receiptsToShow}
           renderItem={({ item }) => (
             <Card transparent style={{ paddingHorizontal: 6 }}>
               <CardItem cardBody>
@@ -54,19 +71,19 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
                   <Image
                     source={{ uri: item.image }}
                     style={{
-                      height: 100,
-                      width: null,
-                      flex: 1,
+                      height: 150,
+                      width: 150,
+                      flex: 0,
                       borderRadius: 5,
+                      alignItems: 'center',
+                      alignSelf: 'center',
                     }}
                   />
                 </TouchableOpacity>
               </CardItem>
               <CardItem cardBody>
                 <Body>
-                  <Spacer size={10} />
-                  <Text style={{ fontWeight: '800' }}>{item.title}</Text>
-                  <Spacer size={15} />
+                  <Spacer size={5} />
                   <Button block bordered small onPress={() => onPress(item)}>
                     <Text>{item.body}</Text>
                   </Button>

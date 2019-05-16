@@ -99,10 +99,7 @@ export default class ReceiptItems extends Component {
     console.log('parsed receipt', parsedReceipt);
     this.setState({ parsedReceipt: parsedReceipt });
     setTimeout(() => this.createBill(), 5000);
-    setTimeout(
-      () => Actions.receipt({ match: { params: { id: String(1) } } }),
-      5000,
-    );
+    setTimeout(() => Actions.receipt({ match: { params: { id: String(2) } } }), 5000);
   };
 
   handleChangeName = e => {
@@ -124,16 +121,16 @@ export default class ReceiptItems extends Component {
   //   return count;
   // }
 
-  createBill = async () => {
-    let id = 1;
-    let otherId = 0;
-    FirebaseRef.child(`receipts/${id}`).set({
-      id: id,
-      author: this.state.currentUser,
-      body: this.state.name,
-      image:
-        'https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5',
-    });
+  createBill = async() => {
+    let id = 2
+    let otherId = 0
+    FirebaseRef.child(`receipts/${id}`)
+      .set({
+        id: id,
+        author: this.state.currentUser,
+        body: this.state.name
+        image: "https://i.imgur.com/LVnHSmC.png"
+      });
 
     FirebaseRef.child(`receipts/${id}/users/${otherId}`).set({
       id: otherId,

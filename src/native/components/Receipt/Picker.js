@@ -4,10 +4,11 @@ import {
   ListItem,
   Button,
   Icon,
-  Text
+  Text,
  } from 'native-base';
 import { Firebase } from '../../../lib/firebase';
 const { FirebaseRef } = require('../../../lib/firebase.js');
+import { MaterialIcons } from '@expo/vector-icons';
 
 
 class PickedUser extends Component {
@@ -25,7 +26,7 @@ class PickedUser extends Component {
     const receiptId = this.props.receiptId;
 
     const receiptUsers = receipt.users.map(user => (
-      <Picker.Item key={user.id} label={user.email} value={user.id}/>
+      <Picker.Item key={user.id} label={user.email} value={user.id} />
     ));
 
     const assignUser = (user, itemObj) => {
@@ -55,11 +56,13 @@ class PickedUser extends Component {
                   {receiptUsers}
                 </Picker>
                 <Button
+                  success
+                  rounded
                   onPress={() =>
                     assignUser(this.state.selectedUser, itemObj.id)
                   }
                 >
-                  <Icon>+</Icon>
+                  <Icon>Assign</Icon>
                 </Button>
                 <Text>
                   {itemObj.name} ${itemObj.price}

@@ -64,24 +64,24 @@ const receiptsToFilter = receipts.map(receipt=>{
               <CardItem cardBody>
                 <TouchableOpacity
                   onPress={() => onPress(item)}
-                  style={{ flex: 1 }}
+                  style={{ flex:1 }}
                 >
                   <Image
                     source={{ uri: item.image }}
                     style={{
-                      height: 100,
-                      width: null,
-                      flex: 1,
+                      height: 150,
+                      width: 150,
+                      flex: 0,
                       borderRadius: 5,
+                      alignItems: "center",
+                      alignSelf: "center"
                     }}
                   />
                 </TouchableOpacity>
               </CardItem>
               <CardItem cardBody>
                 <Body>
-                  <Spacer size={10} />
-                  <Text style={{ fontWeight: '800' }}>{item.title}</Text>
-                  <Spacer size={15} />
+                  <Spacer size={5} />
                   <Button block bordered small onPress={() => onPress(item)}>
                     <Text>{item.body}</Text>
                   </Button>

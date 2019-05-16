@@ -43,19 +43,6 @@ class ReviewForm extends React.Component {
         <CardItem>
           <Content>
             <Form>
-              {this.reviewList().map((el, ind) => {
-                return (
-                  <View key={ind}>
-                    <Text>Item Name: {el[0]}</Text>
-                    <Text>Item Price: ${el[2]}</Text>
-                    <Text>Item Payee: {el[4]}</Text>
-                    <Text>{"\n"}</Text>
-                  </View>
-                );
-              })}
-            </Form>
-
-            <Form>
               {Object.keys(this.totalAmount()).map((key, ind) => {
                 return key ? (
                   <Text key={key}>
@@ -65,21 +52,28 @@ class ReviewForm extends React.Component {
                   this.reviewList().map(el => {
                     if (!el[4]) {
                       return (
-                          <Text key={key + "hello"}>
-                            {" "}
-                            ⚠️{el[0]} still need(s) to be claimed!
-                          </Text>
+                        <Text key={key + "hello"}>
+                          {" "}
+                          ⚠️{el[0]} still need(s) to be claimed!
+                        </Text>
                       );
                     }
                   })
-                )
-                ;
+                );
               })}
             </Form>
-            <Text></Text>
+            <Text />
+            <View>
+              <InvitationEmail
+                users={this.props.users}
+                total={this.totalAmount()}
+                list={this.reviewList()}
+              />
+            </View>
+
+            <Text />
+
             <Text>Itemized List</Text>
-            <Text>
-            </Text>
             <Form>
               {this.reviewList().map((el, ind) => {
                 return (
@@ -92,14 +86,6 @@ class ReviewForm extends React.Component {
                 );
               })}
             </Form>
-
-            <View>
-              <InvitationEmail
-                users={this.props.users}
-                total={this.totalAmount()}
-                list={this.reviewList()}
-              />
-            </View>
           </Content>
         </CardItem>
       </ScrollView>

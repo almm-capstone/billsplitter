@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Content, CardItem, Text, Button, Form, Input } from "native-base";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 import InvitationEmail from "../../../containers/InvitationEmail";
-// import console = require("console");
-// import console = require("console");
-// import console = require("console");
+import Spacer from '../UI/Spacer';
+
 class ReviewForm extends React.Component {
   // console.log(
   //   "========reviewform",
@@ -42,30 +41,18 @@ class ReviewForm extends React.Component {
       <ScrollView>
         <CardItem>
           <Content>
-            <Form>
-              {this.reviewList().map((el, ind) => {
-                return (
-                  <View key={ind}>
-                    <Text>Item Name: {el[0]}</Text>
-                    <Text>Item Price: ${el[2]}</Text>
-                    <Text>Item Payee: {el[4]}</Text>
-                    <Text>{"\n"}</Text>
-                  </View>
-                );
-              })}
-            </Form>
 
             <Form>
               {Object.keys(this.totalAmount()).map((key, ind) => {
                 return key ? (
-                  <Text key={key}>
+                  <Text style={styles.text} key={key}>
                     {key} need to pay: ${this.totalAmount()[key]} in total!
                   </Text>
                 ) : (
                   this.reviewList().map(el => {
                     if (!el[4]) {
                       return (
-                          <Text key={key + "hello"}>
+                          <Text style={styles.warnText} key={key + "hello"}>
                             {" "}
                             ⚠️{el[0]} still need(s) to be claimed!
                           </Text>
@@ -77,17 +64,17 @@ class ReviewForm extends React.Component {
               })}
             </Form>
             <Text></Text>
-            <Text>Itemized List</Text>
+            <Text style={styles.text}>Itemized List</Text>
             <Text>
             </Text>
             <Form>
               {this.reviewList().map((el, ind) => {
                 return (
                   <View key={ind}>
-                    <Text>Item Name: {el[0]}</Text>
-                    <Text>Item Price: ${el[2].toFixed(2)}</Text>
-                    <Text>Item Payee: {el[4]}</Text>
-                    <Text>{"\n"}</Text>
+                    <Text style={styles.smText}>Item Name: {el[0]}</Text>
+                    <Text style={styles.smText}>Item Price: ${el[2].toFixed(2)}</Text>
+                    <Text style={styles.smText}>Item Payee: {el[4]}</Text>
+                    <Text style={styles.smText}>{"\n"}</Text>
                   </View>
                 );
               })}
@@ -106,5 +93,24 @@ class ReviewForm extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {},
+  text: {
+    color: "darkcyan",
+    fontWeight: "bold",
+    fontSize: 20,
+
+  },
+  warnText: {
+    color: "red",
+    fontWeight: "bold",
+    fontSize: 20,
+  },
+  smText: {
+    color: "darkcyan",
+    fontSize: 20,
+  },
+})
 
 export default ReviewForm;

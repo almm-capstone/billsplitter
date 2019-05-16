@@ -99,7 +99,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   // Items Delete listing
   const items = receipt.items.map(itemObj => (
     <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
-      <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
+      <Button rounded danger onPress={() => deleteItem(itemObj.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
       <Text> </Text>
@@ -110,7 +110,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   ));
   const users = receipt.users.map(user => (
     <ListItem key={user.id} rightIcon={{ style: { opacity: 0 } }}>
-      <Button onPress={() => deleteUser(user.id, receipt.id)}>
+      <Button rounded onPress={() => deleteUser(user.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
       <Text> </Text>
@@ -140,7 +140,8 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 
   const authorView = (
     <Swiper style={styles.wrapper} loop={true} index={0}>
-      <View styles={styles.slide5}>
+      <View styles={styles.slide1}>
+      <Spacer size={20} />
         <Text style={styles.text}>Add More Users</Text>
         <AddUserForm receiptId={receipt.id} users={users} />
       </View>
@@ -150,7 +151,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
         <List>{items}</List>
       </View>
 
-      <View style={styles.slide1}>
+      <View style={styles.slide7}>
         <Text style={styles.text}>Assign Items</Text>
 
         <List>
@@ -164,7 +165,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
       </View>
 
       <View>
-        <Text>Review before closing...</Text>
+        <Text style={styles.text}>Review before closing...</Text>
         <ReviewForm items={items} users={users} />
       </View>
     </Swiper>
@@ -189,7 +190,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
                   key={itemObj.id}
                   rightIcon={{ style: { opacity: 0 } }}
                 >
-                  <Button onPress={() => assignUser(currentUser, itemObj.id)}>
+                  <Button rounded onPress={() => assignUser(currentUser, itemObj.id)}>
                     <Icon>+</Icon>
                   </Button>
                   <Text>
@@ -253,10 +254,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 25
   },
+  slide7: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 25
+  },
   text: {
     color: "darkcyan",
     fontSize: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    alignSelf: "center",
   }
 });
 

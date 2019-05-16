@@ -191,6 +191,13 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
         <Text style={styles.text}>Review before closing...</Text>
         <ReviewForm items={items} users={users} />
       </View>
+
+      <View>
+        <Text style={styles.text}>Pay Now</Text>
+        <Button onPress={() => Actions.payment()}>
+          <Text>Checkout with PayPal</Text>
+        </Button>
+      </View>
     </Swiper>
   );
 

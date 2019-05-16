@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 const { FirebaseRef } = require("../../../lib/firebase.js");
-import { StyleSheet } from 'react-native';
-import Spacer from '../UI/Spacer';
+import { StyleSheet } from "react-native";
+import Spacer from "../UI/Spacer";
 
 import {
   Container,
@@ -20,17 +20,17 @@ import {
   Item
 } from "native-base";
 import { Image, ScrollView } from "react-native";
-// import console = require("console");
+
 class AddItemForm extends React.Component {
   state = {
     id: "",
     name: "",
-    price: "",
+    price: 0,
     quantity: 0,
     user_claim: ""
   };
 
-  addItem = (name, price, user_claim, id, quantity) => {
+  addItem = (name, price, quantity, user_claim, id) => {
     FirebaseRef.child(
       `receipts/${this.props.receiptId}/items/${this.props.items.length}`
     ).set({
@@ -51,13 +51,13 @@ class AddItemForm extends React.Component {
 
   handleChangePrice = e => {
     this.setState({
-      price: e.nativeEvent.text
+      price: Number(e.nativeEvent.text)
     });
   };
 
   handleChangeQuantity = e => {
     this.setState({
-      quantity: e.nativeEvent.quantity
+      quantity: Number(e.nativeEvent.text)
     });
   };
 
@@ -74,36 +74,37 @@ class AddItemForm extends React.Component {
         <CardItem>
           <Content>
             <Form>
-            <Spacer size={10} />
+              <Spacer size={10} />
               <Text style={styles.text}>Item Name :</Text>
               <Item rounded>
                 <Input
                   onChange={this.handleChangeName}
-                  placeholder='Enter item name here' />
+                  placeholder="Enter item name here"
+                />
               </Item>
               <Spacer size={10} />
               <Text style={styles.text}>Price :</Text>
               <Item rounded>
-              <Input
-                placeholder="Enter item price here"
-                onChange={this.handleChangePrice}
-              />
+                <Input
+                  placeholder="Enter item price here"
+                  onChange={this.handleChangePrice}
+                />
               </Item>
               <Spacer size={10} />
               <Text style={styles.text}>Quantity :</Text>
               <Item rounded>
-              <Input
-                placeholder="Enter quantity here"
-                onChange={this.handleChangeQuantity}
-              />
+                <Input
+                  placeholder="Enter quantity here"
+                  onChange={this.handleChangeQuantity}
+                />
               </Item>
               <Spacer size={10} />
               <Text style={styles.text}>User :</Text>
               <Item rounded>
-              <Input
-                placeholder="Enter user here"
-                onChange={this.handleChangeUser}
-              />
+                <Input
+                  placeholder="Enter user here"
+                  onChange={this.handleChangeUser}
+                />
               </Item>
               <Spacer size={10} />
 
@@ -134,8 +135,8 @@ const styles = StyleSheet.create({
   text: {
     color: "darkcyan",
     fontWeight: "bold",
-    fontSize: 20,
+    fontSize: 20
   }
-})
+});
 
 export default AddItemForm;

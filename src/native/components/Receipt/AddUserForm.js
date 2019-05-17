@@ -1,26 +1,41 @@
-import React, { Component } from "react";
-const { FirebaseRef } = require("../../../lib/firebase.js");
-import { Content, CardItem, Text, Button, Form, Input, Item } from "native-base";
-import { ScrollView, StyleSheet } from "react-native";
+import React, { Component } from 'react';
+const { FirebaseRef } = require('../../../lib/firebase.js');
+import {
+  Content,
+  CardItem,
+  Text,
+  Button,
+  Form,
+  Input,
+  Item,
+} from 'native-base';
+import { ScrollView, StyleSheet } from 'react-native';
 import Spacer from '../UI/Spacer';
 // import console = require("console");
 
 class AddUserForm extends React.Component {
   state = {
-    user: "",
-    id: 0
+    user: '',
+    id: 0,
   };
 
   addItem = user => {
     FirebaseRef.child(
-      `receipts/${this.props.receiptId}/users/${this.props.users.length}`
+      `receipts/${this.props.receiptId}/users/${this.props.users.length}`,
     ).set({ email: user, id: this.state.id });
   };
 
   handleChangeUser = e => {
     this.setState({
       user: e.nativeEvent.text,
-      id: this.props.users.length
+      id: this.props.users.length,
+    });
+  };
+
+  submitAndClear = () => {
+    this.addItem(this.state.user);
+    this.setState({
+      user: '',
     });
   };
 
@@ -33,13 +48,14 @@ class AddUserForm extends React.Component {
             <Form>
               <Text style={styles.text}> User email :</Text>
               <Item rounded>
-              <Input
-                placeholder="Enter your friend's email here!"
-                onChange={this.handleChangeUser}
-              />
+                <Input
+                  placeholder="Enter your friend's email here!"
+                  value={this.state.user}
+                  onChange={this.handleChangeUser}
+                />
               </Item>
               <Spacer size={15} />
-              <Button rounded onPress={() => this.addItem(this.state.user)}>
+              <Button rounded onPress={() => this.submitAndClear()}>
                 <Text>Add User</Text>
               </Button>
             </Form>
@@ -53,10 +69,10 @@ class AddUserForm extends React.Component {
 const styles = StyleSheet.create({
   wrapper: {},
   text: {
-    color: "darkcyan",
+    color: 'darkcyan',
     fontSize: 30,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
-})
+});
 
 export default AddUserForm;

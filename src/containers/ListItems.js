@@ -27,17 +27,10 @@ import {
   Text,
   Icon,
   Form,
-<<<<<<< HEAD
-  Input,
-} from 'native-base';
-import { Firebase } from '../lib/firebase.js';
-import { Action, Actions } from 'react-native-router-flux';
-=======
   Input
 } from "native-base";
 import { Firebase } from "../lib/firebase.js";
 import { Actions } from "react-native-router-flux";
->>>>>>> 10c98375c36f5e7511394a3a5d9be27838ee8a64
 
 export default class ReceiptItems extends Component {
   state = {
@@ -45,9 +38,7 @@ export default class ReceiptItems extends Component {
     parsedReceipt: [],
     bill: {},
     currentUser: null,
-<<<<<<< HEAD
-    name: '',
-=======
+    name: "",
     receiptID: 0,
     itemID: 0,
     userID: 0
@@ -67,7 +58,6 @@ export default class ReceiptItems extends Component {
     let currentUserId = 0;
     currentUserId = snapshot.val().length - 1;
     this.setState({ userID: currentUserId });
->>>>>>> 10c98375c36f5e7511394a3a5d9be27838ee8a64
   };
 
   componentDidMount = async () => {
@@ -166,7 +156,6 @@ export default class ReceiptItems extends Component {
   //   return count;
   // }
 
-
   createBill = () => {
     // add a new receipt:
     FirebaseRef.child("receipts").off("value", this.handleSetReceiptID);
@@ -204,7 +193,6 @@ export default class ReceiptItems extends Component {
         price: item.price,
         quantity: item.quantity,
         user_claim: ""
->>>>>>> 10c98375c36f5e7511394a3a5d9be27838ee8a64
       });
     });
   };

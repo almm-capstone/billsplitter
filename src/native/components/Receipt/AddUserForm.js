@@ -23,7 +23,6 @@ class AddUserForm extends React.Component {
     FirebaseRef.child(
       `receipts/${this.props.receiptId}/users/${this.props.users.length}`,
     ).set({ email: user, id: this.state.id });
-    this.textInput.clear();
   };
 
   handleChangeUser = e => {

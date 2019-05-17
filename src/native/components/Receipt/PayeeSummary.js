@@ -85,23 +85,6 @@ class PayeeSummary extends React.Component {
     );
   }
 }
-const styles = StyleSheet.create({
-  wrapper: {},
-  text: {
-    color: "darkcyan",
-    fontWeight: "bold",
-    fontSize: 20
-  },
-  warnText: {
-    color: "red",
-    fontWeight: "bold",
-    fontSize: 20
-  },
-  smText: {
-    color: "darkcyan",
-    fontSize: 20
-  }
-});
 
 const styles = StyleSheet.create({
   wrapper: {},

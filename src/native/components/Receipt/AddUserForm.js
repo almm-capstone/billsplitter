@@ -15,9 +15,7 @@ class AddUserForm extends React.Component {
     FirebaseRef.child(
       `receipts/${this.props.receiptId}/users/${this.props.users.length}`
     ).set({ email: user, id: this.state.id });
-    this.setState({
-      user: "",
-    });
+    this.textInput.clear();
   };
 
   handleChangeUser = e => {
@@ -37,6 +35,7 @@ class AddUserForm extends React.Component {
               <Text style={styles.text}> User email :</Text>
               <Item rounded>
               <Input
+                ref={input => { this.textInput = input }}
                 placeholder="Enter your friend's email here!"
                 onChange={this.handleChangeUser}
               />

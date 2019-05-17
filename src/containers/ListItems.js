@@ -49,11 +49,11 @@ export default class ReceiptItems extends Component {
     currentReceiptId = snapshot.val().length;
     this.setState({ receiptID: currentReceiptId });
   };
-  handleSetItemID = snapshot => {
-    let currentItemId = 0;
-    currentItemId = snapshot.val().length - 2;
-    this.setState({ itemID: currentItemId });
-  };
+  // handleSetItemID = snapshot => {
+  //   let currentItemId = 0;
+  //   currentItemId = snapshot.val().length - 2;
+  //   this.setState({ itemID: currentItemId });
+  // };
   handleSetUserID = snapshot => {
     let currentUserId = 0;
     currentUserId = snapshot.val().length - 2;
@@ -125,9 +125,12 @@ export default class ReceiptItems extends Component {
         quantity: 1,
       });
     });
-    // console.log("parsed receipt", this.state.parsedReceipt);
-    this.setState({ parsedReceipt: parsedReceipt });
-    setTimeout(() => this.createBill(), 4000);
+
+    this.setState({ parsedReceipt: parsedReceipt }, () =>
+      console.log('parsed receipt', this.state.parsedReceipt),
+    );
+    setTimeout(() => this.createBill(), 5000);
+
     setTimeout(
       () =>
         Actions.receipt({
@@ -184,16 +187,16 @@ export default class ReceiptItems extends Component {
       'value',
       this.handleSetItemID,
     );
+    let count = 0;
     this.state.parsedReceipt.forEach(item => {
-      FirebaseRef.child(
-        `receipts/${this.state.receiptID}/items/${this.state.itemID}`,
-      ).set({
-        id: this.state.itemID,
+      FirebaseRef.child(`receipts/${this.state.receiptID}/items/${count}`).set({
+        id: count,
         name: item.name,
         price: item.price,
         quantity: item.quantity,
         user_claim: '',
       });
+      count++;
     });
   };
 

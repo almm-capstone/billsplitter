@@ -3,7 +3,7 @@
   "expoServerPort": null,
   "packagerPort": null,
   "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerNgrokUrl": "https://f3-667.ashleyheestand.billsplitter.exp.direct",
+  "packagerNgrokUrl": "https://packager.f3-667.ashleyheestand.billsplitter.exp.direct",
+  "ngrokPid": 34633
 }

@@ -160,7 +160,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   }, 0);
 
   const authorView = (
-    <Swiper style={styles.wrapper} loop={true} index={0}>
+    <Swiper style={styles.wrapper} loop={false} index={0}>
       <View styles={styles.slide1}>
       <Spacer size={20} />
         <Text style={styles.text}>Add More Users</Text>
@@ -192,7 +192,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
         <ReviewForm items={items} users={users} />
       </View>
 
-      <View>
+      <View style={styles.slide2}>
         <Text style={styles.text}>Pay Now</Text>
         <Button onPress={() => Actions.payment()}>
           <Text>Checkout with PayPal</Text>
@@ -207,7 +207,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
     });
   };
   const payeeView = (
-    <Swiper style={styles.wrapper} loop={true} index={0}>
+    <Swiper style={styles.wrapper} loop={false} index={0}>
       <View style={styles.slide1}>
         <Text style={styles.text}>Claim Items</Text>
 
@@ -220,7 +220,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
                   key={itemObj.id}
                   rightIcon={{ style: { opacity: 0 } }}
                 >
-                  <Button rounded onPress={() => assignUser(currentUser, itemObj.id)}>
+                  <Button success rounded onPress={() => assignUser(currentUser, itemObj.id)}>
                     <Icon>+</Icon>
                   </Button>
                   <Text>
@@ -232,7 +232,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
         </List>
       </View>
       <View>
-        <Text>Review before closing...</Text>
+        <Text style={styles.text}>Review before closing...</Text>
         <PayeeSummary items={items} users={users} />
       </View>
     </Swiper>

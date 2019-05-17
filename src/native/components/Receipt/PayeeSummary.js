@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 const { FirebaseRef } = require("../../../lib/firebase.js");
 import { Content, CardItem, Text, Button, Form, Input } from "native-base";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, StyleSheet } from "react-native";
 import InvitationEmail from "../../../containers/InvitationEmail";
 
 class PayeeSummary extends React.Component {
@@ -41,7 +41,7 @@ class PayeeSummary extends React.Component {
         <CardItem>
           <Content>
             <Form>
-              <Text>Amounts Owed and Unclaimed items</Text>
+              <Text style={styles.text}>Amounts Owed and Unclaimed items</Text>
               <Text />
               {Object.keys(this.totalAmount()).map((key, ind) => {
                 return key ? (
@@ -53,7 +53,7 @@ class PayeeSummary extends React.Component {
                   this.reviewList().map(el => {
                     if (!el[4]) {
                       return (
-                        <Text key={key + "hello"}>
+                        <Text style={styles.warnText} key={key + "hello"}>
                           {" "}
                           ⚠️{el[0]} still need(s) to be claimed!
                         </Text>
@@ -64,15 +64,15 @@ class PayeeSummary extends React.Component {
               })}
             </Form>
             <Text />
-            <Text>Itemized List</Text>
+            <Text style={styles.text}>Itemized List</Text>
             <Text />
             <Form>
               {this.reviewList().map((el, ind) => {
                 return (
                   <View key={ind}>
-                    <Text>Item Name: {el[0]}</Text>
-                    <Text>Item Price: ${Number(el[2]).toFixed(2)}</Text>
-                    <Text>Item Payee: {el[4]}</Text>
+                    <Text style={styles.smText}>Item Name: {el[0]}</Text>
+                    <Text style={styles.smText}>Item Price: ${Number(el[2]).toFixed(2)}</Text>
+                    <Text style={styles.smText}>Item Payee: {el[4]}</Text>
                     <Text>{"\n"}</Text>
                   </View>
                 );
@@ -84,5 +84,23 @@ class PayeeSummary extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {},
+  text: {
+    color: "darkcyan",
+    fontWeight: "bold",
+    fontSize: 20
+  },
+  warnText: {
+    color: "red",
+    fontWeight: "bold",
+    fontSize: 20
+  },
+  smText: {
+    color: "darkcyan",
+    fontSize: 20
+  }
+});
 
 export default PayeeSummary;

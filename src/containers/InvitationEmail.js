@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, Button, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Button, Text } from 'native-base';
 import email from "react-native-email";
 
 export default class InvitationEmail extends React.Component {
@@ -40,12 +41,12 @@ export default class InvitationEmail extends React.Component {
       subject: "Don't forget to pay your tabs!!!",
       body: `Hey lovely,
 
-      Total Amount Summary 
+      Total Amount Summary
       ${totalSummary()} \n
 
       Here is a summary of the receipt: \n
-      ${summary()} \n      
-      
+      ${summary()} \n
+
       Have A Wonderful Day!
       `
     }).catch(console.error);
@@ -56,9 +57,12 @@ export default class InvitationEmail extends React.Component {
     return (
       <View style={styles.container}>
         <Button
-          title="Close Receipt and Send the Summary via Emails to All Payees!"
+          block
+          large
           onPress={this.handleEmail}
-        />
+        >
+        <Text>Close Receipt and Send Email</Text>
+        </Button>
       </View>
     );
   }

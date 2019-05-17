@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   ActivityIndicator,
-  Button,
   Clipboard,
   FlatList,
   Image,
@@ -9,20 +8,39 @@ import {
   Share,
   StatusBar,
   StyleSheet,
-  Text,
   TextInput,
   TouchableOpacity,
   ScrollView,
   View,
 } from 'react-native';
 import { Constants, ImagePicker, ImageManipulater, Permissions } from 'expo';
-import { Input } from 'native-base';
+import {
+  Button,
+  Container,
+  Content,
+  Card,
+  CardItem,
+  Col,
+  Row,
+  Body,
+  H3,
+  Grid,
+  Left,
+  List,
+  ListItem,
+  Text,
+  Icon,
+  Form,
+  Input,
+} from 'native-base';
 import uuid from 'uuid';
 import Environment from '../../config/environment';
 import * as firebase from 'firebase';
 import { Firebase as firebaseConfig, FirebaseRef } from '../lib/firebase';
 import { Actions } from 'react-native-router-flux';
 import ReceiptItems from './ListItems';
+import { MaterialIcons } from '@expo/vector-icons';
+import Spacer from '../../src/native/components/UI/Spacer';
 
 // firebase.initializeApp(firebaseConfig);
 
@@ -45,48 +63,41 @@ export default class NewCamera extends React.Component {
     let { image, receiptLines } = this.state;
 
     return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}
-        >
-          <View style={styles.welcomeContainer}>
-            {/* <Image
-              source={
-                __DEV__
-                  ? require('../assets/images/robot-dev.png')
-                  : require('../assets/images/robot-prod.png')
-              }
-              style={styles.welcomeImage}
-            /> */}
-          </View>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
+        <View style={styles.getStartedContainer}>
+          {image ? null : (
+            <Text style={styles.getStartedText}>
+              Pick an image from the gallery or take a photo to get started
+            </Text>
+          )}
+        </View>
+        <Spacer size={20} />
 
-          <View style={styles.getStartedContainer}>
-            {image ? null : (
-              <Text style={styles.getStartedText}>New Receipt</Text>
-            )}
-          </View>
-
-          <View style={styles.helpContainer}>
-            <Button
-              onPress={this._pickImage}
-              title="Pick an image from camera roll"
-            />
-
-            <Button onPress={this._takePhoto} title="Take a photo" />
-            {this.state.googleResponse && (
+        <Grid style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Row>
+            <Button onPress={this._pickImage}>
+              <MaterialIcons name="photo-library" size={40} color="white" />
+            </Button>
+            <Button onPress={this._takePhoto}>
+              <MaterialIcons name="camera-alt" size={40} color="white" />
+            </Button>
+          </Row>
+          {/* {this.state.googleResponse && (
               <FlatList
                 data={this.state.googleResponse.responses[0].labelAnnotations}
                 extraData={this.state}
                 keyExtractor={this._keyExtractor}
                 renderItem={({ item }) => <Text>Item: {item.description}</Text>}
               />
-            )}
-            {this._maybeRenderImage()}
-            {this._maybeRenderUploadingOverlay()}
-          </View>
-        </ScrollView>
-      </View>
+            )} */}
+          <Spacer size={20} />
+          <Row>{this._maybeRenderImage()}</Row>
+          <Row>{this._maybeRenderUploadingOverlay()}</Row>
+        </Grid>
+      </ScrollView>
     );
   }
 
@@ -126,49 +137,13 @@ export default class NewCamera extends React.Component {
     }
 
     return (
-      <View
-        style={{
-          marginTop: 20,
-          width: 250,
-          borderRadius: 3,
-          elevation: 2,
-        }}
-      >
-        <Button
-          style={{ marginBottom: 10 }}
-          onPress={() => this.submitToGoogle()}
-          title="Analyze!"
-        />
+      <View>
+        <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
+        <Button right onPress={() => this.submitToGoogle()}>
+          <Text>Analyze</Text>
+        </Button>
 
-        <View
-          style={{
-            borderTopRightRadius: 3,
-            borderTopLeftRadius: 3,
-            shadowColor: 'rgba(0,0,0,1)',
-            shadowOpacity: 0.2,
-            shadowOffset: { width: 4, height: 4 },
-            shadowRadius: 5,
-            overflow: 'hidden',
-          }}
-        >
-          <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
-        </View>
-        {/* <Text
-          onPress={this._copyToClipboard}
-          onLongPress={this._share}
-          style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-        /> */}
-
-        {/* <Text>Edit Receipt:</Text> */}
-
-        {googleResponse && (
-          <Button
-            title="Edit Receipt"
-            onPress={() => Actions.receiptItems({ items: { receiptLines } })}
-            // onLongPress={this._share}
-            style={{ paddingVertical: 10, paddingHorizontal: 10 }}
-          />
-        )}
+        {googleResponse && Actions.receiptItems({ items: { receiptLines } })}
       </View>
     );
   };
@@ -278,8 +253,8 @@ export default class NewCamera extends React.Component {
         },
       );
       let responseJson = await response.json();
-      let firstThing = responseJson.responses[0].textAnnotations[0].description;
-      console.log(firstThing);
+      let firstThing = responseJson.responses[0].textAnnotations[0].description.trim();
+      console.log('first thing', firstThing);
       this.setState({
         googleResponse: responseJson,
         receiptLines: firstThing,

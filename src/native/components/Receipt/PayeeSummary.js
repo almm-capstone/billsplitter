@@ -46,7 +46,7 @@ class PayeeSummary extends React.Component {
               {Object.keys(this.totalAmount()).map((key, ind) => {
                 return key ? (
                   <Text key={key}>
-                    {key} needs to pay: ${this.totalAmount()[key].toFixed(2)} in
+                    {key} needs to pay: ${Number(this.totalAmount()[key]).toFixed(2)} in
                     total!
                   </Text>
                 ) : (
@@ -71,7 +71,7 @@ class PayeeSummary extends React.Component {
                 return (
                   <View key={ind}>
                     <Text>Item Name: {el[0]}</Text>
-                    <Text>Item Price: ${el[2].toFixed(2)}</Text>
+                    <Text>Item Price: ${Number(el[2]).toFixed(2)}</Text>
                     <Text>Item Payee: {el[4]}</Text>
                     <Text>{"\n"}</Text>
                   </View>

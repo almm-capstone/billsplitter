@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 const { FirebaseRef } = require('../lib/firebase.js');
 import {
   View,
-  Button,
   TextInput,
   FlatList,
   AlertIOS,
@@ -12,12 +11,17 @@ import {
   ScrollView,
 } from 'react-native';
 import {
+  Button,
   Container,
   Content,
   Card,
   CardItem,
+  Col,
+  Row,
   Body,
   H3,
+  Grid,
+  Left,
   List,
   ListItem,
   Text,
@@ -26,7 +30,7 @@ import {
   Input,
 } from 'native-base';
 import { Firebase } from '../lib/firebase.js';
-import { Action, Actions } from 'react-native-router-flux'
+import { Actions } from 'react-native-router-flux';
 
 export default class ReceiptItems extends Component {
   state = {
@@ -34,12 +38,42 @@ export default class ReceiptItems extends Component {
     parsedReceipt: [],
     bill: {},
     currentUser: null,
+    name: '',
+    receiptID: 0,
+    itemID: 0,
+    userID: 0,
+  };
+
+  handleSetReceiptID = snapshot => {
+    let currentReceiptId = 0;
+    currentReceiptId = snapshot.val().length;
+    this.setState({ receiptID: currentReceiptId });
+  };
+  handleSetItemID = snapshot => {
+    let currentItemId = 0;
+    currentItemId = snapshot.val().length - 2;
+    this.setState({ itemID: currentItemId });
+  };
+  handleSetUserID = snapshot => {
+    let currentUserId = 0;
+    currentUserId = snapshot.val().length - 2;
+    this.setState({ userID: currentUserId });
   };
 
   componentDidMount = async () => {
     const { currentUser } = await Firebase.auth();
     // console.log('current user', currentUser);
     this.setState({ currentUser: currentUser.email });
+
+    FirebaseRef.child('receipts').on('value', this.handleSetReceiptID);
+    FirebaseRef.child(`receipts/${this.state.receiptID}/items`).on(
+      'value',
+      this.handleSetItemID,
+    );
+    FirebaseRef.child(`receipts/${this.state.receiptID}/users`).on(
+      'value',
+      this.handleSetUserID,
+    );
   };
 
   deleteItem = item => {
@@ -52,7 +86,7 @@ export default class ReceiptItems extends Component {
 
   processReceipt = () => {
     let receipt = this.state.receipt;
-    console.log('state', this.state);
+    //console.log("state", this.state);
     let priceArr = [];
     let itemsArr = [];
     let receiptObj = {};
@@ -91,12 +125,21 @@ export default class ReceiptItems extends Component {
         quantity: 1,
       });
     });
-    console.log('parsed receipt', parsedReceipt);
+    // console.log("parsed receipt", this.state.parsedReceipt);
     this.setState({ parsedReceipt: parsedReceipt });
-    setTimeout(() => this.createBill(), 5000);
-    setTimeout(() => Actions.receipt({ match: { params: { id: String(2) } } }), 5000);
+    setTimeout(() => this.createBill(), 4000);
+    setTimeout(
+      () =>
+        Actions.receipt({
+          match: { params: { id: String(`${this.state.receiptID}`) } },
+        }),
+      5000,
+    );
   };
 
+  handleChangeName = e => {
+    this.setState({ name: e.nativeEvent.text });
+  };
 
   // findId = () => {
   //   // FirebaseRef.child('receipts').on('value', function(snapshot) {
@@ -113,59 +156,83 @@ export default class ReceiptItems extends Component {
   //   return count;
   // }
 
-  createBill = async() => {
-    let id = 2
-    let otherId = 0
-    FirebaseRef.child(`receipts/${id}`)
-      .set({
-        id: id,
-        author: this.state.currentUser,
-        body: Date.now(),
-        image: "https://i.imgur.com/LVnHSmC.png"
-      });
+  createBill = () => {
+    // add a new receipt:
+    FirebaseRef.child('receipts').off('value', this.handleSetReceiptID);
+    FirebaseRef.child(`receipts/${this.state.receiptID}`).set({
+      id: this.state.receiptID,
+      author: this.state.currentUser,
+      body: this.state.name,
+      image:
+        'https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5',
+    });
 
-    FirebaseRef.child(`receipts/${id}/users/${otherId}`)
-      .set({
-        id: otherId,
-        email: this.state.currentUser
-      });
+    // add users to the current receipte:
+    FirebaseRef.child(`receipts/${this.state.receiptID}/users`).off(
+      'value',
+      this.handleSetUserID,
+    );
+    FirebaseRef.child(
+      `receipts/${this.state.receiptID}/users/${this.state.userID}`,
+    ).set({
+      id: this.state.userID,
+      email: this.state.currentUser,
+    });
 
-    this.state.parsedReceipt.forEach((item) => {
-      FirebaseRef.child(`receipts/${id}/items/${otherId}`)
-        .set({
-          id: otherId,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-          user_claim: '',
-        });
+    // add new items to the current receipt:
+    FirebaseRef.child(`receipts/${this.state.receiptID}/items`).off(
+      'value',
+      this.handleSetItemID,
+    );
+    this.state.parsedReceipt.forEach(item => {
+      FirebaseRef.child(
+        `receipts/${this.state.receiptID}/items/${this.state.itemID}`,
+      ).set({
+        id: this.state.itemID,
+        name: item.name,
+        price: item.price,
+        quantity: item.quantity,
+        user_claim: '',
+      });
     });
   };
 
   render() {
-    // console.log(this.findId(), 'IN FIND ID')
-    let { items } = this.props;
-    // console.log('props', items.receiptLines);
     let receipt = this.state.receipt;
-    // console.log('receipt', receipt);
     const receiptItems = receipt.map(itemObj => (
-      <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
-        <Text>{itemObj}</Text>
-        <Button onPress={() => this.deleteItem(itemObj)} title="Delete" />
-      </ListItem>
+      <Content>
+        <ListItem icon key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
+          <Button light onPress={() => this.deleteItem(itemObj)}>
+            <Icon name="trash" />
+          </Button>
+          <Body>
+            <Text>{itemObj}</Text>
+          </Body>
+        </ListItem>
+      </Content>
     ));
 
     return (
       <ScrollView>
-        <Button onPress={() => this.processReceipt()} title="Process Receipt" />
-
         <Container>
           <Card>
             <CardItem header bordered>
-              <Text>Receipt Items</Text>
+              <Content scrollEnabled={false}>
+                <Form>
+                  <Text>Name your receipt: </Text>
+                  <Input
+                    placeholder="Enter receipt name here"
+                    onChange={this.handleChangeName}
+                  />
+                </Form>
+              </Content>
+              <Button light success onPress={() => this.processReceipt()}>
+                <Icon name="cloud-done" />
+              </Button>
             </CardItem>
             <CardItem>
               <Content>
+                <Text>Edit items</Text>
                 <List>{receiptItems}</List>
               </Content>
             </CardItem>

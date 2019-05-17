@@ -22,7 +22,10 @@ import {
   Button,
   Icon,
   Form,
-  Input
+  Input,
+  Thumbnail,
+  Left,
+  Right,
 } from "native-base";
 import { errorMessages } from "../../../constants/messages";
 import Error from "../UI/Error";
@@ -97,20 +100,38 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   if (!receipt) return <Error content={errorMessages.receipt404} />;
 
   // Items Delete listing
+  // const items = receipt.items.map(itemObj => (
+  //   <ListItem key={itemObj.id}>
+  //     <Button rounded danger onPress={() => deleteItem(itemObj.id, receipt.id)}>
+  //       <Icon>X</Icon>
+  //     </Button>
+  //     <Text>  </Text>
+  //     <Text>
+  //       {itemObj.name} ${itemObj.price} {itemObj.user_claim}
+  //     </Text>
+  //   </ListItem>
+  // ));
+
   const items = receipt.items.map(itemObj => (
-    <ListItem key={itemObj.id} rightIcon={{ style: { opacity: 0 } }}>
-      <Button onPress={() => deleteItem(itemObj.id, receipt.id)}>
+    <ListItem style={styles.row} thumbnail key={itemObj.id}>
+    <Left>
+      <Button rounded danger onPress={() => deleteItem(itemObj.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
-      <Text> </Text>
-      <Text>
-        {itemObj.name} ${itemObj.price} {itemObj.user_claim}
-      </Text>
+    </Left>
+    <Body>
+      <Text>{itemObj.name}</Text>
+      <Text note numberOfLines={2}>{itemObj.user_claim}</Text>
+    </Body>
+    <Right>
+      <Text>${Number(itemObj.price)}</Text>
+    </Right>
     </ListItem>
   ));
+
   const users = receipt.users.map(user => (
     <ListItem key={user.id} rightIcon={{ style: { opacity: 0 } }}>
-      <Button onPress={() => deleteUser(user.id, receipt.id)}>
+      <Button rounded onPress={() => deleteUser(user.id, receipt.id)}>
         <Icon>X</Icon>
       </Button>
       <Text> </Text>
@@ -140,17 +161,20 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 
   const authorView = (
     <Swiper style={styles.wrapper} loop={true} index={0}>
-      <View styles={styles.slide5}>
+      <View styles={styles.slide1}>
+      <Spacer size={20} />
         <Text style={styles.text}>Add More Users</Text>
         <AddUserForm receiptId={receipt.id} users={users} />
       </View>
 
       <View style={styles.slide2}>
+      <Content>
         <Text style={styles.text}>Delete Items</Text>
         <List>{items}</List>
+        </Content>
       </View>
 
-      <View style={styles.slide1}>
+      <View style={styles.slide7}>
         <Text style={styles.text}>Assign Items</Text>
 
         <List>
@@ -164,8 +188,15 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
       </View>
 
       <View>
-        <Text>Review before closing...</Text>
+        <Text style={styles.text}>Review before closing...</Text>
         <ReviewForm items={items} users={users} />
+      </View>
+
+      <View>
+        <Text style={styles.text}>Pay Now</Text>
+        <Button onPress={() => Actions.payment()}>
+          <Text>Checkout with PayPal</Text>
+        </Button>
       </View>
     </Swiper>
   );
@@ -189,7 +220,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
                   key={itemObj.id}
                   rightIcon={{ style: { opacity: 0 } }}
                 >
-                  <Button onPress={() => assignUser(currentUser, itemObj.id)}>
+                  <Button rounded onPress={() => assignUser(currentUser, itemObj.id)}>
                     <Icon>+</Icon>
                   </Button>
                   <Text>
@@ -227,7 +258,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    padding: 25
+    padding: 25,
+    width: 400,
+    height: 100
   },
   slide3: {
     flex: 1,
@@ -253,10 +286,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 25
   },
+  slide7: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-between",
+    padding: 25
+  },
+  row: {
+    width: 300
+  },
   text: {
     color: "darkcyan",
     fontSize: 30,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    alignSelf: "center",
   }
 });
 

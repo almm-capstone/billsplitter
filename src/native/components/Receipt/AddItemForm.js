@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 const { FirebaseRef } = require("../../../lib/firebase.js");
+import { StyleSheet } from "react-native";
+import Spacer from "../UI/Spacer";
 
 import {
   Container,
@@ -14,20 +16,21 @@ import {
   Button,
   Icon,
   Form,
-  Input
+  Input,
+  Item
 } from "native-base";
 import { Image, ScrollView } from "react-native";
-// import console = require("console");
+
 class AddItemForm extends React.Component {
   state = {
     id: "",
     name: "",
-    price: "",
+    price: 0,
     quantity: 0,
     user_claim: ""
   };
 
-  addItem = (name, price, user_claim, id, quantity) => {
+  addItem = (name, price, quantity, user_claim, id) => {
     FirebaseRef.child(
       `receipts/${this.props.receiptId}/items/${this.props.items.length}`
     ).set({
@@ -48,13 +51,13 @@ class AddItemForm extends React.Component {
 
   handleChangePrice = e => {
     this.setState({
-      price: e.nativeEvent.text
+      price: Number(e.nativeEvent.text)
     });
   };
 
   handleChangeQuantity = e => {
     this.setState({
-      quantity: e.nativeEvent.quantity
+      quantity: Number(e.nativeEvent.text)
     });
   };
 
@@ -67,31 +70,46 @@ class AddItemForm extends React.Component {
   render() {
     return (
       <ScrollView>
+        <Spacer size={10} />
         <CardItem>
           <Content>
             <Form>
-              <Text>Item Name :</Text>
-              <Input
-                placeholder="Enter item name here"
-                onChange={this.handleChangeName}
-              />
-              <Text>Price :</Text>
-              <Input
-                placeholder="Enter item price here"
-                onChange={this.handleChangePrice}
-              />
-              <Text>Quantity :</Text>
-              <Input
-                placeholder="Enter quantity here"
-                onChange={this.handleChangeQuantity}
-              />
-              <Text>User</Text>
-              <Input
-                placeholder="Enter user here"
-                onChange={this.handleChangeUser}
-              />
+              <Spacer size={10} />
+              <Text style={styles.text}>Item Name :</Text>
+              <Item rounded>
+                <Input
+                  onChange={this.handleChangeName}
+                  placeholder="Enter item name here"
+                />
+              </Item>
+              <Spacer size={10} />
+              <Text style={styles.text}>Price :</Text>
+              <Item rounded>
+                <Input
+                  placeholder="Enter item price here"
+                  onChange={this.handleChangePrice}
+                />
+              </Item>
+              <Spacer size={10} />
+              <Text style={styles.text}>Quantity :</Text>
+              <Item rounded>
+                <Input
+                  placeholder="Enter quantity here"
+                  onChange={this.handleChangeQuantity}
+                />
+              </Item>
+              <Spacer size={10} />
+              <Text style={styles.text}>User :</Text>
+              <Item rounded>
+                <Input
+                  placeholder="Enter user here"
+                  onChange={this.handleChangeUser}
+                />
+              </Item>
+              <Spacer size={10} />
 
               <Button
+                rounded
                 onPress={() =>
                   this.addItem(
                     this.state.name,
@@ -111,5 +129,14 @@ class AddItemForm extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {},
+  text: {
+    color: "darkcyan",
+    fontWeight: "bold",
+    fontSize: 20
+  }
+});
 
 export default AddItemForm;

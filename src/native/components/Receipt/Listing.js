@@ -67,8 +67,7 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
                 <TouchableOpacity
                   onPress={() => onPress(item)}
                   style={{ flex: 1 }}
-                >
-                </TouchableOpacity>
+                />
               </CardItem>
               <CardItem cardBody>
                 <Body>

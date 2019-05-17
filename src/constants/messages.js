@@ -19,11 +19,6 @@ export const errorMessages = {
   missingPassword: 'Password is missing',
   passwordsDontMatch: 'Passwords do not match',
 
-  // Recipes
-  recipe404: 'Recipe not found',
-  missingMealId: 'Missing meal definition',
-
- // Receipts
- receipt404: 'Receipt not found',
+  // Receipts
+  receipt404: 'Receipt not found',
 };
-

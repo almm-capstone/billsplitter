@@ -25,7 +25,7 @@ import {
   Input,
   Thumbnail,
   Left,
-  Right,
+  Right
 } from "native-base";
 import { errorMessages } from "../../../constants/messages";
 import Error from "../UI/Error";
@@ -114,18 +114,24 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 
   const items = receipt.items.map(itemObj => (
     <ListItem style={styles.row} thumbnail key={itemObj.id}>
-    <Left>
-      <Button rounded danger onPress={() => deleteItem(itemObj.id, receipt.id)}>
-        <Icon>X</Icon>
-      </Button>
-    </Left>
-    <Body>
-      <Text>{itemObj.name}</Text>
-      <Text note numberOfLines={2}>{itemObj.user_claim}</Text>
-    </Body>
-    <Right>
-      <Text>${Number(itemObj.price)}</Text>
-    </Right>
+      <Left>
+        <Button
+          rounded
+          danger
+          onPress={() => deleteItem(itemObj.id, receipt.id)}
+        >
+          <Icon>X</Icon>
+        </Button>
+      </Left>
+      <Body>
+        <Text>{itemObj.name}</Text>
+        <Text note numberOfLines={2}>
+          {itemObj.user_claim}
+        </Text>
+      </Body>
+      <Right>
+        <Text>${Number(itemObj.price)}</Text>
+      </Right>
     </ListItem>
   ));
 
@@ -160,17 +166,17 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
   }, 0);
 
   const authorView = (
-    <Swiper style={styles.wrapper} loop={true} index={0}>
+    <Swiper style={styles.wrapper} loop={false} index={0}>
       <View styles={styles.slide1}>
-      <Spacer size={20} />
+        <Spacer size={20} />
         <Text style={styles.text}>Add More Users</Text>
         <AddUserForm receiptId={receipt.id} users={users} />
       </View>
 
       <View style={styles.slide2}>
-      <Content>
-        <Text style={styles.text}>Delete Items</Text>
-        <List>{items}</List>
+        <Content>
+          <Text style={styles.text}>Delete Items</Text>
+          <List>{items}</List>
         </Content>
       </View>
 
@@ -189,7 +195,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
 
       <View>
         <Text style={styles.text}>Review before closing...</Text>
-        <ReviewForm items={items} users={users} />
+        <ReviewForm items={items} users={users} receiptId={receipt.id} />
       </View>
 
       <View>
@@ -220,7 +226,10 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
                   key={itemObj.id}
                   rightIcon={{ style: { opacity: 0 } }}
                 >
-                  <Button rounded onPress={() => assignUser(currentUser, itemObj.id)}>
+                  <Button
+                    rounded
+                    onPress={() => assignUser(currentUser, itemObj.id)}
+                  >
                     <Icon>+</Icon>
                   </Button>
                   <Text>
@@ -233,7 +242,7 @@ const ReceiptView = ({ error, receipts, receiptId, currentUser }) => {
       </View>
       <View>
         <Text>Review before closing...</Text>
-        <PayeeSummary items={items} users={users} />
+        <PayeeSummary items={items} users={users} receiptId={receipt.id} />
       </View>
     </Swiper>
   );
@@ -299,7 +308,7 @@ const styles = StyleSheet.create({
     color: "darkcyan",
     fontSize: 30,
     fontWeight: "bold",
-    alignSelf: "center",
+    alignSelf: "center"
   }
 });
 

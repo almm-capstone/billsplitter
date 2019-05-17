@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-const { FirebaseRef } = require("../../../lib/firebase.js");
-import { StyleSheet } from "react-native";
-import Spacer from "../UI/Spacer";
+import React, { Component } from 'react';
+const { FirebaseRef } = require('../../../lib/firebase.js');
+import { StyleSheet } from 'react-native';
+import Spacer from '../UI/Spacer';
 
 import {
   Container,
@@ -17,53 +17,69 @@ import {
   Icon,
   Form,
   Input,
-  Item
-} from "native-base";
-import { Image, ScrollView } from "react-native";
+  Item,
+} from 'native-base';
+import { Image, ScrollView } from 'react-native';
 
 class AddItemForm extends React.Component {
   state = {
-    id: "",
-    name: "",
+    id: '',
+    name: '',
     price: 0,
     quantity: 0,
-    user_claim: ""
+    user_claim: '',
   };
 
   addItem = (name, price, quantity, user_claim, id) => {
     FirebaseRef.child(
-      `receipts/${this.props.receiptId}/items/${this.props.items.length}`
+      `receipts/${this.props.receiptId}/items/${this.props.items.length}`,
     ).set({
       name,
       price,
       quantity,
       user_claim,
-      id
+      id,
     });
   };
 
   handleChangeName = e => {
     this.setState({
       name: e.nativeEvent.text,
-      id: `${this.props.items.length}`
+      id: `${this.props.items.length}`,
     });
   };
 
   handleChangePrice = e => {
     this.setState({
-      price: Number(e.nativeEvent.text)
+      price: Number(e.nativeEvent.text),
     });
   };
 
   handleChangeQuantity = e => {
     this.setState({
-      quantity: Number(e.nativeEvent.text)
+      quantity: Number(e.nativeEvent.text),
     });
   };
 
   handleChangeUser = e => {
     this.setState({
-      user_claim: e.nativeEvent.text
+      user_claim: e.nativeEvent.text,
+    });
+  };
+
+  submitAndClear = () => {
+    this.addItem(
+      this.state.name,
+      this.state.price,
+      this.state.quantity,
+      this.state.user_claim,
+      this.state.id,
+    );
+    this.setState({
+      name: '',
+      price: '',
+      quantity: '',
+      user_claim: '',
     });
   };
 
@@ -79,6 +95,7 @@ class AddItemForm extends React.Component {
               <Item rounded>
                 <Input
                   onChange={this.handleChangeName}
+                  value={this.state.name}
                   placeholder="Enter item name here"
                 />
               </Item>
@@ -87,6 +104,7 @@ class AddItemForm extends React.Component {
               <Item rounded>
                 <Input
                   placeholder="Enter item price here"
+                  value={this.state.price}
                   onChange={this.handleChangePrice}
                 />
               </Item>
@@ -95,6 +113,7 @@ class AddItemForm extends React.Component {
               <Item rounded>
                 <Input
                   placeholder="Enter quantity here"
+                  value={this.state.quantity}
                   onChange={this.handleChangeQuantity}
                 />
               </Item>
@@ -103,23 +122,13 @@ class AddItemForm extends React.Component {
               <Item rounded>
                 <Input
                   placeholder="Enter user here"
+                  value={this.state.user_claim}
                   onChange={this.handleChangeUser}
                 />
               </Item>
               <Spacer size={10} />
 
-              <Button
-                rounded
-                onPress={() =>
-                  this.addItem(
-                    this.state.name,
-                    this.state.price,
-                    this.state.quantity,
-                    this.state.user_claim,
-                    this.state.id
-                  )
-                }
-              >
+              <Button rounded onPress={() => this.submitAndClear()}>
                 <Text>Add Item</Text>
               </Button>
             </Form>
@@ -133,10 +142,10 @@ class AddItemForm extends React.Component {
 const styles = StyleSheet.create({
   wrapper: {},
   text: {
-    color: "darkcyan",
-    fontWeight: "bold",
-    fontSize: 20
-  }
+    color: 'darkcyan',
+    fontWeight: 'bold',
+    fontSize: 20,
+  },
 });
 
 export default AddItemForm;

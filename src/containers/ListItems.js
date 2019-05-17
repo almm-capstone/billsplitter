@@ -27,17 +27,10 @@ import {
   Text,
   Icon,
   Form,
-<<<<<<< HEAD
   Input,
 } from 'native-base';
 import { Firebase } from '../lib/firebase.js';
-import { Action, Actions } from 'react-native-router-flux';
-=======
-  Input
-} from "native-base";
-import { Firebase } from "../lib/firebase.js";
-import { Actions } from "react-native-router-flux";
->>>>>>> 4a7c07e0a9d6b3329849208fc00447799b1fc373
+import { Actions } from 'react-native-router-flux';
 
 export default class ReceiptItems extends Component {
   state = {
@@ -45,11 +38,7 @@ export default class ReceiptItems extends Component {
     parsedReceipt: [],
     bill: {},
     currentUser: null,
-<<<<<<< HEAD
     name: '',
-=======
-    name: "",
->>>>>>> 4a7c07e0a9d6b3329849208fc00447799b1fc373
     receiptID: 0,
     itemID: 0,
     userID: 0,
@@ -203,11 +192,7 @@ export default class ReceiptItems extends Component {
         name: item.name,
         price: item.price,
         quantity: item.quantity,
-<<<<<<< HEAD
         user_claim: '',
-=======
-        user_claim: ""
->>>>>>> 4a7c07e0a9d6b3329849208fc00447799b1fc373
       });
     });
   };

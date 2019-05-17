@@ -144,13 +144,7 @@ export default class NewCamera extends React.Component {
           </Button>
         </Row>
         <Row>
-          {googleResponse && (
-            <Button
-              onPress={() => Actions.receiptItems({ items: { receiptLines } })}
-            >
-              <Text>Edit Receipt</Text>
-            </Button>
-          )}
+          {googleResponse && Actions.receiptItems({ items: { receiptLines } })}
         </Row>
         <Row>
           <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />

@@ -44,7 +44,7 @@ class ReviewForm extends React.Component {
             <Form>
               {Object.keys(this.totalAmount()).map((key, ind) => {
                 return key ? (
-                  <Text style={styles.text} key={key}>
+                  <Text key={key}>
                     {key} need to pay: ${this.totalAmount()[key]} in total!
                   </Text>
                 ) : (
@@ -72,7 +72,7 @@ class ReviewForm extends React.Component {
 
             <Text />
 
-            <Text>Itemized List</Text>
+            <Text style={styles.text}>Itemized List</Text>
             <Text />
             <Text style={styles.text}>Itemized List</Text>
             <Text />
@@ -85,7 +85,7 @@ class ReviewForm extends React.Component {
                       Item Price: ${Number(el[2]).toFixed(2)}
                     </Text>
                     <Text style={styles.smText}>Item Payee: {el[4]}</Text>
-                    <Text style={styles.smText}>{"\n"}</Text>
+                    <Text>{"\n"}</Text>
                   </View>
                 );
               })}

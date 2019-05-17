@@ -85,6 +85,7 @@ class PayeeSummary extends React.Component {
     );
   }
 }
+
 const styles = StyleSheet.create({
   wrapper: {},
   text: {

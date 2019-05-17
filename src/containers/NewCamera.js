@@ -75,17 +75,17 @@ export default class NewCamera extends React.Component {
           )}
         </View>
         <Spacer size={20} />
-        <Container>
-          <Grid style={{ justifyContent: 'center', alignItems: 'center' }}>
-            <Row>
-              <Button onPress={this._pickImage}>
-                <MaterialIcons name="photo-library" size={40} color="white" />
-              </Button>
-              <Button onPress={this._takePhoto}>
-                <MaterialIcons name="camera-alt" size={40} color="white" />
-              </Button>
-            </Row>
-            {/* {this.state.googleResponse && (
+
+        <Grid style={{ justifyContent: 'center', alignItems: 'center' }}>
+          <Row>
+            <Button onPress={this._pickImage}>
+              <MaterialIcons name="photo-library" size={40} color="white" />
+            </Button>
+            <Button onPress={this._takePhoto}>
+              <MaterialIcons name="camera-alt" size={40} color="white" />
+            </Button>
+          </Row>
+          {/* {this.state.googleResponse && (
               <FlatList
                 data={this.state.googleResponse.responses[0].labelAnnotations}
                 extraData={this.state}
@@ -93,10 +93,10 @@ export default class NewCamera extends React.Component {
                 renderItem={({ item }) => <Text>Item: {item.description}</Text>}
               />
             )} */}
-            <Row>{this._maybeRenderImage()}</Row>
-            <Row>{this._maybeRenderUploadingOverlay()}</Row>
-          </Grid>
-        </Container>
+          <Spacer size={20} />
+          <Row>{this._maybeRenderImage()}</Row>
+          <Row>{this._maybeRenderUploadingOverlay()}</Row>
+        </Grid>
       </ScrollView>
     );
   }
@@ -138,17 +138,12 @@ export default class NewCamera extends React.Component {
 
     return (
       <View>
-        <Row>
-          <Button center onPress={() => this.submitToGoogle()}>
-            <Text>Analyze</Text>
-          </Button>
-        </Row>
-        <Row>
-          {googleResponse && Actions.receiptItems({ items: { receiptLines } })}
-        </Row>
-        <Row>
-          <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
-        </Row>
+        <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
+        <Button right onPress={() => this.submitToGoogle()}>
+          <Text>Analyze</Text>
+        </Button>
+
+        {googleResponse && Actions.receiptItems({ items: { receiptLines } })}
       </View>
     );
   };

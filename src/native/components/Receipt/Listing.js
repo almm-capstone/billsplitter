@@ -54,8 +54,8 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
     <Container>
       <Content padder>
         <Header
-          title="All Receipts"
-          content="This is a listing of all receipts"
+          title="Receipts"
+          content="These are receipts you are assigned to"
         />
 
         <FlatList
@@ -68,17 +68,6 @@ const ReceiptListing = ({ error, loading, receipts, reFetch, currentUser }) => {
                   onPress={() => onPress(item)}
                   style={{ flex: 1 }}
                 >
-                  <Image
-                    source={{ uri: item.image }}
-                    style={{
-                      height: 150,
-                      width: 150,
-                      flex: 0,
-                      borderRadius: 5,
-                      alignItems: 'center',
-                      alignSelf: 'center',
-                    }}
-                  />
                 </TouchableOpacity>
               </CardItem>
               <CardItem cardBody>

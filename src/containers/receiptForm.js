@@ -20,6 +20,7 @@ const addBill = (author, body, image, title, items, users) => {
     title,
     items,
     users,
+    status,
   });
 };
 
@@ -38,6 +39,7 @@ class ReceiptForm extends Component {
     items: [], //{ price: “”, name: [], user_claim: “” },
     users: [],
     switchValue: 0,
+    status: 'Open'
   };
 
   handleChangeAuthor = e => {

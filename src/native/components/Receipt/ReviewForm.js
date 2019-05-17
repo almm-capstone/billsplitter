@@ -10,21 +10,30 @@ class ReviewForm extends React.Component {
   //   "========reviewform",
   //   this.props.items[0].props.children[2].props.children
   // );
-  reviewList = () => {
-    let result = [];
-    for (let i = 0; i < this.props.items.length; i++) {
-      result.push(this.props.items[i].props.children[2].props.children);
-    }
-    return result;
+
+  constructor() {
+    super();
+    this.state = {
+      items: []
+    };
+  }
+
+  handleSetItems = snapshot => {
+    this.setState({ items: snapshot.val().items });
   };
+
+  componentDidMount() {
+    FirebaseRef.child(`receipts/${this.props.receiptId}`).on(
+      "value",
+      this.handleSetItems
+    );
+  }
 
   totalAmount = () => {
     let total = {};
-    for (let i = 0; i < this.props.items.length; i++) {
-      let currentPayee = this.props.items[i].props.children[2].props
-        .children[4];
-      let currentAmount = this.props.items[i].props.children[2].props
-        .children[2];
+    for (let i = 0; i < this.state.items.length; i++) {
+      let currentPayee = this.state.items[i].user_claim;
+      let currentAmount = this.state.items[i].price;
 
       if (!total[currentPayee]) {
         total[currentPayee] = currentAmount;
@@ -36,60 +45,54 @@ class ReviewForm extends React.Component {
   };
 
   render() {
-    //console.log("HELLO THERE", this.totalAmount());
+    // console.log("HELLO THERE. IAM ITEMS", this.state.items);
     return (
       <ScrollView>
         <CardItem>
           <Content>
             <Form>
-              {Object.keys(this.totalAmount()).map((key, ind) => {
-                return key ? (
-                  <Text key={key}>
-                    {key} need to pay: ${this.totalAmount()[key]} in total!
+              {this.state.items.map((item, ind) => {
+                return item.user_claim ? (
+                  <Text style={styles.text} key={ind}>
+                    {item.user_claim} needs to pay: $
+                    {this.totalAmount()[item.user_claim]} in total
                   </Text>
                 ) : (
-                  this.reviewList().map(el => {
-                    if (!el[4]) {
-                      return (
-                        <Text style={styles.warnText} key={key + "hello"}>
-                          {" "}
-                          ⚠️{el[0]} still need(s) to be claimed!
-                        </Text>
-                      );
-                    }
-                  })
+                  <Text style={styles.warnText} key={ind}>
+                    ⚠️{item.name} still needs to be claimed!
+                  </Text>
                 );
               })}
             </Form>
             <Text />
-            <View>
-              <InvitationEmail
-                users={this.props.users}
-                total={this.totalAmount()}
-                list={this.reviewList()}
-              />
-            </View>
-
-            <Text />
-
-            <Text style={styles.text}>Itemized List</Text>
+            <Text style={styles.text}>=========================</Text>
             <Text />
             <Text style={styles.text}>Itemized List</Text>
             <Text />
             <Form>
-              {this.reviewList().map((el, ind) => {
+              {this.state.items.map((el, ind) => {
                 return (
                   <View key={ind}>
-                    <Text style={styles.smText}>Item Name: {el[0]}</Text>
+                    <Text style={styles.smText}>Item Name: {el.name}</Text>
                     <Text style={styles.smText}>
-                      Item Price: ${Number(el[2]).toFixed(2)}
+                      Item Price: ${Number(el.price).toFixed(2)}
                     </Text>
-                    <Text style={styles.smText}>Item Payee: {el[4]}</Text>
-                    <Text>{"\n"}</Text>
+                    <Text style={styles.smText}>
+                      Item Payee: {el.user_claim}
+                    </Text>
+                    <Text style={styles.smText}>{"\n"}</Text>
                   </View>
                 );
               })}
             </Form>
+
+            <View>
+              {this.state.item}
+              <InvitationEmail
+                items={this.state.items}
+                summary={this.totalAmount}
+              />
+            </View>
           </Content>
         </CardItem>
       </ScrollView>

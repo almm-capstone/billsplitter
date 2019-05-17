@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-const { FirebaseRef } = require('../lib/firebase.js');
+import React, { Component } from "react";
+const { FirebaseRef } = require("../lib/firebase.js");
 import {
   View,
   TextInput,
@@ -8,8 +8,8 @@ import {
   StyleSheet,
   TouchableHighlight,
   Switch,
-  ScrollView,
-} from 'react-native';
+  ScrollView
+} from "react-native";
 import {
   Button,
   Container,
@@ -27,21 +27,21 @@ import {
   Text,
   Icon,
   Form,
-  Input,
-} from 'native-base';
-import { Firebase } from '../lib/firebase.js';
-import { Actions } from 'react-native-router-flux';
+  Input
+} from "native-base";
+import { Firebase } from "../lib/firebase.js";
+import { Actions } from "react-native-router-flux";
 
 export default class ReceiptItems extends Component {
   state = {
-    receipt: this.props.items.receiptLines.split('\n'),
+    receipt: this.props.items.receiptLines.split("\n"),
     parsedReceipt: [],
     bill: {},
     currentUser: null,
-    name: '',
+    name: "",
     receiptID: 0,
     itemID: 0,
-    userID: 0,
+    userID: 0
   };
 
   handleSetReceiptID = snapshot => {
@@ -65,14 +65,14 @@ export default class ReceiptItems extends Component {
     // console.log('current user', currentUser);
     this.setState({ currentUser: currentUser.email });
 
-    FirebaseRef.child('receipts').on('value', this.handleSetReceiptID);
+    FirebaseRef.child("receipts").on("value", this.handleSetReceiptID);
     FirebaseRef.child(`receipts/${this.state.receiptID}/items`).on(
-      'value',
-      this.handleSetItemID,
+      "value",
+      this.handleSetItemID
     );
     FirebaseRef.child(`receipts/${this.state.receiptID}/users`).on(
-      'value',
-      this.handleSetUserID,
+      "value",
+      this.handleSetUserID
     );
   };
 
@@ -102,14 +102,14 @@ export default class ReceiptItems extends Component {
       }
     });
     itemsArr.forEach((ele, idx) => {
-      const lastSpaceIdx = ele.lastIndexOf(' ');
+      const lastSpaceIdx = ele.lastIndexOf(" ");
       if (ele.slice(-3).match(regex)) {
         priceArr.splice(
           idx,
           0,
           isNaN(Number(ele.slice(lastSpaceIdx + 1)))
             ? 999.99
-            : Number(ele.slice(lastSpaceIdx + 1)),
+            : Number(ele.slice(lastSpaceIdx + 1))
         );
       }
     });
@@ -117,23 +117,23 @@ export default class ReceiptItems extends Component {
       receiptObj[idx] = {
         name: itemsArr[idx],
         price: price,
-        quantity: 1,
+        quantity: 1
       };
       parsedReceipt.push({
         name: itemsArr[idx],
         price: price,
-        quantity: 1,
+        quantity: 1
       });
     });
     // console.log("parsed receipt", this.state.parsedReceipt);
     this.setState({ parsedReceipt: parsedReceipt });
-    setTimeout(() => this.createBill(), 4000);
+    setTimeout(() => this.createBill(), 5000);
     setTimeout(
       () =>
         Actions.receipt({
-          match: { params: { id: String(`${this.state.receiptID}`) } },
+          match: { params: { id: String(`${this.state.receiptID}`) } }
         }),
-      5000,
+      5000
     );
   };
 
@@ -158,41 +158,41 @@ export default class ReceiptItems extends Component {
 
   createBill = () => {
     // add a new receipt:
-    FirebaseRef.child('receipts').off('value', this.handleSetReceiptID);
+    FirebaseRef.child("receipts").off("value", this.handleSetReceiptID);
     FirebaseRef.child(`receipts/${this.state.receiptID}`).set({
       id: this.state.receiptID,
       author: this.state.currentUser,
       body: this.state.name,
       image:
-        'https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5',
+        "https://firebasestorage.googleapis.com/v0/b/react-native-starter-app.appspot.com/o/image-1.jpg?alt=media&token=9f7c839b-2d40-4660-a2a0-bf6c2f64a2e5"
     });
 
     // add users to the current receipte:
     FirebaseRef.child(`receipts/${this.state.receiptID}/users`).off(
-      'value',
-      this.handleSetUserID,
+      "value",
+      this.handleSetUserID
     );
     FirebaseRef.child(
-      `receipts/${this.state.receiptID}/users/${this.state.userID}`,
+      `receipts/${this.state.receiptID}/users/${this.state.userID}`
     ).set({
       id: this.state.userID,
-      email: this.state.currentUser,
+      email: this.state.currentUser
     });
 
     // add new items to the current receipt:
     FirebaseRef.child(`receipts/${this.state.receiptID}/items`).off(
-      'value',
-      this.handleSetItemID,
+      "value",
+      this.handleSetItemID
     );
     this.state.parsedReceipt.forEach(item => {
       FirebaseRef.child(
-        `receipts/${this.state.receiptID}/items/${this.state.itemID}`,
+        `receipts/${this.state.receiptID}/items/${this.state.itemID}`
       ).set({
         id: this.state.itemID,
         name: item.name,
         price: item.price,
         quantity: item.quantity,
-        user_claim: '',
+        user_claim: ""
       });
     });
   };
@@ -248,14 +248,14 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     padding: 30,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    backgroundColor: '#6565fc',
+    flexDirection: "column",
+    justifyContent: "center",
+    backgroundColor: "#6565fc"
   },
   title: {
     marginBottom: 20,
     fontSize: 25,
-    textAlign: 'center',
+    textAlign: "center"
   },
   itemInput: {
     height: 50,
@@ -263,25 +263,25 @@ const styles = StyleSheet.create({
     marginRight: 5,
     fontSize: 23,
     borderWidth: 1,
-    borderColor: 'white',
+    borderColor: "white",
     borderRadius: 8,
-    color: 'white',
+    color: "white"
   },
   buttonText: {
     fontSize: 18,
-    color: '#111',
-    alignSelf: 'center',
+    color: "#111",
+    alignSelf: "center"
   },
   button: {
     height: 45,
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderColor: 'white',
+    flexDirection: "row",
+    backgroundColor: "white",
+    borderColor: "white",
     borderWidth: 1,
     borderRadius: 8,
     marginBottom: 10,
     marginTop: 10,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-  },
+    alignSelf: "stretch",
+    justifyContent: "center"
+  }
 });

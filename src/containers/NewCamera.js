@@ -20,11 +20,8 @@ import {
   Content,
   Card,
   CardItem,
-  Col,
-  Row,
   Body,
   H3,
-  Grid,
   Left,
   List,
   ListItem,
@@ -33,6 +30,7 @@ import {
   Form,
   Input,
 } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import uuid from 'uuid';
 import Environment from '../../config/environment';
 import * as firebase from 'firebase';
@@ -75,17 +73,18 @@ export default class NewCamera extends React.Component {
           )}
         </View>
         <Spacer size={20} />
-
-        <Grid style={{ justifyContent: 'center', alignItems: 'center' }}>
-          <Row>
-            <Button onPress={this._pickImage}>
-              <MaterialIcons name="photo-library" size={40} color="white" />
-            </Button>
-            <Button onPress={this._takePhoto}>
-              <MaterialIcons name="camera-alt" size={40} color="white" />
-            </Button>
-          </Row>
-          {/* {this.state.googleResponse && (
+        <View>
+          <Grid style={styles.newContainer}>
+            <Row>
+              <Button onPress={this._pickImage}>
+                <MaterialIcons name="photo-library" size={40} color="white" />
+              </Button>
+              <Text>{'     '} </Text>
+              <Button onPress={this._takePhoto}>
+                <MaterialIcons name="camera-alt" size={40} color="white" />
+              </Button>
+            </Row>
+            {/* {this.state.googleResponse && (
               <FlatList
                 data={this.state.googleResponse.responses[0].labelAnnotations}
                 extraData={this.state}
@@ -93,10 +92,11 @@ export default class NewCamera extends React.Component {
                 renderItem={({ item }) => <Text>Item: {item.description}</Text>}
               />
             )} */}
-          <Spacer size={20} />
-          <Row>{this._maybeRenderImage()}</Row>
-          <Row>{this._maybeRenderUploadingOverlay()}</Row>
-        </Grid>
+            <Spacer size={20} />
+            <Row>{this._maybeRenderImage()}</Row>
+            <Row>{this._maybeRenderUploadingOverlay()}</Row>
+          </Grid>
+        </View>
       </ScrollView>
     );
   }
@@ -137,12 +137,16 @@ export default class NewCamera extends React.Component {
     }
 
     return (
-      <View>
-        <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
-        <Button right onPress={() => this.submitToGoogle()}>
-          <Text>Analyze</Text>
-        </Button>
-
+      <View style={styles.newContainer}>
+        <Row>
+          <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
+        </Row>
+        <Spacer size={20} />
+        <Row>
+          <Button onPress={() => this.submitToGoogle()}>
+            <Text>Analyze</Text>
+          </Button>
+        </Row>
         {googleResponse && Actions.receiptItems({ items: { receiptLines } })}
       </View>
     );
@@ -338,5 +342,11 @@ const styles = StyleSheet.create({
   helpContainer: {
     marginTop: 15,
     alignItems: 'center',
+  },
+  newContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+    backgroundColor: '#ecf0f1',
   },
 });

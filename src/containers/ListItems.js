@@ -56,7 +56,7 @@ export default class ReceiptItems extends Component {
   // };
   handleSetUserID = snapshot => {
     let currentUserId = 0;
-    currentUserId = snapshot.val().length - 2;
+    currentUserId = snapshot.val().length - 1;
     this.setState({ userID: currentUserId });
   };
 
@@ -66,10 +66,10 @@ export default class ReceiptItems extends Component {
     this.setState({ currentUser: currentUser.email });
 
     FirebaseRef.child('receipts').on('value', this.handleSetReceiptID);
-    FirebaseRef.child(`receipts/${this.state.receiptID}/items`).on(
-      'value',
-      this.handleSetItemID,
-    );
+    // FirebaseRef.child(`receipts/${this.state.receiptID}/items`).on(
+    //   'value',
+    //   this.handleSetItemID,
+    // );
     FirebaseRef.child(`receipts/${this.state.receiptID}/users`).on(
       'value',
       this.handleSetUserID,
@@ -129,14 +129,14 @@ export default class ReceiptItems extends Component {
     this.setState({ parsedReceipt: parsedReceipt }, () =>
       console.log('parsed receipt', this.state.parsedReceipt),
     );
-    setTimeout(() => this.createBill(), 5000);
+    setTimeout(() => this.createBill(), 900);
 
     setTimeout(
       () =>
         Actions.receipt({
           match: { params: { id: String(`${this.state.receiptID}`) } },
         }),
-      5000,
+      1000,
     );
   };
 
@@ -183,10 +183,10 @@ export default class ReceiptItems extends Component {
     });
 
     // add new items to the current receipt:
-    FirebaseRef.child(`receipts/${this.state.receiptID}/items`).off(
-      'value',
-      this.handleSetItemID,
-    );
+    // FirebaseRef.child(`receipts/${this.state.receiptID}/items`).off(
+    //   'value',
+    //   this.handleSetItemID,
+    // );
     let count = 0;
     this.state.parsedReceipt.forEach(item => {
       FirebaseRef.child(`receipts/${this.state.receiptID}/items/${count}`).set({

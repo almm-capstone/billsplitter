@@ -1,4 +1,4 @@
-<img src="/src/images/app-icon.png" alt="Tabs Billsplitter" width="200" />
+<img src="/src/images/app-icon.png" alt="Tabs Billsplitter" width="300" />
 
 
 ---

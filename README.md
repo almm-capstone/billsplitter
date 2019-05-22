@@ -5,7 +5,7 @@
 
 # Tabs Billsplitter
 
-#### Tabs Billsplitter is a mobile app for friends to split the check and pay each other back after eating out. Tabs uses text recognition technology and a custom algorithm to process information about a check, calculate tax and tip, and determine what everyone owes..
+#### Tabs Billsplitter is a mobile app for friends to split the check and pay each other back after eating out. Tabs uses text recognition technology and a custom algorithm to process information about a check, calculate tax and tip, and determine what everyone owes.
 
 <a href="http://react-boilerplate.mcnam.ee/"><img src="/docs/web-demo.jpg" alt="Web Demo" height="50" /></a>
 <a href="https://expo.io/@mcnamee/react-native-starter-kit"><img src="/docs/expo-demo.jpg" alt="React Native Expo Demo" height="50" /></a>

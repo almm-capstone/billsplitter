@@ -13,7 +13,7 @@
 
 Tabs bill-splitting app was built with React Native and Redux on the front end, and uses Expo to build native iOS and android apps simultaneously. We used Firebase's Realtime Database to store and update receipt information in real time. To continue using Expo, we decided to handle the OCR (Optical Character Recognition) outside of the platform and used Google Cloud Vision to fetch data from receipts. Tabs was styled with Native-Base.
 
-- Dependencies
+### Dependencies
 - __Flux architecture__
     - [Redux](https://redux.js.org/docs/introduction/)
 - __Routing and navigation__

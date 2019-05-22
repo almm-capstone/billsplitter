@@ -3,11 +3,9 @@
 
 ---
 
-[![CryptoTip](https://img.shields.io/badge/Donate%20with-CryptoTip-blue.svg?style=flat&colorB=007bff)](https://cryptotip.it/p/mcnamee)  [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=U7CE3LJYX859E)
+# Tabs Billsplitter
 
-# React (Web + Native) Starter Kit
-
-#### For when you're looking to build 'the next big thing' for both web and native mobile.
+#### Tabs Billsplitter is a mobile app for friends to split the check and pay each other back after eating out. Tabs uses text recognition technology and a custom algorithm to process information about a check, calculate tax and tip, and determine what everyone owes..
 
 <a href="http://react-boilerplate.mcnam.ee/"><img src="/docs/web-demo.jpg" alt="Web Demo" height="50" /></a>
 <a href="https://expo.io/@mcnamee/react-native-starter-kit"><img src="/docs/expo-demo.jpg" alt="React Native Expo Demo" height="50" /></a>

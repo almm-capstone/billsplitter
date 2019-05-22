@@ -36,7 +36,6 @@ Tabs bill-splitting app was built with React Native and Redux on the front end, 
 
 - [Setup your own Firebase](/docs/firebase.md)
 - [Understanding the file structure](/docs/file-structure.md)
-- [FAQs & Opinions](/docs/faqs.md)
 
 ---
 

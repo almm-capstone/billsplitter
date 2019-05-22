@@ -68,13 +68,13 @@ Instructions are shown in the terminal. You can select to open it in:
 
 #### 3. Team
 
-_Ashley Heestand_  
+Ashley Heestand  
 
-_Matt Hemmerly_  
+Matt Hemmerly  
 
-_Meng Mu_  
+Meng Mu  
 
-_Lesley Smith_  
+Lesley Smith  
 
 
 #### 4. Patches and Pull Requests

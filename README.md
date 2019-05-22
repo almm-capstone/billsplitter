@@ -66,7 +66,7 @@ Instructions are shown in the terminal. You can select to open it in:
 - An emulator (either iOS or Android)
 - Your mobile device with the [Expo app](https://expo.io/). It will reload if you save edits to your files and you will see build errors and logs in the terminal.
 
-##### 3. Team
+#### 3. Team
 
 _Ashley Heestand_  
 
@@ -77,7 +77,7 @@ _Meng Mu_
 _Lesley Smith_  
 
 
-###### 4. Patches and Pull Requests
+#### 4. Patches and Pull Requests
 
 Your patches are welcome. Here's our suggested workflow:
  

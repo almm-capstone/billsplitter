@@ -68,9 +68,9 @@ Instructions are shown in the terminal. You can select to open it in:
 
 ##### 3. Team
 
-_Ashley Heestand_
-_Matt Hemmerly_
-_Meng Mu_
+_Ashley Heestand_ . 
+_Matt Hemmerly_ . 
+_Meng Mu_ . 
 _Lesley Smith_
 
 ###### 4. Patches and Pull Requests

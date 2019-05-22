@@ -7,36 +7,28 @@
 
 #### Tabs Billsplitter is a mobile app for friends to split the check and pay each other back after eating out. Tabs uses text recognition technology and a custom algorithm to process information about a check, calculate tax and tip, and determine what everyone owes.
 
-<a href="http://react-boilerplate.mcnam.ee/"><img src="/docs/web-demo.jpg" alt="Web Demo" height="50" /></a>
-<a href="https://expo.io/@mcnamee/react-native-starter-kit"><img src="/docs/expo-demo.jpg" alt="React Native Expo Demo" height="50" /></a>
-
 ---
 
 ## 👋 Intro
 
-This boilerplate launches with a [React web app](https://reactjs.org/) and [React Native app](https://facebook.github.io/react-native/) sharing a single code base. It shares the 'business logic' (_i.e. actions, containers, reducers_) across the platforms, whilst allowing flexibility in View components to ensure your project looks and feels native in each platform.
+Tabs bill-splitting app was built with React Native and Redux on the front end, and uses Expo to build native iOS and android apps simultaneously. We used Firebase's Realtime Database to store and update receipt information in real time. To continue using Expo, we decided to handle the OCR (Optical Character Recognition) outside of the platform and used Google Cloud Vision to fetch data from receipts. Tabs was styled with Native-Base.
 
-The project is _super_ helpful to kick-start your next project, as it provides a lot of the common tools you may reach for, all ready to go. Specifically:
-
-- A shared React and React Native structure
+- Dependencies
 - __Flux architecture__
     - [Redux](https://redux.js.org/docs/introduction/)
 - __Routing and navigation__
     - [React Native Router Flux](https://github.com/aksonov/react-native-router-flux) for native mobile
-    - [React Router](https://github.com/ReactTraining/react-router) for web
 - __Data Caching / Offline__
     - [Redux Persist](https://github.com/rt2zz/redux-persist)
 - __UI Toolkit/s__
     - [Native Base](https://nativebase.io/) for native mobile
-    - [Bootstrap](https://getbootstrap.com/) for web
 - __Simpler mobile app development__ through
     - [Expo](https://expo.io/)
 - __User authentication__ example through
     - [Firebase](https://firebase.google.com/)
-- __API/Data example__
-    - Shows how to read/write data from/to an external API (in our case, [Firebase](https://firebase.google.com/))
-- __Code Linting__ with
-    - [Airbnb's JS Linting](https://github.com/airbnb/javascript) guidelines
+- __Text recognition technology through__
+    - [Google Vision AI](https://cloud.google.com/vision/)
+    - [Cloud Vision Text Detection](https://cloud.google.com/vision/docs/ocr)
 
 ---
 
@@ -45,9 +37,6 @@ The project is _super_ helpful to kick-start your next project, as it provides a
 - [Setup your own Firebase](/docs/firebase.md)
 - [Understanding the file structure](/docs/file-structure.md)
 - [FAQs & Opinions](/docs/faqs.md)
-- [Testing, Deploying & Publishing](/docs/publishing.md)
-- [Tests & testing](/docs/testing.md) (coming soon...)
-- [Contributing to this project](/docs/contributing.md)
 
 ---
 
@@ -55,21 +44,21 @@ The project is _super_ helpful to kick-start your next project, as it provides a
 
 #### 1. Clone and Install
 
-_*It's recommended that you install [React Native Debugger](https://github.com/jhen0409/react-native-debugger/releases) and open before `yarn start`._
+_*It's recommended that you install [React Native Debugger](https://github.com/jhen0409/react-native-debugger/releases) and open before `npm start`._
 
 ```bash
 # Clone the repo
-git clone https://github.com/mcnamee/react-native-starter-kit.git
+git clone https://github.com/almm-capstone/billsplitter
 
 # Install dependencies
-yarn install
+npm install
 ```
 
-#### 2.1. Run the _React Native_ App
+#### 2. Run the _Tabs_ App
 
 ```bash
 # Start the React Native packager
-yarn start
+npm start
 ```
 
 Instructions are shown in the terminal. You can select to open it in:
@@ -77,29 +66,3 @@ Instructions are shown in the terminal. You can select to open it in:
 - An emulator (either iOS or Android)
 - Your mobile device with the [Expo app](https://expo.io/). It will reload if you save edits to your files and you will see build errors and logs in the terminal.
 
-#### 2.2. Run the _Web_ App
-
-```bash
-# Starts are local live-reload server at:
-# http://localhost:3001
-yarn run web
-```
-
-Via webpack, starts a localhost server on port 3001 [http://localhost:3001](http://localhost:3001).
-
-- Save code and it auto refreshes
-- Install [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=en) into Chrome to see the state of Redux
-
----
-
-## 👊 Further Help?
-
-This repo is a great place to start, but if you'd prefer to sit back and have your new project built for you, [get in touch with me directly](https://mcnam.ee) and I can organise a quote.
-
----
-
-## 💡 Inspiration
-
-- [This blog post](http://jkaufman.io/react-web-native-codesharing/) helped put the ideas into action
-
-_If there's any other ideas presented in this repo, that you think worth mentioning - feel free open a pull request :)_

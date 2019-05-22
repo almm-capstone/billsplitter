@@ -1,4 +1,4 @@
-<img src="/docs/rnsk-logo.jpg" alt="React Native Starter Kit" width="400" />
+<img src="/src/images/app-icon.jpg" alt="Tabs Billsplitter" width="400" />
 
 [![GitHub tag](https://img.shields.io/github/tag/mcnamee/react-native-starter-kit.svg?style=flat-square)](https://github.com/mcnamee/react-native-starter-kit/tags)
 [![GitHub contributors](https://img.shields.io/github/contributors/mcnamee/react-native-starter-kit.svg?style=flat-square)](https://github.com/mcnamee/react-native-starter-kit/contributors)
